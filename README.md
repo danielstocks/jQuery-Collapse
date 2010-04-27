@@ -8,7 +8,7 @@ Coming soon
 
 Unless otherwise specified within any of the plugins, you can assume the following license:
 
-    * Copyright (c) 2010 James Padolsey
+    * Copyright (c) 2010 Daniel Stocks
     * -------------------------------------------------------
     * Dual licensed under the MIT and GPL licenses.
     *    - http://www.opensource.org/licenses/mit-license.php
