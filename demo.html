@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery Collapse Demo</title>
+        <style type="text/css">
+        body {font-family: helvetica, arial; color:#000; background:#fff;}
+        #wrap {width: 720px; margin:0 auto;}
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+        <h1>jQuery Collapse Demo</h1>
+            <div id="demo">
+            <h2>Fruits</h2>
+                <ul>
+                    <li>Apple</li>
+                    <li>Pear</li>
+                    <li>Orange</li>
+                </ul>
+            <h2>Vegetables</h2>
+                <ul>
+                    <li>Carrot</li>
+                    <li>Tomato</li>
+                    <li>Squash</li>
+                </ul>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script src="jquery.collapse.js"></script>
+        <script>
+            $("#demo").collapse();
+        </script>
+    </body>
+</html>
