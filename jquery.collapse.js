@@ -1,6 +1,6 @@
 (function($) {
     $.fn.extend({
-        collapsible: function() {
+        collapse: function() {
             
             var obj = $(this);
             var inactive = "inactive"
