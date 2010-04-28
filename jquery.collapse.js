@@ -1,50 +1,70 @@
-(function($) {
+/**
+ * Collapse plugin for jQuery
+ * ---
+ * @author Daniel Stocks (http://webcloud.se)
+ * @version 0.1
+ * @updated 28-APR-2010
+ * ---
+ * Note: For cookie support you need 
+ * the cookie plugin from here: http://plugins.jquery.com/project/cookie
+ * ---
+ */
+ 
+ (function($) {
     $.fn.extend({
-        collapse: function() {
+        collapse: function(options) {
             
-            var obj = $(this);
-            var inactive = "inactive"
-            var active = "active"
-
-            var sections = obj.find("h2").addClass(inactive),
-                panel = obj.find("ul").hide(),
-                l = sections.length;
-            for (c=0;c<=l;c++) {
-                var cvalue = $.cookie('panel' + c);
-                if ( cvalue == 'open' + c ) {
-                    panel.eq(c).css({display:"block"});
-                    panel.eq(c).prev().removeClass(inactive).addClass(active);
-                };
+            var defaults = {
+                inactive : "inactive",
+                active : "active",
+                head : "h3",
+                group : "ul",
+                speed : 100,
+                cookie : "collapse"
             };
-            sections.toggle(function() {
-                var num = sections.index(this);
-                var cookieName = 'panel' + num;
-                var ul = $(this).next("ul");
-                if($(this).hasClass(active)) {
-                    ul.slideUp("fast");
-                    $(this).removeClass(active).addClass(inactive);
-                    $.cookie(cookieName, null, { path: '/', expires: 10 });
-                    return
-                }
-                ul.slideDown("fast");
-                $(this).addClass(active).removeClass(inactive);
-                var cookieValue = 'open' + num;
-                $.cookie(cookieName, cookieValue, { path: '/', expires: 10 });
-            }, function() {
-                var num = sections.index(this);
-                var cookieName = 'panel' + num;
-                var ul = $(this).next("ul");
-                if($(this).hasClass(inactive)) {
-                    ul.slideDown("fast");
-                    $(this).addClass(active).removeClass(inactive); 
+            
+            // Set a cookie counter so we dont get name collisions
+            var op = $.extend(defaults, options);
+                cookie_counter = 0;
+                
+            return this.each(function() {
+                
+                // Increment cookie name counter
+                cookie_counter++;
+
+                var obj = $(this),
+                    sections = obj.find(op.head).addClass(op.inactive),
+                    panel = obj.find(op.group).hide(),
+                    l = sections.length,
+                    cookie = op.cookie + "_" + cookie_counter;
+                
+                // Look for existing cookies
+                for (c=0;c<=l;c++) {
+                    var cvalue = $.cookie(cookie + c);
+                    if ( cvalue == 'open' + c ) {
+                        panel.eq(c).show();
+                        panel.eq(c).prev().removeClass(op.inactive).addClass(op.active);
+                    };
+                };
+                sections.click(function(e) {
+                    e.preventDefault();
+                    var num = sections.index(this);
+                    var cookieName = cookie + num;
+                    var ul = $(this).next(op.group);
+                    // If item is open, slide up 
+                    if($(this).hasClass(op.active)) {
+                        ul.slideUp(op.speed);
+                        $(this).removeClass(op.active).addClass(op.inactive);
+                        $.cookie(cookieName, null, { path: '/', expires: 10 });
+                        return
+                    }
+                    // Else slide down
+                    ul.slideDown(op.speed);
+                    $(this).addClass(op.active).removeClass(op.inactive);
                     var cookieValue = 'open' + num;
                     $.cookie(cookieName, cookieValue, { path: '/', expires: 10 });
-                    return
-                }
-                ul.slideUp("fast");
-                $(this).removeClass(active).addClass(inactive);;
-                $.cookie(cookieName, null, { path: '/', expires: 10 });
-            });   
+                });
+            });
         }
     });
 })(jQuery);
