@@ -10,13 +10,13 @@ Usage
 Some sample markup::
 
     <div id="demo">
-    <h2><a href="#">Fruits</a></h2>
+        <h2><a href="#">Fruits</a></h2>
         <ul>
             <li>Apple</li>
             <li>Pear</li>
             <li>Orange</li>
         </ul>
-    <h2><a href="<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">">Vegetables</a></h2>
+        <h2><a href="#">Vegetables</a></h2>
         <ul>
             <li>Carrot</li>
             <li>Tomato</li>
