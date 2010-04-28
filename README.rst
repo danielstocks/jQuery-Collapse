@@ -1,7 +1,10 @@
-# jQuery Collapse
+===============
+jQuery Collapse
+===============
 A plugin for enabling collapsible lists with cookie support. 
 
-## Usage
+Usage
+=====
 
 HTML::
 
@@ -29,13 +32,14 @@ JavaScript::
         $("#demo").collapse();
     </script>
 
-##Licenses
+License
+=======
 
 Unless otherwise specified within any of the plugins, you can assume the following license:
 
-    * Copyright (c) 2010 Daniel Stocks
-    * -------------------------------------------------------
-    * Dual licensed under the MIT and GPL licenses.
-    *    - http://www.opensource.org/licenses/mit-license.php
-    *    - http://www.gnu.org/copyleft/gpl.html
+* Copyright (c) 2010 Daniel Stocks
+* -------------------------------------------------------
+* Dual licensed under the MIT and GPL licenses.
+*    - http://www.opensource.org/licenses/mit-license.php
+*    - http://www.gnu.org/copyleft/gpl.html
 
