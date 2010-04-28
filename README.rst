@@ -23,7 +23,7 @@ Some sample markup::
             <li>Carrot</li>
             <li>Tomato</li>
             <li>Squash</li>
-        </ul></script>
+        </ul>
     </div>
 
 Load the JavaScript (make sure DOM is loaded before you do)::
