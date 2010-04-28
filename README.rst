@@ -4,6 +4,8 @@ jQuery Collapse
 
 A plugin for enabling collapsible lists with cookie support.
 
+*Note*: For cookie support you need the cookie plugin: http://plugins.jquery.com/project/cookie
+
 Usage
 =====
 
@@ -32,3 +34,21 @@ Load the JavaScript (make sure DOM is loaded before you do)::
     <script>
         $("#demo").collapse();
     </script>
+
+Options
+-------
+
+* **inactive** CSS class for inactive header (default: "inactive")
+* **active** : CSS class for active header (default: "active")
+* **head** : Elements for clickable headings (default: "h3")
+* **group** : Elements for collapsable group (default: "ul")
+* **speed** : Animation speed (default: 100)
+* **cookie** : Cookie name, needs to be unique if used in different't contexts (default: "collapse")
+
+
+Browser Support
+---------------
+Tested in: Safari,Chrome,IE6+,Firefox3+
+
+
+
