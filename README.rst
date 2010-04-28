@@ -15,12 +15,12 @@ Some sample markup::
             <li>Pear</li>
             <li>Orange</li>
         </ul>
-    <h2><a href="#">Vegetables</a></h2>
+    <h2><a href=" <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">">Vegetables</a></h2>
         <ul>
             <li>Carrot</li>
             <li>Tomato</li>
             <li>Squash</li>
-        </ul> <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        </ul></script>
     </div>
 
 Load the JavaScript (make sure DOM is loaded before you do)::
