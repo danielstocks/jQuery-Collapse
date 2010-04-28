@@ -12,13 +12,13 @@ Usage
 Some sample markup::
 
     <div id="demo">
-        <h2><a href="#">Fruits</a></h2>
+        <h3><a href="#">Fruits</a></h3>
         <ul>
             <li>Apple</li>
             <li>Pear</li>
             <li>Orange</li>
         </ul>
-        <h2><a href="#">Vegetables</a></h2>
+        <h3><a href="#">Vegetables</a></h3>
         <ul>
             <li>Carrot</li>
             <li>Tomato</li>
