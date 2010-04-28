@@ -20,7 +20,7 @@ Some sample markup::
             <li>Carrot</li>
             <li>Tomato</li>
             <li>Squash</li>
-        </ul>
+        </ul> <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     </div>
 
 Load the JavaScript (make sure DOM is loaded before you do)::
