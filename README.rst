@@ -6,7 +6,7 @@ A plugin for enabling collapsible lists with cookie support.
 Usage
 =====
 
-HTML::
+Some sample markup::
 
     <div id="demo">
     <h2><a href="#">Fruits</a></h2>
@@ -23,7 +23,7 @@ HTML::
         </ul>
     </div>
 
-JavaScript::
+Load the JavaScript (make sure DOM is loaded before you do)::
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="jquery.collapse.js"></script>
