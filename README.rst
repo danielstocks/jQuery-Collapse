@@ -8,20 +8,20 @@ Usage
 
 HTML::
 
-    <div id="demo">
-    <h2><a href="#">Fruits</a></h2>
-        <ul>
-            <li>Apple</li>
-            <li>Pear</li>
-            <li>Orange</li>
-        </ul>
-    <h2><a href="#">Vegetables</a></h2>
-        <ul>
-            <li>Carrot</li>
-            <li>Tomato</li>
-            <li>Squash</li>
-        </ul>
-    </div>
+    &lt;div id=&quot;demo&quot;&gt;
+    &lt;h2&gt;&lt;a href=&quot;#&quot;&gt;Fruits&lt;/a&gt;&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Apple&lt;/li&gt;
+            &lt;li&gt;Pear&lt;/li&gt;
+            &lt;li&gt;Orange&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;h2&gt;&lt;a href=&quot;#&quot;&gt;Vegetables&lt;/a&gt;&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Carrot&lt;/li&gt;
+            &lt;li&gt;Tomato&lt;/li&gt;
+            &lt;li&gt;Squash&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
 
 JavaScript::
 
