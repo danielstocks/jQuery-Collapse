@@ -10,11 +10,12 @@
  * ---
  */
  
- (function($) {
+(function($) {
     $.fn.extend({
         collapse: function(options) {
             
             var defaults = {
+                open : false,
                 inactive : "inactive",
                 active : "active",
                 head : "h3",
@@ -23,9 +24,23 @@
                 cookie : "collapse"
             };
             
-            // Set a cookie counter so we dont get name collisions
+            // Set a cookie counter so we dont get cookie name collisions
             var op = $.extend(defaults, options);
                 cookie_counter = 0;
+                
+            // Internal method for showing 
+            var _show = function(el) {
+                $.each(el, function() {
+                    $(this).show().prev().removeClass(op.inactive).addClass(op.active);
+                });
+            }
+            
+            // Internal method for hiding
+            var _hide = function(el) {
+                $.each(el, function() {
+                    $(this).hide().prev().removeClass(op.active).addClass(op.inactive);
+                }); 
+            }
                 
             return this.each(function() {
                 
@@ -37,32 +52,38 @@
                     panel = obj.find(op.group).hide(),
                     l = sections.length,
                     cookie = op.cookie + "_" + cookie_counter;
+
+                // Open by default
+                if(op.open) {
+                    _show(panel);
+                }
                 
                 // Look for existing cookies
                 for (c=0;c<=l;c++) {
-                    var cvalue = $.cookie(cookie + c);
-                    if ( cvalue == 'open' + c ) {
-                        panel.eq(c).show();
-                        panel.eq(c).prev().removeClass(op.inactive).addClass(op.active);
-                    };
+                    var val = $.cookie(cookie + c);
+                    if ( val == c + "open" ) {
+                        _show(panel.eq(c));
+                    } else if ( val == c + "closed") {
+                        _hide(panel.eq(c))
+                    }
                 };
                 sections.click(function(e) {
                     e.preventDefault();
-                    var num = sections.index(this);
-                    var cookieName = cookie + num;
-                    var ul = $(this).next(op.group);
-                    // If item is open, slide up 
+                    var num = sections.index(this),
+                        cookieName = cookie + num,
+                        cookieVal = num,
+                        ul = $(this).next(op.group);
+                    // Hide
                     if($(this).hasClass(op.active)) {
-                        ul.slideUp(op.speed);
-                        $(this).removeClass(op.active).addClass(op.inactive);
-                        $.cookie(cookieName, null, { path: '/', expires: 10 });
-                        return
+                        _hide(ul.slideUp(op.speed));
+                        cookieVal += 'closed'
+                        $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
+                        return;
                     }
-                    // Else slide down
-                    ul.slideDown(op.speed);
-                    $(this).addClass(op.active).removeClass(op.inactive);
-                    var cookieValue = 'open' + num;
-                    $.cookie(cookieName, cookieValue, { path: '/', expires: 10 });
+                    // Show
+                    _show(ul.slideDown(op.speed));
+                    cookieVal += 'open';
+                    $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                 });
             });
         }
