@@ -54,7 +54,5 @@ All options are optional.
 
 Browser Support
 ---------------
-Tested in: Safari,Chrome,IE6+,Firefox3+
-
-
+Probably works in most modern browsers, but only tested in: Safari, Chrome, IE6+, Firefox3+, Opera10+
 
