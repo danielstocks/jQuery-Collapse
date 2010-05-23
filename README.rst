@@ -35,15 +35,21 @@ Load the JavaScript (make sure DOM is loaded before you do)::
         $("#demo").collapse();
     </script>
 
+*Note*: If you're using the plugin on different't pages on the same domain, you'll have to have unique cookie names to avoid conflict. Use the "cookie" option
+to set a unique name. 
+
 Options
 -------
 
-* **inactive** CSS class for inactive header (default: "inactive")
-* **active** : CSS class for active header (default: "active")
-* **head** : Elements for clickable headings (default: "h3")
-* **group** : Elements for collapsable group (default: "ul")
-* **speed** : Animation speed (default: 100)
-* **cookie** : Cookie name, needs to be unique if used in different't contexts (default: "collapse")
+All options are optional.
+
+* **open** (bool) : Defines wether lists are initially open or closed (default: false)
+* **inactive** (string) CSS class for inactive header (default: "inactive")
+* **active** (string) : CSS class for active header (default: "active")
+* **head** (string) : Elements for clickable headings (default: "h3")
+* **group** (string): Elements for collapsable group (default: "ul")
+* **speed** (number) : Animation speed (default: 100)
+* **cookie** (string) : Name of cookie used in the plugin.
 
 
 Browser Support
