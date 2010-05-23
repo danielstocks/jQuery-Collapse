@@ -38,7 +38,7 @@
             // Internal method for hiding
             var _hide = function(el) {
                 $.each(el, function() {
-                    $(this).hide().prev().removeClass(op.active).addClass(op.inactive);
+                    $(this).hide().prev().removeClass(op.active).addClass(op.inactiv);
                 }); 
             }
                 
@@ -75,13 +75,17 @@
                         ul = $(this).next(op.group);
                     // Hide
                     if($(this).hasClass(op.active)) {
-                        _hide(ul.slideUp(op.speed));
+                        ul.slideUp(op.speed, function() {
+                            _hide($(this));
+                        })
                         cookieVal += 'closed'
                         $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                         return;
                     }
                     // Show
-                    _show(ul.slideDown(op.speed));
+                    ul.slideDown(op.speed, function() {
+                        _show($(this));
+                    });
                     cookieVal += 'open';
                     $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                 });
