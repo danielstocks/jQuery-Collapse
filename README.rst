@@ -35,7 +35,7 @@ Load the JavaScript (make sure DOM is loaded before you do)::
         $("#demo").collapse();
     </script>
 
-*Note*: If you're using the plugin on different't pages on the same domain, you'll have to have unique cookie names to avoid conflict. Use the "cookie" option
+*Note*: If you're using the plugin on different pages on the same domain, you'll have to have unique cookie names to avoid conflict. Use the "cookie" option
 to set a unique name. 
 
 Options
