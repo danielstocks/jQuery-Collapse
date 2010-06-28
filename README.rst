@@ -6,9 +6,15 @@ A plugin for enabling multiple collapsible lists with cookie support.
 
 *Note*: For cookie support you need the cookie plugin: http://plugins.jquery.com/project/cookie. The plugin will automatically detect if cookie support is available.
 
-Google Chrome does not work with cookies if run locally (file://) -> http://code.google.com/p/chromium/issues/detail?id=535
+*Google Chrome* does not work with cookies if run locally (i.e file://) 
+For more details: http://code.google.com/p/chromium/issues/detail?id=535
 
 Tested with jQuery 1.4.2.
+
+Demo
+=====
+Can be found here -> http://webcloud.se/article/jQuery_Collapse_Plugin/
+
 
 Usage
 =====
