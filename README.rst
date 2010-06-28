@@ -2,9 +2,13 @@
 jQuery Collapse
 ============
 
-A plugin for enabling collapsible lists with cookie support.
+A plugin for enabling multiple collapsible lists with cookie support.
 
-*Note*: For cookie support you need the cookie plugin: http://plugins.jquery.com/project/cookie
+*Note*: For cookie support you need the cookie plugin: http://plugins.jquery.com/project/cookie. The plugin will automatically detect if cookie support is available.
+
+Google Chrome does not work with cookies if run locally (file://) -> http://code.google.com/p/chromium/issues/detail?id=535
+
+Tested with jQuery 1.4.2.
 
 Usage
 =====
@@ -35,8 +39,7 @@ Load the JavaScript (make sure DOM is loaded before you do)::
         $("#demo").collapse();
     </script>
 
-*Note*: If you're using the plugin on different pages on the same domain, you'll have to have unique cookie names to avoid conflict. Use the "cookie" option
-to set a unique name. 
+*Note*: If you're using the plugin on different pages on the same domain, you'll have to have a unique cookie name for each instance to avoid conflict. Use the "cookie" option to set a unique cookie name.
 
 Options
 -------
@@ -50,7 +53,7 @@ All options are optional.
 * **group** (string): Elements for collapsable group (default: "ul")
 * **speed** (number) : Animation speed (default: 100)
 * **cookie** (string) : Name of cookie used in the plugin.
-
+* **disableCookie** (string) : Disable cookies (if you have jquery.cookie plugin present but don't want cookies anyway)
 
 Browser Support
 ---------------
