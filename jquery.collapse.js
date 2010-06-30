@@ -3,9 +3,9 @@
  * ---
  * @author Daniel Stocks (http://webcloud.se)
  * @version 0.1
- * @updated 28-APR-2010
+ * @updated 28-JUN-2010
  * ---
- * Note: For cookie support you need 
+ * Note: For cookie support you need to include
  * the cookie plugin from here: http://plugins.jquery.com/project/cookie
  * ---
  */
@@ -21,26 +21,34 @@
                 head : "h3",
                 group : "ul",
                 speed : 100,
-                cookie : "collapse"
+                cookieID : "collapse",
+                disableCookie : false
             };
             
-            // Set a cookie counter so we dont get cookie name collisions
-            var op = $.extend(defaults, options);
+            var op = $.extend(defaults, options),
                 cookie_counter = 0;
+                cookieEnable = false;
                 
-            // Internal method for showing 
-            var _show = function(el) {
+            if($.cookie) {
+                var cookieEnable = true;
+            }
+            if(op.disableCookie) {
+                cookieEnable = false;
+            }
+            
+            // Event for showing
+            $(this).bind("show", function(e, el) {
                 $.each(el, function() {
                     $(this).show().prev().removeClass(op.inactive).addClass(op.active);
                 });
-            }
+            });
             
-            // Internal method for hiding
-            var _hide = function(el) {
+            // event method for hiding
+            $(this).bind("hide", function(e, el) {
                 $.each(el, function() {
-                    $(this).hide().prev().removeClass(op.active).addClass(op.inactiv);
+                    $(this).hide().prev().removeClass(op.active).addClass(op.inactive);
                 }); 
-            }
+            });
                 
             return this.each(function() {
                 
@@ -55,19 +63,21 @@
 
                 // Open by default
                 if(op.open) {
-                    _show(panel);
+                    $(this).trigger('show', [panel]);
                 }
                 
                 // Look for existing cookies
-                for (c=0;c<=l;c++) {
-                    var val = $.cookie(cookie + c);
-                    if ( val == c + "open" ) {
-                        _show(panel.eq(c));
-                    } else if ( val == c + "closed") {
-                        _hide(panel.eq(c))
+                if(cookieEnable) {
+                    for (c=0;c<=l;c++) {
+                        var val = $.cookie(cookie + c);
+                        if ( val == c + "open" ) {
+                             $(this).trigger('show', [panel.eq(c)]);
+                        } else if ( val == c + "closed") {
+                            $(this).trigger('hide', [panel.eq(c)])
+                        }
                     }
-                };
-                sections.click(function(e) {
+                }
+                sections.bind("click", function(e) {
                     e.preventDefault();
                     var num = sections.index(this),
                         cookieName = cookie + num,
@@ -76,18 +86,20 @@
                     // Hide
                     if($(this).hasClass(op.active)) {
                         ul.slideUp(op.speed, function() {
-                            _hide($(this));
+                            $(this).trigger('hide', [$(this)]);
                         })
-                        cookieVal += 'closed'
-                        $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
+                        cookieVal += 'closed';
+                        if(cookieEnable)
+                            $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                         return;
                     }
                     // Show
                     ul.slideDown(op.speed, function() {
-                        _show($(this));
+                        $(this).trigger('show', [$(this)]);
                     });
                     cookieVal += 'open';
-                    $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
+                    if(cookieEnable)
+                        $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                 });
             });
         }
