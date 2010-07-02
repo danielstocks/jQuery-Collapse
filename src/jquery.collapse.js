@@ -13,21 +13,6 @@
  */
  
 (function($) {
-    
-    function Collapse(obj) {
-
-        this.obj = obj;
-    }
-    Collapse.prototype = {
-
-        show : function() {
-
-        },
-        hide : function() {
-
-        }
-    }
-    
     $.fn.extend({
         collapse: function(options) {
             
@@ -55,18 +40,15 @@
                 cookieEnable = false;
             }
             
-            // Reference to the object
-            var obj = $(this);
-            
             // Event for showing
-            obj.bind("show", function(e, el) {
+            this.bind("show", function(e, el) {
                 $.each(el, function() {
                     $(this).show().prev().removeClass(op.inactive).addClass(op.active);
                 });
             });
             
             // event method for hiding
-            obj.bind("hide", function(e, el) {
+            this.bind("hide", function(e, el) {
                 $.each(el, function() {
                     $(this).hide().prev().removeClass(op.active).addClass(op.inactive);
                 });
