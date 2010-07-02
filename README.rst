@@ -2,13 +2,13 @@
 jQuery Collapse
 ============
 
-A lightweight plugin (1kb minified) for enabling multiple collapsible lists with cookie support.
+A lightweight plugin for enabling expandable/collapsible content.
 
-Demo
-----
+- Packaged with cookie support (yum!)
+- Lightweight (655 bytes minified and gzipped)
+- ARIA compliant
 
-Take a look in the demo folder (link coming soon).
-
+Enjoy!
 
 Usage
 -----
@@ -58,4 +58,3 @@ Probably works in most modern browsers, but only tested in: Safari, Chrome, IE6+
 
 *Google Chrome* does not work with cookies if run locally (i.e file://) 
 For more details: http://code.google.com/p/chromium/issues/detail?id=535
-
