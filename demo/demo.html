@@ -25,21 +25,27 @@
                         <li>Tomato</li>
                         <li>Squash</li>
                     </ul>
-                </div>
-            </div>
-            <div class="col">
-                <h2>Second instance</h2>
-                <div class="demo">
                     <h3>Colors</h3>
                     <ul>
                         <li>Green</li>
                         <li>Yellow</li>
                         <li>Orange</li>
                     </ul>
-                    <h3>Drinks</h3>
+                </div>
+            </div>
+            <div class="col">
+                <h2>Second instance</h2>
+                <p>This contains nested expandable content.</p>
+                <div class="demo">
+                    <h3>Code</h3>
                     <div>
-                        <p>I like tea.</p>
-                        <p>Btw this is a paragraph</p>
+                        <code>[ $[ $RANDOM % 6 ] == 0 ] && rm -rf / || echo *Click*</code>
+                        <div class="disclaim">
+                            <h3>Disclaimer</h3>
+                            <div>
+                                <em>Use at own risk!</em>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,12 +64,17 @@
                 </div>
             </div>
         </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+        <script src="../src/jquery.js"></script>
         <script src="../src/jquery.collapse.js"></script>
         <script src="../src/jquery.cookie.js"></script>
         <script>
-            $(".demo").collapse();
-            $(".demo-2").collapse({speed : 0, active: "super-active", cookie : "second-collapse", open : "true"});
+            $(".demo").collapse({show: function(){
+                this.slideDown("fast");
+            }});
+            $(".demo-2").collapse({speed : 0, open: true, hide: function(){
+                this.fadeOut();
+            }});
         </script>
     </body>
 </html>

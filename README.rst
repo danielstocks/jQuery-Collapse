@@ -5,11 +5,13 @@ jQuery Collapse
 A lightweight plugin (1kb minified) for enabling multiple collapsible lists with cookie support.
 
 Demo
-=====
-A working demo can be found here -> http://webcloud.se/collapse-expand-content-with-jquery/
+----
+
+Take a look in the demo folder (link coming soon).
+
 
 Usage
-=====
+-----
 
 HTML::
 
@@ -43,17 +45,12 @@ JavaScript::
 Options
 -------
 
-All options are optional.
-
-* **open** (bool) : Defines wether lists are initially open or closed (default: false)
-* **inactive** (string) CSS class for inactive header (default: "inactive")
-* **active** (string) : CSS class for active header (default: "active")
+* **open** (bool) : Defines if content is initially visible or hidden (default: false)
 * **head** (string) : Elements for clickable headings (default: "h3")
 * **group** (string): Elements containing the collapsable content (default: "ul, div")
-* **speed** (number) : Animation speed (default: 100)
-* **cookie** (string) : Name of cookie used in the plugin.
-* **disableCookie** (string) : Disable cookies (if you have jquery.cookie plugin present but don't want cookies anyway)
-
+* **show** (function) : Custom function for showing content (default: function(){ this.show() })
+* **hide** (function) : Custom function for hiding content (default: function(){ this.hide() })
+* **cookieName** (string) : Name of cookie used in the plugin. (default: "collapse")
 
 Browser Support
 ---------------
