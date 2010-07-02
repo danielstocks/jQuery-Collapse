@@ -13,6 +13,21 @@
  */
  
 (function($) {
+    
+    function Collapse(obj) {
+
+        this.obj = obj;
+    }
+    Collapse.prototype = {
+
+        show : function() {
+
+        },
+        hide : function() {
+
+        }
+    }
+    
     $.fn.extend({
         collapse: function(options) {
             
