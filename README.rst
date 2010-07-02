@@ -13,7 +13,7 @@ Tested with jQuery 1.4.2.
 
 Demo
 =====
-Can be found here -> http://webcloud.se/article/jQuery_Collapse_Plugin/
+A working demo can be found here -> http://webcloud.se/article/jQuery_Collapse_Plugin/
 
 
 Usage
