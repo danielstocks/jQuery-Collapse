@@ -43,7 +43,7 @@
                     active = "active",
                     inactive = "inactive",
                     // Find all headers and wrap them in <a> for accessibility.
-                    sections = obj.find(op.head).addClass(inactive).wrapInner('<a href="#">'),
+                    sections = obj.find(op.head).wrapInner('<a href="#">'),
                     l = sections.length,
                     cookie = op.cookieName + "_" + cookieCounter;
                     // Locate all panels directly following a header
@@ -108,7 +108,7 @@
                     e.preventDefault();
                     var t = $(e.target);
                     // Make sure header anchor is clicked else do nothing
-                    if(!t.is("h3 a")) {
+                    if(!t.is(op.head + " a")) {
                         return false;
                     }
                     // Figure out what position the clicked header has.
