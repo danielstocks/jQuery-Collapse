@@ -34,14 +34,15 @@
             };
             var op = $.extend(defaults, options);
             
+            // Default CSS classes
+            var active = "active",
+                inactive = "inactive";
+            
             return this.each(function() {
                 
                 // Increment coookie counter to ensure cookie name integrity
                 cookieCounter++;
                 var obj = $(this),
-                    // Default CSS classes
-                    active = "active",
-                    inactive = "inactive",
                     // Find all headers and wrap them in <a> for accessibility.
                     sections = obj.find(op.head).wrapInner('<a href="#">'),
                     l = sections.length,
@@ -55,9 +56,8 @@
                 obj.bind("show", function(e, bypass) {
                     var obj = $(e.target);
                     // ARIA attribute for accessability 
-                    obj.attr('aria-hidden',false)
+                    obj.attr('aria-hidden', false)
                         .prev()
-                        .find("a")
                         .removeClass(inactive)
                         .addClass(active);
                     // Sometimes we want to bypass the custom show function
@@ -72,9 +72,8 @@
                 // Bind event for hiding content
                 obj.bind("hide", function(e, bypass) {
                     var obj = $(e.target);
-                    obj.attr('aria-hidden',true)
+                    obj.attr('aria-hidden', true)
                         .prev()
-                        .find("a")
                         .removeClass(active)
                         .addClass(inactive);
                     if(bypass) {
@@ -107,15 +106,23 @@
                 obj.bind("click", function(e) {
                     e.preventDefault();
                     var t = $(e.target);
-                    // Make sure header anchor is clicked else do nothing
-                    if(!t.is(op.head + " a")) {
-                        return false;
+                    // Check if header was clicked
+                    if(!t.is(op.head)) {
+                        // What about link inside header
+                        if(t.parent().is(op.head)) {
+                            console.log("yup");
+                            t = t.parent();
+                        }
+                        // If neither, false alarm
+                        else {
+                            return;
+                        }
                     }
                     // Figure out what position the clicked header has.
-                    var num = sections.index(t.parent()),
+                    var num = sections.index(t),
                         cookieName = cookie + num,
                         cookieVal = num,
-                        content = t.parent().next(op.group);
+                        content = t.next(op.group);
                     // If content is already active, hide it.
                     if(t.hasClass(active)) {
                         content.trigger('hide');
