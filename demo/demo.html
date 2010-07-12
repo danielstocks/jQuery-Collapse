@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <title>jQuery Collapse Demo</title>
         <link href="demo.css" rel="stylesheet">
-        <script>document.getElementsByTagName("html")[0].className = "js";</script>
     </head>
     <body>
         <div id="wrap">
@@ -13,7 +12,7 @@
             <div class="col">
                 <h2>First instance</h2>
                 <div class="demo">
-                    <h3>Fruits</h3>
+                    <h3 class="active">Fruits</h3>
                     <ul>
                         <li>Apple</li>
                         <li>Pear</li>
@@ -72,7 +71,7 @@
             $(".demo").collapse({show: function(){
                 this.slideDown("fast");
             }});
-            $(".demo-2").collapse({speed : 0, open: true, hide: function(){
+            $(".demo-2").collapse({speed : 0, open: true, hide: function() {
                 this.fadeOut();
             }});
         </script>

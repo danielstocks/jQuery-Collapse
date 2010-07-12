@@ -6,6 +6,4 @@ h3:hover {color: #999;}
 ul {border-bottom: 2px solid #ccc; padding:10px 0 10px 20px; margin:0;}
 .active {background-color: #ddd;  background-position: 100% -21px;}
 .col {float: left; width:210px; margin-right:20px;}
-.js h3 + ul,
-.js h3 + div {display: none;}
 .disclaim {margin:10px; padding:10px; background: red;}

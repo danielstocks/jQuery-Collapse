@@ -49,19 +49,22 @@
                     cookie = op.cookieName + "_" + cookieCounter;
                     // Locate all panels directly following a header
                     var panel = obj.find(op.head).map(function() {
-                        return $(this).next(op.group).hide()[0];
+                        var head = $(this)
+                        if(!head.hasClass(active)) {
+                            return head.next(op.group).hide()[0];
+                        }
+                        return head.next(op.group)[0];
                     });
     
                 // Bind event for showing content
                 obj.bind("show", function(e, bypass) {
                     var obj = $(e.target);
-                    // ARIA attribute for accessability 
+                    // ARIA attribute
                     obj.attr('aria-hidden', false)
                         .prev()
                         .removeClass(inactive)
                         .addClass(active);
-                    // Sometimes we want to bypass the custom show function
-                    // and just show the content right away.
+                    // Bypass method for instant display
                     if(bypass) {
                         obj.show();
                     } else {
@@ -94,27 +97,25 @@
                         var val = $.cookie(cookie + c);
                         // Show content if associating cookie is found
                         if ( val == c + "open" ) {
-                            panel.eq(c).trigger('show',[true]);
+                            panel.eq(c).trigger('show', [true]);
                         // Hide content
                         } else if ( val == c + "closed") {
-                            panel.eq(c).trigger('hide',[true])
+                            console.log(panel);
+                            panel.eq(c).trigger('hide', [true]);
                         }
                     }
                 }
                 
-                // Delegate click event to show/hide content
+                // Delegate click event to show/hide content.
                 obj.bind("click", function(e) {
                     e.preventDefault();
                     var t = $(e.target);
                     // Check if header was clicked
                     if(!t.is(op.head)) {
-                        // What about link inside header
-                        if(t.parent().is(op.head)) {
-                            console.log("yup");
+                        // What about link inside header.
+                        if ( t.parent().is(op.head) ) {
                             t = t.parent();
-                        }
-                        // If neither, false alarm
-                        else {
+                        } else {
                             return;
                         }
                     }
@@ -132,7 +133,7 @@
                         }
                         return;
                     }
-                    // Else show it.
+                    // Otherwise show it.
                     content.trigger('show');
                     cookieVal += 'open';
                     if(cookieSupport) {
@@ -155,5 +156,4 @@
         }
     });
     var cookieSupport = $.fn.collapse.cookieSupport = cookie;
-
 })(jQuery);
