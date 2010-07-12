@@ -44,7 +44,7 @@
                 cookieCounter++;
                 var obj = $(this),
                     // Find all headers and wrap them in <a> for accessibility.
-                    sections = obj.find(op.head).wrapInner('<a href="#">'),
+                    sections = obj.find(op.head).wrapInner('<a href="#"></a>'),
                     l = sections.length,
                     cookie = op.cookieName + "_" + cookieCounter;
                     // Locate all panels directly following a header
@@ -100,7 +100,6 @@
                             panel.eq(c).trigger('show', [true]);
                         // Hide content
                         } else if ( val == c + "closed") {
-                            console.log(panel);
                             panel.eq(c).trigger('hide', [true]);
                         }
                     }
