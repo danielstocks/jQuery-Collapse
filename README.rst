@@ -1,10 +1,10 @@
-============
+===============
 jQuery Collapse
-============
+===============
 
 A lightweight plugin for enabling expandable/collapsible content.
 
-- Packaged with cookie support (yum!)
+- Packaged with cookie support (yum yum!)
 - Lightweight (655 bytes minified and gzipped)
 - ARIA compliant
 
@@ -32,8 +32,7 @@ JavaScript::
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="jquery.collapse.js"></script>
-    <!-- If you want cookie support -->
-    <script src="jquery.cookie.js"></script>
+    <script src="jquery.cookie.js"></script> <!-- If you want cookie support -->
     <script>
     $(function() {
         $("#demo").collapse();
@@ -45,12 +44,11 @@ JavaScript::
 Options
 -------
 
-* **open** (bool) : Defines if content is initially visible or hidden (default: false)
-* **head** (string) : Elements for clickable headings (default: "h3")
-* **group** (string): Elements containing the collapsable content (default: "ul, div")
 * **show** (function) : Custom function for showing content (default: function(){ this.show() })
 * **hide** (function) : Custom function for hiding content (default: function(){ this.hide() })
-* **cookieName** (string) : Name of cookie used in the plugin. (default: "collapse")
+* **head** (string) : Elements for clickable headings (default: "h3")
+* **group** (string): Elements containing the collapsable content (default: "ul, div")
+* **cookie** (string) : Name of cookie used in the plugin. (default: "collapse")
 
 Browser Support
 ---------------

@@ -1,9 +1,8 @@
 ROADMAP
 -------
 
-v0.8.7
+v0.8.8
 ----
-* Simplify logic by removing options "head" and "group"
 * Write tests
 
 v9 ++

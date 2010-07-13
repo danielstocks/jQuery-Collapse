@@ -3,8 +3,8 @@
  * http://github.com/danielstocks/jQuery-Collapse/
  *
  * @author Daniel Stocks (http://webcloud.se)
- * @version 0.3
- * @updated 3-JULY-2010 
+ * @version 0.8.7
+ * @updated 13-JULY-2010 
  * 
  * Copyright 2010, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
