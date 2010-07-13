@@ -19,7 +19,6 @@
         collapse: function(options) {
             
             var defaults = {
-                open : false,
                 head : "h3",
                 group : "div, ul",
                 cookieName : "collapse",
@@ -85,11 +84,6 @@
                         op.hide.call(obj);
                     }
                 });
-
-                // Content that is expanded by default
-                if(op.open) {
-                    panel.trigger('show',[true]);
-                }
                 
                 // Look for existing cookies
                 if(cookieSupport) {
