@@ -3,7 +3,7 @@ ROADMAP
 
 v0.8.8
 ----
-* Write tests
+* Write more thorough tests
 
 v9 ++
 ----
