@@ -52,7 +52,7 @@
                 <h2>Third instance</h2>
                 <p>This is open by default</p>
                 <div class="demo-2">
-                    <h3>Countries</h3>
+                    <h3 class="active">Countries</h3>
                     <ul>
                         <li>Sweden</li>
                         <li>Jamaica</li>
@@ -71,7 +71,7 @@
             $(".demo").collapse({show: function(){
                 this.slideDown("fast");
             }});
-            $(".demo-2").collapse({speed : 0, open: true, hide: function() {
+            $(".demo-2").collapse({hide: function() {
                 this.fadeOut();
             }});
         </script>
