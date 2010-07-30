@@ -101,7 +101,6 @@
                 
                 // Delegate click event to show/hide content.
                 obj.bind("click", function(e) {
-                    e.preventDefault();
                     var t = $(e.target);
                     // Check if header was clicked
                     if(!t.is(op.head)) {
@@ -111,6 +110,7 @@
                         } else {
                             return;
                         }
+                        e.preventDefault();
                     }
                     // Figure out what position the clicked header has.
                     var num = sections.index(t),
