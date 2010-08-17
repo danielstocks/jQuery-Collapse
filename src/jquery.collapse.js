@@ -3,8 +3,8 @@
  * http://github.com/danielstocks/jQuery-Collapse/
  *
  * @author Daniel Stocks (http://webcloud.se)
- * @version 0.8.7
- * @updated 13-JULY-2010 
+ * @version 0.8.9
+ * @updated 17-AUG-2010
  * 
  * Copyright 2010, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
@@ -141,11 +141,11 @@
     var cookie = true;
     $(function() {
         try {
-            $.cookie('test', 'testVal', { path: '/', expires: 10 });
+            $.cookie('x', 'x', { path: '/', expires: 10 });
         }
         catch(e) {
             cookie = false;
-            $.cookie('test', null);
+            $.cookie('x', null);
         }
     });
     var cookieSupport = $.fn.collapse.cookieSupport = cookie;
