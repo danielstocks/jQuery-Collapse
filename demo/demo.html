@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>jQuery Collapse Demo</title>
         <link href="demo.css" rel="stylesheet">
+        <script>document.documentElement.className = "js";</script>
     </head>
     <body>
         <div id="wrap">
@@ -69,8 +70,19 @@
         <script src="../src/jquery.cookie.js"></script>
         <script>
             $(".demo").collapse({show: function(){
-                this.slideDown("fast");
-            }});
+                    this.animate({
+                        opacity: 'toggle', 
+                        height: 'toggle'
+                    }, 300);
+                },
+                hide : function() {
+                    
+                    this.animate({
+                        opacity: 'toggle', 
+                        height: 'toggle'
+                    }, 300);
+                }
+            });
             $(".demo-2").collapse({hide: function() {
                 this.fadeOut();
             }});
