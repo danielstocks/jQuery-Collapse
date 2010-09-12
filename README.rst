@@ -48,7 +48,7 @@ Options
 * **hide** (function) : Custom function for hiding content (default: function(){ this.hide() })
 * **head** (string) : Elements for clickable headings (default: "h3")
 * **group** (string): Elements containing the collapsable content (default: "ul, div")
-* **cookie** (string) : Name of cookie used in the plugin. (default: "collapse")
+* **cookieName** (string) : Name of cookie used in the plugin. (default: "collapse")
 
 Browser Support
 ---------------
