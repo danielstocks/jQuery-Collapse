@@ -1,11 +1,8 @@
-/*!
+/*
  * Collapse plugin for jQuery
  * http://github.com/danielstocks/jQuery-Collapse/
  *
  * @author Daniel Stocks (http://webcloud.se)
- * @version 0.9.1
- * @updated 17-AUG-2010
- * 
  * Copyright 2010, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
  */
@@ -138,14 +135,15 @@
     });
 
     // Make sure can we eat cookies without getting into trouble.
-    var cookieSupport = (function() {
+    var cookie = true;
+    $(function() {
         try {
             $.cookie('x', 'x', { path: '/', expires: 10 });
-            $.cookie('x', null);
         }
         catch(e) {
-            return false;
+            cookie = false;
+            $.cookie('x', null);
         }
-        return true;
-    })();
+    });
+    var cookieSupport = $.fn.collapse.cookieSupport = cookie;
 })(jQuery);
