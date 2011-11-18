@@ -25,7 +25,7 @@ HTML::
         <h3>Info</h3>
         <div>
             <p>You can use any container you like (in this case a div)</p>
-        </p>
+        </div>
     </div>
 
 JavaScript::
