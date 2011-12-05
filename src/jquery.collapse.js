@@ -138,6 +138,7 @@
     var cookie = true;
     try {
         $.cookie('x', 'x', { path: '/', expires: 10 });
+        $.cookie('x', null);
     }
     catch(e) {
         cookie = false;
