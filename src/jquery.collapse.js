@@ -136,14 +136,11 @@
 
     // Make sure can we eat cookies without getting into trouble.
     var cookie = true;
-    $(function() {
-        try {
-            $.cookie('x', 'x', { path: '/', expires: 10 });
-        }
-        catch(e) {
-            cookie = false;
-            $.cookie('x', null);
-        }
-    });
+    try {
+        $.cookie('x', 'x', { path: '/', expires: 10 });
+    }
+    catch(e) {
+        cookie = false;
+    }
     var cookieSupport = $.fn.collapse.cookieSupport = cookie;
 })(jQuery);
