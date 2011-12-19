@@ -26,7 +26,8 @@
                 // Default function for hiding content
                 hide: function() { 
                     this.hide();
-                }
+                },
+                disableCookie: false
             };
             var op = $.extend(defaults, options);
             
@@ -81,9 +82,11 @@
                         op.hide.call(obj);
                     }
                 });
-                
+
+                var cookiesEnabled = cookieSupport && !op.disableCookie;
+
                 // Look for existing cookies
-                if(cookieSupport) {
+                if(cookiesEnabled) {
                     for (var c=0;c<=l;c++) {
                         var val = $.cookie(cookie + c);
                         // Show content if associating cookie is found
@@ -118,7 +121,7 @@
                     if(t.hasClass(active)) {
                         content.trigger('hide');
                         cookieVal += 'closed';
-                        if(cookieSupport) {
+                        if(cookiesEnabled) {
                             $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                         }
                         return;
@@ -126,7 +129,7 @@
                     // Otherwise show it.
                     content.trigger('show');
                     cookieVal += 'open';
-                    if(cookieSupport) {
+                    if(cookiesEnabled) {
                         $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
                     }
                 });
