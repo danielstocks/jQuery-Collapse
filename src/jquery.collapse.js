@@ -1,20 +1,23 @@
-/*
+/*!
  * Collapse plugin for jQuery
  * http://github.com/danielstocks/jQuery-Collapse/
  *
  * @author Daniel Stocks (http://webcloud.se)
+ * @version 0.9.1
+ * @updated 17-AUG-2010
+ * 
  * Copyright 2010, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
  */
- 
+  
 (function($) {
-    
+        
     // Use a cookie counter to allow multiple instances of the plugin
     var cookieCounter = 0;
-    
+        
     $.fn.extend({
         collapse: function(options) {
-            
+                        
             var defaults = {
                 head : "h3",
                 group : "div, ul",
@@ -28,30 +31,35 @@
                     this.hide();
                 }
             };
+
             var op = $.extend(defaults, options);
-            
+                        
             // Default CSS classes
             var active = "active",
                 inactive = "inactive";
-            
+                                
+            var selector = this.selector;
+
             return this.each(function() {
-                
-                // Increment coookie counter to ensure cookie name integrity
+                // Increment cookie counter to ensure cookie name integrity
                 cookieCounter++;
                 var obj = $(this),
+                    nested = obj.find(selector + " " + op.head),
                     // Find all headers and wrap them in <a> for accessibility.
-                    sections = obj.find(op.head).wrapInner('<a href="#"></a>'),
+                    // Make sure and skip any nested tags that are in the parent's selector.
+                    sections = obj.find(op.head).not(nested).wrapInner('<a href="#"></a>'),
                     l = sections.length,
                     cookie = op.cookieName + "_" + cookieCounter;
                     // Locate all panels directly following a header
-                    var panel = obj.find(op.head).map(function() {
-                        var head = $(this)
+                    // Don't mess with nested tags, again.
+                    var panel = obj.find(op.head).not(nested).map(function() {
+                        var head = $(this);
                         if(!head.hasClass(active)) {
                             return head.next(op.group).hide()[0];
                         }
                         return head.next(op.group)[0];
                     });
-    
+        
                 // Bind event for showing content
                 obj.bind("show", function(e, bypass) {
                     var obj = $(e.target);
@@ -81,7 +89,7 @@
                         op.hide.call(obj);
                     }
                 });
-                
+                                
                 // Look for existing cookies
                 if(cookieSupport) {
                     for (var c=0;c<=l;c++) {
@@ -95,14 +103,14 @@
                         }
                     }
                 }
-                
-                // Delegate click event to show/hide content.
-                obj.bind("click", function(e) {
+
+                // This is out here now so you can reference it for unbind.
+                var clickHandler = function (e) {
                     var t = $(e.target);
                     // Check if header was clicked
-                    if(!t.is(op.head)) {
+                    if (!t.is(op.head)) {
                         // What about link inside header.
-                        if ( t.parent().is(op.head) ) {
+                        if (t.parent().is(op.head)) {
                             t = t.parent();
                         } else {
                             return;
@@ -115,35 +123,38 @@
                         cookieVal = num,
                         content = t.next(op.group);
                     // If content is already active, hide it.
-                    if(t.hasClass(active)) {
+                    if (t.hasClass(active)) {
                         content.trigger('hide');
                         cookieVal += 'closed';
-                        if(cookieSupport) {
-                            $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
+                        if (cookieSupport) {
+                            $.cookie(cookieName, cookieVal, { path:'/', expires:10 });
                         }
                         return;
                     }
                     // Otherwise show it.
                     content.trigger('show');
                     cookieVal += 'open';
-                    if(cookieSupport) {
-                        $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
+                    if (cookieSupport) {
+                        $.cookie(cookieName, cookieVal, { path:'/', expires:10 });
                     }
-                });
+                };
+
+                // Delegate click event to show/hide content.
+                // Note that the click event needs to be bound to the <a> tag, not the main div!
+                obj.find(op.head).not(nested).children(":first-child").bind("click", clickHandler);
             });
         }
     });
 
     // Make sure can we eat cookies without getting into trouble.
-    var cookie = true;
-    $(function() {
+    var cookieSupport = (function() {
         try {
             $.cookie('x', 'x', { path: '/', expires: 10 });
-        }
-        catch(e) {
-            cookie = false;
             $.cookie('x', null);
         }
-    });
-    var cookieSupport = $.fn.collapse.cookieSupport = cookie;
+        catch(e) {
+            return false;
+        }
+        return true;
+    })();
 })(jQuery);
