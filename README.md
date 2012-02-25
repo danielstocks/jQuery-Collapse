@@ -9,15 +9,19 @@ Enjoy!
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
 - Lightweight (655 bytes minified and Gzipped)
 - Cross Browser compliant (Tested on IE6 +, Firefox, Safari, Chrome, Opera)
-- Optional: 'Accordion' plugin
-- Optional: 'Storage' plugin: Uses Cookies || HTML5 localStorage for 'remembering' open and closed sections
+- Optional: **Accordion** plugin
+- Optional: **Storage** plugin
 
 ## Usage
+
+Add the JavaScripts to your document:
 
 ```html
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="jquery.collapse.js"></script>
 ```
+
+Here's some sample HTML markup:
 
 ```html
 <div id="demo" data-collapse="true">
@@ -34,7 +38,7 @@ Enjoy!
 </div>
 ```
 
-The *data-collapse* attribute will automatically trigger the script. 
+That's it! The *data-collapse* attribute will automatically trigger the script. 
 
 If you'd rather load the plugin with jQuery, you can:
 
@@ -55,23 +59,30 @@ new Collapse(document.getElementById("demo"), {
 });
 ```
 
-### Accordion
+### Accordion plugin
 
 If you want to enable "accordion" functionality load the accordion plugin *after* you load jquery.collapse.js
 
-HTML::
+```html
+<script src="jquery.collapse.accordion.js"></script>
+```
 
-    <script src="jquery.collapse.accordion.js"></script>
+Remember, you won't be able to show several sections at once with the
+accordion, because it'll automagically close any open sections before
+trying to open a new one.
 
-### Cookies / Storage
+### Storage plugin
 
 By default, if the user reloads the page all the sections will be closed. If you want previously collapsed sections to stay open, you can use
 the storage plugin. Load it *after* you load jquery.collapse.js
 
-HTML::
+```html
+<script src="jquery.collapse.storage.js"></script>
+```
 
-    <script src="jquery.collapse.storage.js"></script>
-
+The storage plugin uses HTML5 localStorage if available. Otherwise it
+will attempt to use browser cookies, if that also fails, it will simply
+work, but without any storage.
 
 ## API Documentation
 
