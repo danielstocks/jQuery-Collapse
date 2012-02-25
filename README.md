@@ -7,7 +7,7 @@ Enjoy!
 ## Features
 
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
-- Lightweight (655 bytes minified and Gzipped)
+- Lightweight (~700 bytes minified and Gzipped)
 - Cross Browser compliant (Tested on IE6 +, Firefox, Safari, Chrome, Opera)
 - Optional: **Accordion** plugin
 - Optional: **Storage** plugin
