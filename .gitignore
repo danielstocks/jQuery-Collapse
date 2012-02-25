@@ -1,0 +1,7 @@
+*~
+*.diff
+*.patch
+.DS_Store
+.settings
+Guardfile
+Gemfile
