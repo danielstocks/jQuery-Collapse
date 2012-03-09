@@ -43,12 +43,14 @@ That's it! The *data-collapse* attribute will automatically trigger the script.
 
 ## Custom usage
 
-If you'd rather load the plugin with jQuery, you can:
+If you'd rather omit the 'data-collapse' attribute and load the plugin with jQuery, you can:
 
 
 ```js
 $(function() {
-    $("#demo").collapse();
+    $("#demo").collapse({
+      // options...
+    });
 });
 ```
 

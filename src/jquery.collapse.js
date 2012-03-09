@@ -1,4 +1,4 @@
-/**
+/*
  * Collapse plugin for jQuery
  * --
  * code: http://github.com/danielstocks/jQuery-Collapse/
@@ -8,3 +8,7 @@
  * Copyright 2012, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
  */
+
+ !function($){
+
+ }(window.jQuery);
