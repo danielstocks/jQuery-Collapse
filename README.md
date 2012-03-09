@@ -40,6 +40,9 @@ Here's some sample HTML markup:
 
 That's it! The *data-collapse* attribute will automatically trigger the script. 
 
+
+## Custom usage
+
 If you'd rather load the plugin with jQuery, you can:
 
 
