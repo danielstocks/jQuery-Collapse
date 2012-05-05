@@ -46,7 +46,7 @@ Here's some sample HTML markup:
 That's it! The *data-collapse* attribute will automatically trigger the script. 
 
 
-## Custom usage
+## JavaScript usage
 
 If you'd rather omit the 'data-collapse' attribute in the HTML and load the plugin via jQuery, you can:
 
@@ -119,7 +119,7 @@ both values to the data-collapse attribute
 
 ## API Documentation
 
-Here are the exposed options and events that you can play aroud with
+Here are the exposed options and events that you can play around with
 using JavaScript. Enjoy.
 
 ### Options
