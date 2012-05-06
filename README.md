@@ -62,7 +62,7 @@ If you don't want to use the jQuery ($) wrapper, you can also access the
 plugin with vanilla JavaScript:
 
 ```js
-new Collapse($("#demo"), {
+new jQueryCollapse($("#demo"), {
   // options...
 });
 ```
@@ -143,7 +143,7 @@ the plugin with JavaScript.
 Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
 
 * Find a bug, or invent a feature.
-* Write a test case (located in ./test/*_test.js)
+* Write a test case (located in ./spec/*_spec.coffee)
 * Watch it fail (red light)
 * Fix bug / introduce feature
 * Watch it pass (green light)
@@ -152,7 +152,6 @@ Did you find a bug? Do you want to introduce a feature? Here's what to do (in th
 * Wait patiently...
 * Rejoice!
 
-Tests are written in a BDD fashion and run
-using the [Buster.js](http://busterjs.org/) test framework
+Tests are written in CoffeeScript with a BDD flavour using the [Buster.js](http://busterjs.org/) test framework.
 
 Thanks in advance
