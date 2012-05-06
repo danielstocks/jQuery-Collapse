@@ -5,3 +5,4 @@
 .settings
 Guardfile
 Gemfile
+spec/*_spec.js
