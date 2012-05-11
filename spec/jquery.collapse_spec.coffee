@@ -113,19 +113,19 @@ describe "jQuery Collapse", ->
           it "should prevent default behaviour", ->
             event =
               preventDefault : @spy()
-            @jq.sections[0].handleClick(event);
+            @jq.handleClick(event);
             expect(event.preventDefault).toHaveBeenCalledOnce()
 
           it "should open the corresponding section if it's closed", ->
             @jq.sections[0].close();
             stub = @stub(@jq.sections[0], "open")
-            @summary.trigger("click")
+            @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
           it "should close the corresponding section if it's open", ->
             @jq.sections[0].open();
             stub = @stub(@jq.sections[0], "close")
-            @summary.trigger("click")
+            @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
   describe 'Events', ->
@@ -181,3 +181,30 @@ describe "jQuery Collapse", ->
 
       it "should be a H2 element", ->
         expect(@target.find(".closed").get(0).tagName).toBe "H2"
+
+
+  describe 'accordion', ->
+
+    before ->
+      ###:DOC+=<div class="test" id="test4">
+        <h1>Section 1</h1> <div>hello 1</div>
+        <h2>Section 2</h2> <span>hello 2</span>
+        <h3>Section 3</h3> <div>hello 3</div>
+      </div>###
+
+      @target = $("#test4")
+      @jq = new jQueryCollapse(@target, {
+        accordion: true
+      })
+
+    it "should be an accordion", ->
+      expect(@jq.isAccordion).toBe true
+   
+    it "should close any open sections when opening a new one", ->
+      @target.trigger("open", 0)
+      expect(@target.find(".open").length).toBe 1
+
+    it "should be able to close the open section by clicking", ->
+      @target.trigger("open", 0)
+      @target.find("h1").find("a").trigger("click")
+      expect(@target.find(".open").length).toBe 0

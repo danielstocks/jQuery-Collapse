@@ -12,17 +12,19 @@
 !function($) {
 
   // Constructor
-  function Collapse (el) {
+  function Collapse (el, options) {
 
     var _this = this,
+        options = options || {},
         err;
 
-    err = !(el instanceof $) ? "'el' argument must be a jQuery object" : null
+    err = !(el instanceof $) ? "'el' argument must be a jQuery object" : null // not working properly?
     err = (el.length < 1) ? "'el' must contain a DOM element" : null
     if(err) throw new TypeError(err);
 
     _this.$el = el;
     _this.sections = [];
+    _this.isAccordion = options.accordion || false;
 
     // For every pair of elements in given
     // element, create a section
@@ -32,32 +34,58 @@
 
     // Wrap in private scope to
     // to preserve 'sections' property
-    (function(sections) { 
+    (function(_this) { 
 
-      // Open event
-      _this.$el.bind("open", function(e, eq) {
-        if(eq) {
-          sections[eq].open();
-          return;
-        }
-        $.each(sections, function() {
-          this.open();
-        });
-      });
+      var _this = _this;
+      _this.$el.on("click", $.proxy(_this.handleClick, _this));
+      _this.$el.bind("open", $.proxy(_this.open, _this));
+      _this.$el.bind("close", $.proxy(_this.close, _this));
 
-      // Close event
-      _this.$el.bind("close", function(e, eq) {
-        if(eq) {
-          sections[eq].close();
-          return;
-        }
-        $.each(sections, function() {
-          this.close();
-        });
-      });
-
-    }(_this.sections));
+    }(_this));
   }
+
+  Collapse.prototype = {
+
+    handleClick: function(e) {
+
+      e.preventDefault();
+
+      var sections = this.sections,
+          p = $(e.target).parent();
+
+      // Allow for closing an open accordion option
+      if($(p).hasClass("open") && this.isAccordion) return p.trigger("close");
+
+      // If accordion close all sections
+      if(this.isAccordion) this.$el.trigger("close");
+
+      var l = sections.length;
+      while(l--) {
+        if(sections[l].$summary.find("a").is(e.target)) {
+          sections[l].toggle();
+          break;
+        }
+      }
+    },
+    open : function(e, eq) {
+      if(typeof eq == "number") {
+        if(this.isAccordion) this.$el.trigger("close");
+        return this.sections[eq].open();
+      }
+      if(this.isAccordion) return this.$el.trigger("close");
+      $.each(this.sections, function() {
+        this.open();
+      });
+    },
+    close: function(e, eq) {
+      if(typeof eq == "number") {
+        return this.sections[eq].close();
+      }
+      $.each(this.sections, function() {
+        this.close();
+      });
+    }
+  };
 
   // Section constructor
   function Section($el) {
@@ -67,16 +95,14 @@
       'isOpen' : false,
       '$summary' : $el
         .prev()
-        .wrapInner('<a href="#"/>')
-        .bind('click', $.proxy(_this.handleClick, _this)),
+        .wrapInner('<a href="#"/>'),
       '$details' : $el
     });
     _this.close();
   }
 
   Section.prototype = {
-    handleClick : function(e) {
-      e.preventDefault();
+    toggle : function() {
       this.isOpen ? this.close() : this.open();
     },
     close: function() {
@@ -101,7 +127,7 @@
     collapse: function(scan) {
       var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
       return nodes.each(function() {
-        jQueryCollapse($(this));
+        new jQueryCollapse($(this)).$el;
       });
     }
   });

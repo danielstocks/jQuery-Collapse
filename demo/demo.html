@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>jQuery Collapse Demo</title>
+    <link rel="stylesheet" href="demo.css">
   </head>
   <body>
     <h1>jQuery Collapse Demo</h1>
@@ -11,47 +12,33 @@
     <h2>Default Example</h2>
     <div id="default-example" data-collapse>
       <h3>Fruits</h3>
-      <ul>
-        <li>Apple</li>
-        <li>Pear</li>
-        <li>Orange</li>
-      </ul>
+      <div>I like fruits. This <a href="#work">link should work</a></div>
       <h3>Info</h3>
-      <div>
-        <p>You can use any container you like (in this case a div element)</p>
-      </div>
+      <div>This is some information</div>
     </div>
 
     <!-- Accordion -->
     <h2>Accordion Example</h2>
-    <div id="accordion-example" data-collapse="accordion">
+    <div id="accordion-example">
+      <h3>Accordion</h3>
+      <div>Are fun.</div>
       <h3>Fruits</h3>
-      <ul>
-        <li>Apple</li>
-        <li>Pear</li>
-        <li>Orange</li>
-      </ul>
+      <div>I like fruits</div>
       <h3>Info</h3>
-      <div>
-        <p>You can use any container you like (in this case a div element)</p>
-      </div>
+      <div>This is some information</div>
+      <h3>Yeah!!</h3>
+      <div>eh</div>
     </div>
 
     <!-- Persist -->
-    <h2>Persist Example</h2>
     <div id="persist-example">
-      <h3>Fruits</h3>
-      <ul>
-        <li>Apple</li>
-        <li>Pear</li>
-        <li>Orange</li>
-      </ul>
-      <h3>Info</h3>
-      <div>
-        <p>You can use any container you like (in this case a div element)</p>
-      </div>
     </div>
     <script src="../vendor/jquery-1.7.2.js"></script>
     <script src="../src/jquery.collapse.js"></script>
+    <script>
+      new jQueryCollapse($("#accordion-example"), {
+        accordion: true
+      });
+    </script>
   </body>
 </html>
