@@ -29,6 +29,34 @@
     _this.$el.children(":odd").each(function() {
       _this.sections.push(new Section($(this)));
     });
+
+    // Wrap in private scope to
+    // to preserve 'sections' property
+    (function(sections) { 
+
+      // Open event
+      _this.$el.bind("open", function(e, eq) {
+        if(eq) {
+          sections[eq].open();
+          return;
+        }
+        $.each(sections, function() {
+          this.open();
+        });
+      });
+
+      // Close event
+      _this.$el.bind("close", function(e, eq) {
+        if(eq) {
+          sections[eq].close();
+          return;
+        }
+        $.each(sections, function() {
+          this.close();
+        });
+      });
+
+    }(_this.sections));
   }
 
   // Section constructor
@@ -72,7 +100,7 @@
   $.fn.extend({
     collapse: function(scan) {
       var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
-      nodes.each(function() {
+      return nodes.each(function() {
         jQueryCollapse($(this));
       });
     }

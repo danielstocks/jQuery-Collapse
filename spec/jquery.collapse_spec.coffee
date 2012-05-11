@@ -57,6 +57,7 @@ describe "jQuery Collapse", ->
       expect(@jq.sections).toBeObject []
 
     it "should create a section for every group of two child elements", ->
+      console.log($("body").html())
       expect(@jq.sections.length).toEqual 3
 
     describe 'the first section', ->
@@ -127,5 +128,56 @@ describe "jQuery Collapse", ->
             @summary.trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
+  describe 'Events', ->
 
+    # We create two instances of collapse
+    # to verify that the correct
+    # one is reacting to the events
 
+    before ->
+      ###:DOC+=<div class="test" id="test2">
+        <h1>Section 1</h1> <div>hello 1</div>
+        <h2>Section 2</h2> <span>hello 2</span>
+        <h3>Section 3</h3> <div>hello 3</div>
+      </div>###
+
+      ###:DOC+=<div class="test" id="test3">
+        <h1>Section 1</h1> <div>hello 1</div>
+        <h2>Section 2</h2> <span>hello 2</span>
+        <h3>Section 3</h3> <div>hello 3</div>
+      </div>###
+
+      $(".test").collapse()
+      @target = $("#test2")
+
+    it "should open all sections", ->
+      @target.trigger("open")
+      console.log $("body").html()
+      expect(@target.find(".open").length).toBe 3
+
+    it "should close all sections", ->
+      @target.trigger("close");
+      expect(@target.find(".closed").length).toBe 3
+
+    describe 'opening a specific section', ->
+
+      before ->
+        @target.trigger("open", 1);
+
+      it "should open the second section", ->
+        expect(@target.find(".open").length).toBe 1
+
+      it "should be a H2 element", ->
+        expect(@target.find(".open")[0].tagName).toBe "H2"
+
+    describe 'closing a specific section', ->
+
+      before ->
+        @target.trigger("open")
+        @target.trigger("close", 1);
+
+      it "should close the second section", ->
+        expect(@target.find(".closed").length).toBe 1
+
+      it "should be a H2 element", ->
+        expect(@target.find(".closed").get(0).tagName).toBe "H2"
