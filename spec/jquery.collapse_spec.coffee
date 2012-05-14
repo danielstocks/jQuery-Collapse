@@ -57,7 +57,6 @@ describe "jQuery Collapse", ->
       expect(@jq.sections).toBeObject []
 
     it "should create a section for every group of two child elements", ->
-      console.log($("body").html())
       expect(@jq.sections.length).toEqual 3
 
     describe 'the first section', ->
@@ -71,6 +70,9 @@ describe "jQuery Collapse", ->
 
       it "should wrap the inner text with a <a> element", ->
         expect(@summary.get(0).innerHTML).toEqual '<a href="#">Section 1</a>'
+
+      it "should add data-collap-summary attribute to details", ->
+        expect(@summary.attr("data-collapse-summary")).toBeDefined()
 
       it "should have div as 'details' for the first section", ->
         expect(@details.get(0).tagName).toEqual "DIV"
@@ -128,6 +130,19 @@ describe "jQuery Collapse", ->
             @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
+          it "should not fire handle click event on links inside collapsed content", ->
+            ###:DOC+=<div id="test-click">
+              <h1>Section 1</h1> <div>hello 1</div>
+              <h2>Section 2</h2> <span>hello 2</span>
+              <h3>Section 3</h3> <div>hello 3 <a id="test-link" href="#test-link">test link</a></div>
+            </div>###
+            
+            stub = @stub(jQueryCollapse.prototype, "handleClick")
+            @jq2 = new jQueryCollapse $("#test-click")
+            $("#test-link").trigger("click")
+            expect(stub).not.toHaveBeenCalledOnce()
+
+
   describe 'Events', ->
 
     # We create two instances of collapse
@@ -152,7 +167,6 @@ describe "jQuery Collapse", ->
 
     it "should open all sections", ->
       @target.trigger("open")
-      console.log $("body").html()
       expect(@target.find(".open").length).toBe 3
 
     it "should close all sections", ->

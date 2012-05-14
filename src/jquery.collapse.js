@@ -34,12 +34,12 @@
 
     // Wrap in private scope to
     // to preserve 'sections' property
-    (function(_this) { 
+    (function(scope) { 
 
-      var _this = _this;
-      _this.$el.on("click", $.proxy(_this.handleClick, _this));
-      _this.$el.bind("open", $.proxy(_this.open, _this));
-      _this.$el.bind("close", $.proxy(_this.close, _this));
+      var scope = scope;
+      _this.$el.on("click", "[data-collapse-summary]", $.proxy(_this.handleClick, scope));
+      _this.$el.bind("open", $.proxy(_this.open, scope));
+      _this.$el.bind("close", $.proxy(_this.close, scope));
 
     }(_this));
   }
@@ -95,6 +95,7 @@
       'isOpen' : false,
       '$summary' : $el
         .prev()
+        .attr("data-collapse-summary", "")
         .wrapInner('<a href="#"/>'),
       '$details' : $el
     });
