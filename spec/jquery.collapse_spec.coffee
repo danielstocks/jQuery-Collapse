@@ -43,6 +43,18 @@ describe "jQuery Collapse", ->
       $("#test2").collapse();
       expect(@jq).toHaveBeenCalledOnce()
 
+  describe 'initializing plugin with data-collapse accordion', ->
+    before ->
+      ###:DOC+= <div data-collapse="accordion"></div> ###
+      @jq = @stub(window, "jQueryCollapse")
+
+    it "should call the jQueryCollapse constructor with accordion option set to true",->
+      obj = $("div").get(0)
+      $.fn.collapse(true);
+      expect(@jq).toHaveBeenCalledWith($(obj),
+        accordion: true
+      )
+
   describe 'sections', ->
 
     before ->
@@ -136,7 +148,7 @@ describe "jQuery Collapse", ->
               <h2>Section 2</h2> <span>hello 2</span>
               <h3>Section 3</h3> <div>hello 3 <a id="test-link" href="#test-link">test link</a></div>
             </div>###
-            
+
             stub = @stub(jQueryCollapse.prototype, "handleClick")
             @jq2 = new jQueryCollapse $("#test-click")
             $("#test-link").trigger("click")
@@ -213,7 +225,7 @@ describe "jQuery Collapse", ->
 
     it "should be an accordion", ->
       expect(@jq.isAccordion).toBe true
-   
+
     it "should close any open sections when opening a new one", ->
       @target.trigger("open", 0)
       expect(@target.find(".open").length).toBe 1
