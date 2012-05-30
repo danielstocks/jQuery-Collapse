@@ -124,7 +124,6 @@ Example usage of options:
 // Initializing collapse plugin
 // with custom show/hide methods,
 // persistance plugin and accordion behaviour
-
 $("#demo").collapse({
   show: function() {
     this.animate({
@@ -154,7 +153,7 @@ The events can be triggered as follows:
 $("#demo").collapse();
 
 // Open event
-$("#demo".bind("open", function(el) {
+$("#demo").bind("open", function(el) {
   console.log("Opening:", el);
 });
 $("#demo").trigger('open'); // Opening all sections
