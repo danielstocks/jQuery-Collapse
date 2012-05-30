@@ -31,13 +31,13 @@ Here's some sample HTML markup:
 
 ```html
 <div id="demo" data-collapse>
-  <h3>Fruits</h3>
+  <h2>Fruits</h2>
   <ul>
     <li>Apple</li>
     <li>Pear</li>
     <li>Orange</li>
   </ul>
-  <h3>Info</h3>
+  <h2>Info</h2>
   <div>
     <p>You can use any container you like (in this case a div element)</p>
   </div>
@@ -120,29 +120,29 @@ the plugin with JavaScript.
 
 ### Events
 
-* **open** (event) : Trigger this event to open a section
-* **close** (event) : Trigger this event to close a section
+* **open** (event) : Event for section open 
+* **close** (event) : Event for section close
 
-The events can be used as follows:
+The events can be triggered as follows:
 ```js
 
 // Initializing plugin
 $("#demo").collapse();
 
-// Open all sections
-$("#demo").trigger('open');
+// Open event
+$("#demo".bind("open", function(el) {
+  console.log("Opening:", el);
+});
+$("#demo").trigger('open'); // Opening all sections
+$("#demo h2").first().trigger('open'); // Opening the first section
 
-// Close all sections
+// Close event
+$("#demo").bind("close", function(el) {
+  console.log("Closing:", el);
+})
 $("#demo").trigger('close');
+$("#demo h2").last().trigger('open'); // Closing the last section
 
-// Open first section
-$("#demo").trigger('open', 0);
-
-// Open second section
-$("#demo").trigger('open', 1);
-
-// Close first section
-$("#demo").trigger('close', 0);
 
 // and so on...
 ```
