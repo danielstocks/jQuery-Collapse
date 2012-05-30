@@ -142,9 +142,6 @@ $("#demo").bind("close", function(el) {
 })
 $("#demo").trigger('close');
 $("#demo h2").last().trigger('open'); // Closing the last section
-
-
-// and so on...
 ```
 
 
