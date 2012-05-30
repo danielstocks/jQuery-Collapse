@@ -118,6 +118,30 @@ the plugin with JavaScript.
 * **accordion** (bool) : Enable accordion behaviour by setting this option to 'true'
 * **persist** (bool) : Enable persistance between page loads by setting this option to 'true'
 
+Example usage of options:
+```js
+
+// Initializing collapse plugin
+// with custom show/hide methods,
+// persistance plugin and accordion behaviour
+
+$("#demo").collapse({
+  show: function() {
+    this.animate({
+      opacity: 'toggle', 
+      height: 'toggle'
+    }, 300);
+  },
+  hide: function() {
+    this.animate({
+      height: 'toggle'
+    }, 100);
+  },
+  accordion: true,
+  persist: true
+});
+```
+
 ### Events
 
 * **open** (event) : Event for section open 
