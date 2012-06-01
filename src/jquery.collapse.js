@@ -26,7 +26,8 @@
                 // Default function for hiding content
                 hide: function() { 
                     this.hide();
-                }
+                },
+                hidedOnInit : true
             };
             var op = $.extend(defaults, options);
             
@@ -46,7 +47,7 @@
                     // Locate all panels directly following a header
                     var panel = obj.find(op.head).map(function() {
                         var head = $(this)
-                        if(!head.hasClass(active)) {
+                        if(!head.hasClass(active) && op.hidedOnInit) {
                             return head.next(op.group).hide()[0];
                         }
                         return head.next(op.group)[0];
