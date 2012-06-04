@@ -93,7 +93,7 @@ jQuery Collapse uses HTML5 localStorage if available, otherwise it
 will attempt to use cookies. If that also fails, it will degrade
 to work but without any persistance.
 
-You can combine the accordion an persistance options by adding
+You can combine the accordion and persistance options by adding
 both values to the data-collapse attribute:
 
 ```html
@@ -162,7 +162,7 @@ $("#demo h2").first().trigger('open'); // Opening the first section
 // Close event
 $("#demo").bind("close", function(el) {
   console.log("Closing:", el);
-})
+});
 $("#demo").trigger('close');
 $("#demo h2").last().trigger('open'); // Closing the last section
 ```

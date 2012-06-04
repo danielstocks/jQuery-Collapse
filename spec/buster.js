@@ -11,7 +11,7 @@ config["jQuery Collapse specs"] = {
     "spec/*_spec.coffee"
   ],
   extensions: [
-    require("buster-coffee"),
-    require("buster-html-doc")
+    require("buster-html-doc"),
+    require("buster-coffee")
   ]
 }
