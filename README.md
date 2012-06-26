@@ -126,15 +126,12 @@ Example usage of options:
 // persistance plugin and accordion behaviour
 $("#demo").collapse({
   show: function() {
-    this.animate({
-      opacity: 'toggle', 
-      height: 'toggle'
-    }, 300);
+    // The context of 'this' is applied to
+    // the collapsed details in a jQuery wrapper 
+    this.slideDown(100);
   },
   hide: function() {
-    this.animate({
-      height: 'toggle'
-    }, 100);
+    this.slideUp(100);
   },
   accordion: true,
   persist: true

@@ -30,10 +30,32 @@
       <div>eh</div>
     </div>
 
-    <!-- Persist -->
-    <div id="persist-example">
+    <!-- Custom show & hide -->
+    <h2>Custom show &amp; hide</h2>
+    <div id="custom-show-hide-example">
+      <h3>Hello</h3>
+      <div>
+        <p>Hello Sir.</p>
+        <p>I'm sliding</p>
+      </div>
+      <h3>Anarachy in the UK</h3>
+      <div>I like tea</div>
+      <h3>Indeed</h3>
+      <div>This is some information</div>
     </div>
+
     <script src="../vendor/jquery-1.7.2.js"></script>
     <script src="../src/jquery.collapse.js"></script>
+
+    <script>
+      new jQueryCollapse($("#custom-show-hide-example"), {
+        show: function() {
+          this.slideDown(150);
+        },
+        hide: function() {
+          this.slideUp(150);
+        },
+      });
+    </script>
   </body>
 </html>

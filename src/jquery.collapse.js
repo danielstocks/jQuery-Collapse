@@ -29,12 +29,12 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.children(":odd").each(function() {
-      _this.sections.push(new Section($(this)));
+      _this.sections.push(new Section($(this), options));
     });
 
     // Wrap in private scope to
     // to preserve 'sections' property
-    (function(scope) { 
+    (function(scope) {
 
       var scope = scope;
       _this.$el.on("click", "[data-collapse-summary]", $.proxy(_this.handleClick, scope));
@@ -51,10 +51,12 @@
       e.preventDefault();
 
       var sections = this.sections,
-          p = $(e.target).parent();
+          parent = $(e.target).parent();
 
       // Allow for closing an open accordion option
-      if($(p).hasClass("open") && this.isAccordion) return p.trigger("close");
+      if($(parent).hasClass("open") && this.isAccordion) {
+        return parent.trigger("close");
+      }
 
       // If accordion close all sections
       if(this.isAccordion) this.$el.trigger("close");
@@ -88,16 +90,18 @@
   };
 
   // Section constructor
-  function Section($el) {
+  function Section($el, options) {
 
     var _this = this;
     $.extend(_this, {
-      'isOpen' : false,
-      '$summary' : $el
+      isOpen : false,
+      $summary : $el
         .prev()
         .attr("data-collapse-summary", "")
         .wrapInner('<a href="#"/>'),
-      '$details' : $el
+      $details : $el,
+      firstRun : true,
+      options: options
     });
     _this.close();
   }
@@ -107,12 +111,23 @@
       this.isOpen ? this.close() : this.open();
     },
     close: function() {
-      this.$details.hide().attr("aria-hidden", true);
+      if($.isFunction(this.options.hide) && !this.firstRun) {
+        this.options.hide.apply(this.$details);
+      } else {
+        this.$details.hide();
+      }
+      this.$details.attr("aria-hidden", true);
       this.$summary.addClass("closed").removeClass("open");
       this.isOpen = false;
+      this.firstRun = false;
     },
     open: function() {
-      this.$details.show().attr("aria-hidden", false);
+      if($.isFunction(this.options.show)) {
+        this.options.show.apply(this.$details)
+      } else {
+        this.$details.show();
+      }
+      this.$details.attr("aria-hidden", false);
       this.$summary.addClass("open").removeClass("closed");
       this.isOpen = true;
     }

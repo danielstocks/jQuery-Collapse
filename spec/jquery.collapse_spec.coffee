@@ -154,6 +154,28 @@ describe "jQuery Collapse", ->
             $("#test-link").trigger("click")
             expect(stub).not.toHaveBeenCalledOnce()
 
+  describe 'Custom options', ->
+
+    before ->
+      ###:DOC+=<div id="test-options">
+        <h1>Section 1</h1> <div>hello 1</div>
+      </div>###
+      @hide = @spy()
+      @show = @spy()
+      @jq = new jQueryCollapse($("#test-options"), {
+        hide: @hide
+        show: @show
+      })
+
+    it 'should fire the custom show function once', ->
+      @jq.$el.trigger "open"
+      expect(@show).toHaveBeenCalledOnce()
+
+    it 'should fire the custom hide function once', ->
+      @jq.$el.trigger "open"
+      @jq.$el.trigger "close"
+      expect(@hide).toHaveBeenCalledOnce()
+
 
   describe 'Events', ->
 
