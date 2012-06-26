@@ -1,11 +1,16 @@
 body {
+  background: #eee;
   width: 500px;
   margin: 0 auto;
   font: normal 14px/1.2 'Helvetica Neue', 'Arial'
 }
 
 h2 { margin: 10px 0; }
-h2 + div { background: #aaffff; }
+h2 + div { 
+  background: #aaffff; 
+  overflow: hidden;
+  border-radius: 4px;
+}
 
 h3 { margin: 0; }
 h3 a {
@@ -26,3 +31,20 @@ h3 a {
 h3 a:hover { background: rgb(228,10,85); }
 h3.open a { background: rgb(208,10,85); }
 h3 + div { padding: 10px; }
+
+/* CSS3 Animation Test*/
+#css3-animated-example h3 + div {
+  height: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background: #000;
+  -webkit-transition:all 0.5s ease;
+  display: block!important;
+}
+#css3-animated-example .content {
+  padding: 10px;
+}
+
+#css3-animated-example h3 + div.open {
+  background: #aaffff;
+}
