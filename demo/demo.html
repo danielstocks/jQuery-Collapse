@@ -4,98 +4,144 @@
     <meta charset="utf-8">
     <title>jQuery Collapse Demo</title>
     <link rel="stylesheet" href="demo.css">
+    <script src="../vendor/jquery-1.7.2.js"></script>
+    <script src="../src/jquery.collapse.js"></script>
   </head>
   <body>
     <h1>jQuery Collapse Demo</h1>
 
-    <!-- Default -->
-    <h2>Default Example</h2>
-    <div id="default-example" data-collapse>
-      <h3>Fruits</h3>
-      <div>I like fruits. This <a href="#work">link should work</a></div>
-      <h3>Info</h3>
-      <div>This is some information</div>
-    </div>
-
-    <!-- Accordion -->
-    <h2>Accordion Example</h2>
-    <div id="accordion-example" data-collapse="accordion">
-      <h3>Accordion</h3>
-      <div>Are fun.</div>
-      <h3>Fruits</h3>
-      <div>I like fruits</div>
-      <h3>Info</h3>
-      <div>This is some information</div>
-      <h3>Yeah!!</h3>
-      <div>eh</div>
-    </div>
-
-    <!-- Custom show & hide -->
-    <h2>Custom show &amp; hide</h2>
-    <div id="custom-show-hide-example">
-      <h3>Hello</h3>
-      <div>
-        <p>Hello Sir.</p>
-        <p>I'm sliding</p>
+    <div class="col c1">
+      <h2>Default Example</h2>
+      <div id="default-example" data-collapse>
+        <h3>Fruits</h3>
+        <div>I like fruits. This <a href="#work">link should work</a></div>
+        <h3>Info</h3>
+        <div>This is some information</div>
       </div>
-      <h3>Anarachy in the UK</h3>
-      <div>I like tea</div>
-      <h3>Indeed</h3>
-      <div>This is some information</div>
+      <h2>Accordion Example</h2>
+      <div id="accordion-example" data-collapse="accordion">
+        <h3>Accordion</h3>
+        <div>Are fun.</div>
+        <h3>Fruits</h3>
+        <div>I like fruits</div>
+        <h3>Info</h3>
+        <div>This is some information</div>
+        <h3>Yeah!!</h3>
+        <div>eh</div>
+      </div>
+    </div>
+    <div class="col c2">
+
+      <!-- Custom show and hide -->
+      <h2>Custom show &amp; hide</h2>
+      <div id="custom-show-hide-example">
+        <h3>Hello</h3>
+        <div>
+          <p>Hello Sir.</p>
+          <p>I'm sliding</p>
+        </div>
+        <h3>Anarachy in the UK</h3>
+        <div>I like tea</div>
+        <h3>Indeed</h3>
+        <div>This is some information</div>
+      </div>
+      <script>
+        new jQueryCollapse($("#custom-show-hide-example"), {
+          show: function() {
+            this.slideDown(150);
+          },
+          hide: function() {
+            this.slideUp(150);
+          },
+        });
+      </script>
+      <!-- END Custom show and hide -->
+
+      <!-- BEGIN Showing and hiding with CSS -->
+      <h2>Showing and hiding with CSS</h2>
+      <div id="css3-animated-example">
+        <h3>Hello</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+            <p>I'm sliding</p>
+          </div>
+        </div>
+        <h3>Friend</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+          </div>
+        </div>
+        <h3>Foe</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+          </div>
+        </div>
+      </div>
+      <script>
+        new jQueryCollapse($("#css3-animated-example"), {
+          accordion: true,
+          show: function() {
+            this.addClass("open");
+            this.css({ height: this.children().outerHeight() });
+          },
+          hide: function() {
+            this.css({ height: "0px" });
+            this.removeClass("open");
+          },
+        });
+      </script>
+      <!-- END Showing and hiding with CSS -->
+
     </div>
 
-    <!-- Custom show & hide -->
-    <h2>Showing and hiding with CSS</h2>
-    <div id="css3-animated-example">
-      <h3>Hello</h3>
-      <div>
-        <div class="content">
+    <div class="col c3">
+
+      <!-- BEGIN Events -->
+      <h2>Binding events</h2>
+      <pre id="event-log"></pre>
+      <div class="example" id="events-example">
+        <h3>Section 1</h3>
+        <div>
           <p>This example simply sets a class attribute to the details and let's an
           external stylesheet toggle the collapsed state.</p>
           <p>Hello Sir.</p>
           <p>I'm sliding</p>
         </div>
-      </div>
-      <h3>Friend</h3>
-      <div>
-        <div class="content">
+        <h3>Section 2</h3>
+        <div>
           <p>This example simply sets a class attribute to the details and let's an
           external stylesheet toggle the collapsed state.</p>
           <p>Hello Sir.</p>
         </div>
-      </div>
-      <h3>Foe</h3>
-      <div>
-        <div class="content">
+        <h3>Section 3</h3>
+        <div>
           <p>This example simply sets a class attribute to the details and let's an
           external stylesheet toggle the collapsed state.</p>
         </div>
       </div>
+      <script>
+        var 
+          el = $("#events-example"),
+          log = $("#event-log");
+        el
+        .collapse()
+        .bind("open", function(e, section) {
+          log.html("'" + section.$summary.text() + "' was opened");
+        })
+        .bind("close", function(e, section) {
+          log.html("'" + section.$summary.text() + "' was closed");
+        })
+      </script>
+      <!-- END Events -->
+
     </div>
-
-    <script src="../vendor/jquery-1.7.2.js"></script>
-    <script src="../src/jquery.collapse.js"></script>
-
-    <script>
-      new jQueryCollapse($("#custom-show-hide-example"), {
-        show: function() {
-          this.slideDown(150);
-        },
-        hide: function() {
-          this.slideUp(150);
-        },
-      });
-      new jQueryCollapse($("#css3-animated-example"), {
-        accordion: true,
-        show: function() {
-          this.addClass("open");
-          this.css({ height: this.children().outerHeight() });
-        },
-        hide: function() {
-          this.css({ height: "0px" });
-          this.removeClass("open");
-        },
-      });
-    </script>
   </body>
 </html>

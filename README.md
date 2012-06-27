@@ -140,28 +140,52 @@ $("#demo").collapse({
 
 ### Events
 
-* **open** (event) : Event for section open 
-* **close** (event) : Event for section close
+#### Binding events
 
-The events can be triggered as follows:
+You can bind your own callbacks to the open and close events for a
+section.
+
 ```js
-
 // Initializing plugin
 $("#demo").collapse();
 
-// Open event
-$("#demo").bind("open", function(el) {
-  console.log("Opening:", el);
+$("#demo").bind("open", function(e, section) {
+  console.log(section, " is open");
 });
-$("#demo").trigger('open'); // Opening all sections
-$("#demo h2").first().trigger('open'); // Opening the first section
 
-// Close event
-$("#demo").bind("close", function(el) {
-  console.log("Closing:", el);
+$("#demo").bind("close", function(e, section) {
+  console.log(section, " is closed");
 });
-$("#demo").trigger('close');
-$("#demo h2").last().trigger('open'); // Closing the last section
+```
+
+### API methods 
+
+If you're using vanilla JavaScript to instantiate the plugin, you'll get
+access to the API of the jQueryCollapse instance.
+
+This will allow you to manually open and close sections
+
+```js
+
+// Initializing plugin
+var demo = new jQueryCollapse($("#demo")); 
+
+// Open all sections
+demo.open()
+
+// Close all sections
+demo.close()
+
+// Open first section
+demo.open(0)
+
+// Open second section
+demo.open(1)
+
+// Close first section
+demo.close(0)
+
+// And so on...
 ```
 
 

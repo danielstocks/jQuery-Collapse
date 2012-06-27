@@ -23,13 +23,14 @@
     if(err) throw new TypeError(err);
 
     _this.$el = el;
+    _this.options = options;
     _this.sections = [];
     _this.isAccordion = options.accordion || false;
 
     // For every pair of elements in given
     // element, create a section
     _this.$el.children(":odd").each(function() {
-      _this.sections.push(new Section($(this), options));
+      _this.sections.push(new Section($(this), _this));
     });
 
     // Wrap in private scope to
@@ -38,8 +39,6 @@
 
       var scope = scope;
       _this.$el.on("click", "[data-collapse-summary]", $.proxy(_this.handleClick, scope));
-      _this.$el.bind("open", $.proxy(_this.open, scope));
-      _this.$el.bind("close", $.proxy(_this.close, scope));
 
     }(_this));
   }
@@ -51,17 +50,8 @@
       e.preventDefault();
 
       var sections = this.sections,
-          parent = $(e.target).parent();
-
-      // Allow for closing an open accordion option
-      if($(parent).hasClass("open") && this.isAccordion) {
-        return parent.trigger("close");
-      }
-
-      // If accordion close all sections
-      if(this.isAccordion) this.$el.trigger("close");
-
-      var l = sections.length;
+          parent = $(e.target).parent(),
+          l = sections.length;
       while(l--) {
         if(sections[l].$summary.find("a").is(e.target)) {
           sections[l].toggle();
@@ -69,17 +59,17 @@
         }
       }
     },
-    open : function(e, eq) {
+    open : function(eq) {
+
       if(typeof eq == "number") {
-        if(this.isAccordion) this.$el.trigger("close");
         return this.sections[eq].open();
       }
-      if(this.isAccordion) return this.$el.trigger("close");
       $.each(this.sections, function() {
         this.open();
       });
     },
-    close: function(e, eq) {
+    close: function(eq) {
+
       if(typeof eq == "number") {
         return this.sections[eq].close();
       }
@@ -90,7 +80,7 @@
   };
 
   // Section constructor
-  function Section($el, options) {
+  function Section($el, parent) {
 
     var _this = this;
     $.extend(_this, {
@@ -101,7 +91,8 @@
         .wrapInner('<a href="#"/>'),
       $details : $el,
       firstRun : true,
-      options: options
+      options: parent.options,
+      parent: parent
     });
     _this.close();
   }
@@ -120,8 +111,14 @@
       this.$summary.addClass("closed").removeClass("open");
       this.isOpen = false;
       this.firstRun = false;
+      this.parent.$el.trigger("close", this);
     },
     open: function() {
+      if(this.options.accordion) {
+        $.each(this.parent.sections, function() {
+          this.close();
+        });
+      }
       if($.isFunction(this.options.show)) {
         this.options.show.apply(this.$details)
       } else {
@@ -130,6 +127,7 @@
       this.$details.attr("aria-hidden", false);
       this.$summary.addClass("open").removeClass("closed");
       this.isOpen = true;
+      this.parent.$el.trigger("open", this);
     }
   }
 
@@ -152,6 +150,8 @@
   });
 
   //jQuery DOM Ready
-  $($.fn.collapse(true));
+  $(function() {
+    $.fn.collapse(true)
+  });
 
 }(window.jQuery);

@@ -1,13 +1,31 @@
 body {
   background: #eee;
-  width: 500px;
   margin: 0 auto;
+  max-width: 1024px;
+  padding: 20px;
   font: normal 14px/1.2 'Helvetica Neue', 'Arial'
 }
 
+.col {
+  width: 320px;
+  float: left;
+  margin-right:32px;
+  margin-bottom: 16px;
+}
+.c3 {
+  margin-right:0;
+}
+
+h1 { 
+  border-bottom: 4px solid #fff;
+  font-size: 32px;
+  padding-bottom: 6px;
+}
+
+
 h2 { margin: 10px 0; }
-h2 + div { 
-  background: #aaffff; 
+h2 + div, .example { 
+  background: #fff; 
   overflow: hidden;
   border-radius: 4px;
 }
@@ -52,3 +70,10 @@ h3 + div { padding: 10px; }
 #css3-animated-example h3 + div.open {
   background: #aaffff;
 }
+
+pre#event-log {
+  background: #fafacc;
+  padding: 10px;
+  display: block;
+}
+

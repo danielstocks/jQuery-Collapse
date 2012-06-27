@@ -168,20 +168,38 @@ describe "jQuery Collapse", ->
       })
 
     it 'should fire the custom show function once', ->
-      @jq.$el.trigger "open"
+      @jq.open()
       expect(@show).toHaveBeenCalledOnce()
 
     it 'should fire the custom hide function once', ->
-      @jq.$el.trigger "open"
-      @jq.$el.trigger "close"
+      @jq.open()
+      @jq.close()
       expect(@hide).toHaveBeenCalledOnce()
-
 
   describe 'Events', ->
 
-    # We create two instances of collapse
-    # to verify that the correct
-    # one is reacting to the events
+    before ->
+      ###:DOC+=<div class="test" id="test4">
+        <h1>Section 1</h1> <div>hello 1</div>
+        <h2>Section 2</h2> <span>hello 2</span>
+        <h3>Section 3</h3> <div>hello 3</div>
+      </div>###
+      @jq = new jQueryCollapse $("#test4")
+
+    it "should fire the callback when opening", ->
+      spy = @spy()
+      @jq.$el.bind("open", spy)
+      @jq.open(1)
+      expect(spy).toHaveBeenCalledOnce()
+
+    it "should fire the callback when closing", ->
+      spy = @spy()
+      @jq.$el.bind("close", spy)
+      @jq.open(1)
+      @jq.close(1)
+      expect(spy).toHaveBeenCalledOnce()
+
+  describe 'API', ->
 
     before ->
       ###:DOC+=<div class="test" id="test2">
@@ -189,46 +207,42 @@ describe "jQuery Collapse", ->
         <h2>Section 2</h2> <span>hello 2</span>
         <h3>Section 3</h3> <div>hello 3</div>
       </div>###
+      @jq = new jQueryCollapse $("#test2")
 
-      ###:DOC+=<div class="test" id="test3">
-        <h1>Section 1</h1> <div>hello 1</div>
-        <h2>Section 2</h2> <span>hello 2</span>
-        <h3>Section 3</h3> <div>hello 3</div>
-      </div>###
+    describe 'open method', ->
 
-      $(".test").collapse()
-      @target = $("#test2")
+      it "should open all sections", ->
+        @jq.open()
+        expect(@jq.$el.find(".open").length).toBe 3
 
-    it "should open all sections", ->
-      @target.trigger("open")
-      expect(@target.find(".open").length).toBe 3
+      describe 'targeted section', ->
 
-    it "should close all sections", ->
-      @target.trigger("close");
-      expect(@target.find(".closed").length).toBe 3
+        before ->
+          @jq.open(1);
 
-    describe 'opening a specific section', ->
+        it "should be open", ->
+          expect(@jq.$el.find(".open").length).toBe 1
 
-      before ->
-        @target.trigger("open", 1);
+        it "should be a H2 element", ->
+          expect(@jq.$el.find(".open")[0].tagName).toBe "H2"
 
-      it "should open the second section", ->
-        expect(@target.find(".open").length).toBe 1
+    describe 'close method', ->
 
-      it "should be a H2 element", ->
-        expect(@target.find(".open")[0].tagName).toBe "H2"
+      it "should close all sections", ->
+        @jq.close()
+        expect(@jq.$el.find(".closed").length).toBe 3
 
-    describe 'closing a specific section', ->
+      describe 'targeted section', ->
 
-      before ->
-        @target.trigger("open")
-        @target.trigger("close", 1);
+        before ->
+          @jq.open()
+          @jq.close(1)
 
-      it "should close the second section", ->
-        expect(@target.find(".closed").length).toBe 1
+        it "should be closed", ->
+          expect(@jq.$el.find(".closed").length).toBe 1
 
-      it "should be a H2 element", ->
-        expect(@target.find(".closed").get(0).tagName).toBe "H2"
+        it "should be a H2 element", ->
+          expect(@jq.$el.find(".closed").get(0).tagName).toBe "H2"
 
 
   describe 'accordion', ->
@@ -240,8 +254,7 @@ describe "jQuery Collapse", ->
         <h3>Section 3</h3> <div>hello 3</div>
       </div>###
 
-      @target = $("#test4")
-      @jq = new jQueryCollapse(@target, {
+      @jq = new jQueryCollapse($("#test4"), {
         accordion: true
       })
 
@@ -249,10 +262,11 @@ describe "jQuery Collapse", ->
       expect(@jq.isAccordion).toBe true
 
     it "should close any open sections when opening a new one", ->
-      @target.trigger("open", 0)
-      expect(@target.find(".open").length).toBe 1
+      @jq.open(0)
+      @jq.open(1)
+      expect(@jq.$el.find(".open").length).toBe 1
 
     it "should be able to close the open section by clicking", ->
-      @target.trigger("open", 0)
-      @target.find("h1").find("a").trigger("click")
-      expect(@target.find(".open").length).toBe 0
+      @jq.open(0)
+      @jq.$el.find("h1").find("a").trigger("click")
+      expect(@jq.$el.find(".open").length).toBe 0
