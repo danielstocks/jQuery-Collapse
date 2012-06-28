@@ -135,15 +135,15 @@
     });
 
     // Make sure can we eat cookies without getting into trouble.
-    var cookie = true;
+    var cookie, cookieSupport;
     $(function() {
         try {
             $.cookie('x', 'x', { path: '/', expires: 10 });
         }
         catch(e) {
             cookie = false;
-            $.cookie('x', null);
         }
+
+        cookieSupport = $.fn.collapse.cookieSupport = cookie;
     });
-    var cookieSupport = $.fn.collapse.cookieSupport = cookie;
 })(jQuery);
