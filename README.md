@@ -3,9 +3,6 @@
 A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also
 known as 'progressive disclosure'.
 
-Dependencies:
-- jQuery 1.7.2
-
 Enjoy!
 
 
@@ -146,8 +143,7 @@ You can bind your own callbacks to the open and close events for a
 section.
 
 ```js
-// Initializing plugin
-$("#demo").collapse();
+$("#demo").collapse(); // Initializing plugin
 
 $("#demo").bind("open", function(e, section) {
   console.log(section, " is open");
@@ -161,31 +157,16 @@ $("#demo").bind("close", function(e, section) {
 ### API methods 
 
 If you're using vanilla JavaScript to instantiate the plugin, you'll get
-access to the API of the jQueryCollapse instance.
-
-This will allow you to manually open and close sections
+access to the *open* and *close* methods.
 
 ```js
 
-// Initializing plugin
-var demo = new jQueryCollapse($("#demo")); 
-
-// Open all sections
-demo.open()
-
-// Close all sections
-demo.close()
-
-// Open first section
-demo.open(0)
-
-// Open second section
-demo.open(1)
-
-// Close first section
-demo.close(0)
-
-// And so on...
+var demo = new jQueryCollapse($("#demo")); // Initializing plugin
+demo.open(); // Open all sections
+demo.close(); // Close all sections
+demo.open(0); // Open first section
+demo.open(1); // Open second section
+demo.close(0); // Close first section
 ```
 
 
