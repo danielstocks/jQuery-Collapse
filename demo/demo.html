@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>jQuery Collapse Demo</title>
     <link rel="stylesheet" href="demo.css">
+    <meta name="viewport" content="width=device-width">
+    <script>document.documentElement.className = "js";</script>
     <script src="../vendor/jquery-1.7.2.js"></script>
     <script src="../src/jquery.collapse.js"></script>
   </head>
@@ -20,8 +22,8 @@
       </div>
       <h2>Accordion Example</h2>
       <div id="accordion-example" data-collapse="accordion">
-        <h3>Accordion</h3>
-        <div>Are fun.</div>
+        <h3>Accordions</h3>
+        <div>Are fun and they make pleasent noises</div>
         <h3>Fruits</h3>
         <div>I like fruits</div>
         <h3>Info</h3>
@@ -29,10 +31,22 @@
         <h3>Yeah!!</h3>
         <div>eh</div>
       </div>
-    </div>
-    <div class="col c2">
 
-      <!-- Custom show and hide -->
+      <h2>Persistence Example</h2>
+      <div id="persistance-example" data-collapse="persist">
+        <h3>These</h3>
+        <div>Well hello there</div>
+        <h3>Sections</h3>
+        <div>yabayaba</div>
+        <h3>Should be</h3>
+        <div>might be.</div>
+        <h3>Persistant!!</h3>
+        <div>eh</div>
+      </div>
+    </div>
+
+    <div class="col c2">
+      <!-- BEGIN Custom show and hide -->
       <h2>Custom show &amp; hide</h2>
       <div id="custom-show-hide-example">
         <h3>Hello</h3>
@@ -88,6 +102,7 @@
       <script>
         new jQueryCollapse($("#css3-animated-example"), {
           accordion: true,
+          persist: true,
           show: function() {
             this.addClass("open");
             this.css({ height: this.children().outerHeight() });
@@ -128,7 +143,7 @@
         </div>
       </div>
       <script>
-        var 
+        var
           el = $("#events-example"),
           log = $("#event-log");
         el

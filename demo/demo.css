@@ -1,8 +1,7 @@
 body {
-  background: #eee;
+  background: #ddd;
   margin: 0 auto;
   max-width: 1024px;
-  padding: 20px;
   font: normal 14px/1.2 'Helvetica Neue', 'Arial'
 }
 
@@ -16,47 +15,72 @@ body {
   margin-right:0;
 }
 
-h1 { 
-  border-bottom: 4px solid #fff;
+h1 {
+  border-bottom: 1px solid #333;
   font-size: 32px;
-  padding-bottom: 6px;
-}
-
-
-h2 { margin: 10px 0; }
-h2 + div, .example { 
-  background: #fff; 
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-h3 { margin: 0; }
-h3 a {
-  display: block;
-  padding: 10px;
-  margin: 0;
   color: #fff;
-  text-decoration: none;
-  font-weight: normal;
-  border-bottom: 1px solid rgb(128, 10, 85);
-  text-shadow: 1px 1px 1px rgb(128,10,85);
+  padding-bottom: 12px;
+  text-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+}
+
+h2 {
+  margin: 10px 0;
+  color: #000;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+h3 {
+  margin: 0;
   background-image: linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -o-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -moz-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -webkit-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -ms-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
 }
-h3 a:hover { background: rgb(228,10,85); }
-h3.open a { background: rgb(208,10,85); }
+
+h3 a {
+  background: url("sprite.png") 15px 13px no-repeat;
+  display: block;
+  padding: 10px;
+  padding-left: 32px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(128, 10, 85, 0.5);
+  text-shadow: 1px 1px 1px rgb(128,10,85);
+}
+h3:hover { background: rgb(228,10,85); }
+h3.open  { background: rgb(255,70,120); }
+h3.open a { background-position: 13px -25px; }
 h3 + div { padding: 10px; }
 
-/* CSS3 Animation Test*/
+h2 + div,
+.example {
+  background: #fff;
+  overflow: hidden;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+/* Pre hide sections with JavaScript on
+--- */
+h3+div {
+  display: none;
+}
+
+/* CSS3 Animation example
+--- */
 #css3-animated-example h3 + div {
   height: 0px;
   padding: 0px;
   overflow: hidden;
   background: #000;
   display: block!important;
+  -webkit-transform: translateZ(0);
   -webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
@@ -67,13 +91,52 @@ h3 + div { padding: 10px; }
   padding: 10px;
 }
 
-#css3-animated-example h3 + div.open {
+#css3-animated-example h3.open + div {
+  height: auto;
   background: #aaffff;
 }
 
+/* Event example
+--- */
 pre#event-log {
   background: #fafacc;
   padding: 10px;
   display: block;
 }
 
+/* Responsive design
+--- */
+@media screen and (max-width: 1056px) {
+  body {
+    width: 672px;
+  }
+  .c2 {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media
+only screen and (max-width: 704px),
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+  body {
+    width: 320px;
+  }
+  .c1 {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+  h1 {
+    font-size: 28px;
+    text-shadow: 0px 0px 1px rgba(0,0,0,0.7);
+  }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+  body {
+    padding: 0 12px;
+  }
+}
