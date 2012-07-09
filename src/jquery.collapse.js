@@ -141,9 +141,12 @@
     collapse: function(scan) {
       var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
       return nodes.each(function() {
-        var options = {
-          accordion: $(this).attr("data-collapse") == "accordion" ? true : false
-        }
+        var
+          options = {},
+          values = $(this).attr("data-collapse") || "";
+        $.each(values.split(" "), function(i,v) {
+          options[v] = true;
+        });
         new jQueryCollapse($(this), options).$el;
       });
     }
