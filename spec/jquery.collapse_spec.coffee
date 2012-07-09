@@ -23,9 +23,24 @@ describe "jQuery Collapse", ->
         jQueryCollapse(el)
       .toThrow("TypeError")
 
-    it "should assign an element", ->
-      el = $(document.createElement('div'))
-      expect(new jQueryCollapse(el).$el).toBe(el)
+    describe 'default assignment', ->
+
+      before ->
+        @el = $(document.createElement('div'))
+        @jq = new jQueryCollapse(@el)
+
+      it "should assign an element", ->
+        expect(@jq.$el).toBe(@el)
+
+      it "should not have an accordion", ->
+        expect(@jq.isAccordion).toBe false
+
+      it "should not have a db", ->
+        expect(@jq.db).toBe false
+
+      it "should assign an empty array as 'states' property",->
+        expect(@jq.states).toEqual []
+
 
   describe 'initializing elements with data-collapse attribute', ->
 
@@ -44,6 +59,7 @@ describe "jQuery Collapse", ->
       expect(@jq).toHaveBeenCalledOnce()
 
   describe 'initializing plugin with data-collapse accordion', ->
+
     before ->
       ###:DOC+= <div data-collapse="accordion"></div> ###
       @jq = @stub(window, "jQueryCollapse")
@@ -53,6 +69,19 @@ describe "jQuery Collapse", ->
       $.fn.collapse(true);
       expect(@jq).toHaveBeenCalledWith($(obj),
         accordion: true
+      )
+
+  describe 'initializing plugin with data-collapse persist', ->
+
+    before ->
+      ###:DOC+= <div data-collapse="persist"></div> ###
+      @jq = @stub(window, "jQueryCollapse")
+
+    it "should call the jQueryCollapse constructor with persist option set to true",->
+      obj = $("div").get(0)
+      $.fn.collapse(true);
+      expect(@jq).toHaveBeenCalledWith($(obj),
+        persist: true
       )
 
   describe 'sections', ->
@@ -270,3 +299,74 @@ describe "jQuery Collapse", ->
       @jq.open(0)
       @jq.$el.find("h1").find("a").trigger("click")
       expect(@jq.$el.find(".open").length).toBe 0
+
+  describe 'persistence', ->
+
+    before ->
+      ###:DOC+=<div class="test" id="test4">
+        <h1>Section 1</h1> <div>hello 1</div>
+        <h2>Section 2</h2> <span>hello 2</span>
+        <h3>Section 3</h3> <div>hello 3</div>
+      </div>###
+
+      @stub(jQueryCollapseStorage.prototype, 'read').returns [0,0,1]
+      @jq = new jQueryCollapse($("#test4"), {
+        persist: true
+      })
+      @stub(@jq.db, 'write')
+
+    it "should instantiate a storage object", ->
+      expect(@jq.db.id).toBe @jq.$el[0].id
+
+    it "should read from db and set states accordingly", ->
+      expect(@jq.states).toEqual [0,0,1]
+
+    it "should write to storage that the third item was opened", ->
+      @jq.open(2)
+      expect(@jq.db.write).toHaveBeenCalledWith(2,1)
+
+    it "should write to storage that the third item was closed", ->
+      @jq.close(2)
+      expect(@jq.db.write).toHaveBeenCalledWith(2,0)
+
+  describe 'storage', ->
+
+    before ->
+      @storage = new jQueryCollapseStorage("xyz")
+      @storage.db =
+        setItem : @stub()
+        getItem : ->
+
+    it "should define a storage object", ->
+      expect(jQueryCollapseStorage).toBeFunction()
+
+    it "should set an id", ->
+      expect(@storage.id).toBe "xyz"
+
+    it "should have an array data property", ->
+      expect(@storage.data).toBeArray()
+
+    it 'should set the data array to five zero-values', ->
+      @storage.write(4,0)
+      expect(@storage.data).toEqual [0,0,0,0,0]
+
+    it 'should set the 3:rd value in array to 1', ->
+      @storage.write(2,1)
+      expect(@storage.data).toEqual [0,0,1]
+
+    it 'should write stringified array to storage backend', ->
+      @storage.write(4,1)
+      arg = JSON.stringify("xyz" : [0,0,0,0,1])
+      expect(@storage.db.setItem).toHaveBeenCalledWith("jQuery-Collapse", arg)
+
+    it 'should re-save previously written items from storage', ->
+      @stub(@storage.db, 'getItem').returns('{ "abc" : [1] }')
+      @storage.write(1,0)
+      obj =
+        "abc": [1]
+        "xyz": [0,0]
+      expect(@storage.db.setItem).toHaveBeenCalledWith("jQuery-Collapse", JSON.stringify(obj))
+
+    it 'should return stored data', ->
+      @stub(@storage.db, 'getItem').returns('{ "xyz" : [1,0,1] }')
+      expect(@storage.read()).toEqual [1,0,1]
