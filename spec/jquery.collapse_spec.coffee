@@ -38,7 +38,10 @@ describe "jQuery Collapse", ->
       it "should not have a db", ->
         expect(@jq.db).toBe false
 
-      it "should assign an empty array as 'states' property",->
+      it "should have a 'sections' property",->
+        expect(@jq.sections).toEqual []
+
+      it "should have a 'states' property",->
         expect(@jq.states).toEqual []
 
 
@@ -51,7 +54,7 @@ describe "jQuery Collapse", ->
       @jq = @stub(window, "jQueryCollapse")
 
     it "should call the jQueryCollapse constructor twice", ->
-      $.fn.collapse(true);
+      $.fn.collapse(false, true);
       expect(@jq).toHaveBeenCalledTwice()
 
     it "should call the jQuery Collapse constructor once", ->
@@ -64,9 +67,9 @@ describe "jQuery Collapse", ->
       ###:DOC+= <div data-collapse="accordion"></div> ###
       @jq = @stub(window, "jQueryCollapse")
 
-    it "should call the jQueryCollapse constructor with accordion option set to true",->
+    it "should call the constructor with accordion option set to true",->
       obj = $("div").get(0)
-      $.fn.collapse(true);
+      $.fn.collapse(false, true);
       expect(@jq).toHaveBeenCalledWith($(obj),
         accordion: true
       )
@@ -77,9 +80,9 @@ describe "jQuery Collapse", ->
       ###:DOC+= <div data-collapse="persist"></div> ###
       @jq = @stub(window, "jQueryCollapse")
 
-    it "should call the jQueryCollapse constructor with persist option set to true",->
+    it "should call the constructor with persist option set to true",->
       obj = $("div").get(0)
-      $.fn.collapse(true);
+      $.fn.collapse(false, true);
       expect(@jq).toHaveBeenCalledWith($(obj),
         persist: true
       )
@@ -90,7 +93,7 @@ describe "jQuery Collapse", ->
       ###:DOC+=<div id="test">
         <h1>Section 1</h1> <div>hello 1</div>
         <h2>Section 2</h2> <span>hello 2</span>
-        <h3>Section 3</h3> <div>hello 3</div>
+        <h3 class="open">Section 3</h3> <div>hello 3</div>
       </div>###
       @jq = new jQueryCollapse $("#test")
 
@@ -99,6 +102,9 @@ describe "jQuery Collapse", ->
 
     it "should create a section for every group of two child elements", ->
       expect(@jq.sections.length).toEqual 3
+
+    it "the last section should be opened by default", ->
+      expect(@jq.sections[2].isOpen).toBe true
 
     describe 'the first section', ->
 
@@ -171,11 +177,12 @@ describe "jQuery Collapse", ->
             @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
-          it "should not fire handle click event on links inside collapsed content", ->
+          it "should not fire handleClick on links inside collapsed content", ->
             ###:DOC+=<div id="test-click">
-              <h1>Section 1</h1> <div>hello 1</div>
-              <h2>Section 2</h2> <span>hello 2</span>
-              <h3>Section 3</h3> <div>hello 3 <a id="test-link" href="#test-link">test link</a></div>
+              <h3>Section 3</h3>
+              <div>
+                hello 3 <a id="test-link" href="#test-link">test link</a>
+              </div>
             </div>###
 
             stub = @stub(jQueryCollapse.prototype, "handleClick")
@@ -365,7 +372,8 @@ describe "jQuery Collapse", ->
       obj =
         "abc": [1]
         "xyz": [0,0]
-      expect(@storage.db.setItem).toHaveBeenCalledWith("jQuery-Collapse", JSON.stringify(obj))
+      expect(@storage.db.setItem)
+        .toHaveBeenCalledWith("jQuery-Collapse", JSON.stringify(obj))
 
     it 'should return stored data', ->
       @stub(@storage.db, 'getItem').returns('{ "xyz" : [1,0,1] }')

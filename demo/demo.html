@@ -100,7 +100,7 @@
         </div>
       </div>
       <script>
-        new jQueryCollapse($("#css3-animated-example"), {
+        $("#css3-animated-example").collapse({
           accordion: true,
           persist: true,
           show: function() {
@@ -142,18 +142,26 @@
           external stylesheet toggle the collapsed state.</p>
         </div>
       </div>
+
+      <h2>Open section by default</h2>
+      <div id="open-by-default-example" data-collapse>
+        <h3 class="open">I'm open by default</h3>
+        <div>Yay</div>
+        <h3>I'm not open</h3>
+        <div>booo :(</div>
+      </div>
+
       <script>
-        var
-          el = $("#events-example"),
+        var el = $("#events-example"),
           log = $("#event-log");
-        el
-        .collapse()
-        .bind("open", function(e, section) {
-          log.html("'" + section.$summary.text() + "' was opened");
-        })
-        .bind("close", function(e, section) {
-          log.html("'" + section.$summary.text() + "' was closed");
-        })
+
+        el.collapse()
+          .bind("open", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was opened");
+          })
+          .bind("close", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was closed");
+          })
       </script>
       <!-- END Events -->
 

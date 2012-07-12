@@ -1,8 +1,8 @@
 /*
  * Collapse plugin for jQuery
  * --
- * code: http://github.com/danielstocks/jQuery-Collapse/
- * docs: http://webcloud.se/code/jQuery-Collapse
+ * source: http://github.com/danielstocks/jQuery-Collapse/
+ * site: http://webcloud.se/code/jQuery-Collapse
  *
  * @author Daniel Stocks (http://webcloud.se)
  * Copyright 2012, Daniel Stocks
@@ -15,11 +15,13 @@
   function Collapse (el, options) {
 
     var _this = this,
-        options = options || {},
-        err;
+      options = options || {},
+      err;
 
-    err = !(el instanceof $) ? "'el' argument must be a jQuery object" : null
-    err = (el.length < 1) ? "'el' must contain a DOM element" : null
+    err = !(el instanceof $) ? 
+      "'el' argument must be a jQuery object" : null
+    err = (el.length < 1) ?
+      "'el' must contain a DOM element" : null
     if(err) throw new TypeError(err);
 
     _this.$el = el;
@@ -35,7 +37,8 @@
 
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      _this.states[section._index()] ? section.open(true) : section.close(true);
+      _this.states[section._index()] || $(this).prev().hasClass("open") ? 
+        section.open(true) : section.close(true);
     });
 
     // Wrap in private scope to
@@ -43,7 +46,8 @@
     (function(scope) {
 
       var scope = scope;
-      _this.$el.on("click", "[data-collapse-summary]", $.proxy(_this.handleClick, scope));
+      _this.$el.on("click", "[data-collapse-summary]", 
+        $.proxy(_this.handleClick, scope));
 
     }(_this));
   }
@@ -55,8 +59,8 @@
       e.preventDefault();
 
       var sections = this.sections,
-          parent = $(e.target).parent(),
-          l = sections.length;
+        parent = $(e.target).parent(),
+        l = sections.length;
       while(l--) {
         if(sections[l].$summary.find("a").is(e.target)) {
           sections[l].toggle();
@@ -181,23 +185,22 @@
   // Add shortcut method
   // to jQuery API
   $.fn.extend({
-    collapse: function(scan) {
+    collapse: function(options, scan) {
       var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
       return nodes.each(function() {
-        var
-          options = {},
+        var settings = (scan) ? {} : options,
           values = $(this).attr("data-collapse") || "";
         $.each(values.split(" "), function(i,v) {
-          options[v] = true;
+          if(v) settings[v] = true;
         });
-        new jQueryCollapse($(this), options).$el;
+        new jQueryCollapse($(this), settings).$el;
       });
     }
   });
 
   //jQuery DOM Ready
   $(function() {
-    $.fn.collapse(true)
+    $.fn.collapse(false, true)
   });
 
 }(window.jQuery);

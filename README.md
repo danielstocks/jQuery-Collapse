@@ -9,10 +9,10 @@ Enjoy!
 ## Features
 
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
-- Lightweight (~x bytes minified and Gzipped)
+- Lightweight (~x bytes minified and gzipped)
 - Cross Browser compliant (Tested in >= IE6, Firefox, Safari, Chrome, Opera)
 - **Accordion** behaviour can be enabled. 
-- **Persistance** to remember open sections on page reload!
+- **Persistence** to remember open sections on page reload!
 
 
 ## Usage
@@ -42,6 +42,19 @@ Here's some sample HTML markup:
 ```
 
 That's it! The *data-collapse* attribute will automatically trigger the script. 
+
+### Open/Collapse section by default 
+
+The standard behaviour is to hide all the collapsible sections on page
+load. If you want to show a section to the user on page load you can
+achieve this by adding an 'open' class to the section heading
+
+```html
+<div id="demo" data-collapse>
+  <h2 class="open">I'm open by default</h2>
+  <p>Yay</p>
+</div>
+```
 
 
 ## JavaScript usage
@@ -75,7 +88,7 @@ To activate the accordion behaviour set 'accordion' as the value of the 'data-co
 ```
 
 
-## Persistance
+## Persistence
 
 By default, if the user reloads the page all the sections will be closed. 
 If you want previously collapsed sections to stay open you can add 'persist' to the data-collapse attribute:
@@ -88,9 +101,9 @@ If you want previously collapsed sections to stay open you can add 'persist' to 
 
 jQuery Collapse uses HTML5 localStorage if available, otherwise it
 will attempt to use cookies. If that also fails, it will degrade
-to work but without any persistance.
+to work but without any persistence.
 
-You can combine the accordion and persistance options by adding
+You can combine the accordion and persistence options by adding
 both values to the data-collapse attribute:
 
 ```html
@@ -107,20 +120,20 @@ using JavaScript. Enjoy.
 
 ### Options
 
-These are options that you can pass when initializing
+You can pass the following options when initializing
 the plugin with JavaScript.
 
 * **show** (function) : Custom function for showing content (default: function(){ this.show() })
 * **hide** (function) : Custom function for hiding content (default: function(){ this.hide() })
 * **accordion** (bool) : Enable accordion behaviour by setting this option to 'true'
-* **persist** (bool) : Enable persistance between page loads by setting this option to 'true'
+* **persist** (bool) : Enable persistence between page loads by setting this option to 'true'
 
 Example usage of options:
 ```js
 
 // Initializing collapse plugin
 // with custom show/hide methods,
-// persistance plugin and accordion behaviour
+// persistence plugin and accordion behaviour
 $("#demo").collapse({
   show: function() {
     // The context of 'this' is applied to
@@ -154,7 +167,7 @@ $("#demo").bind("close", function(e, section) {
 });
 ```
 
-### API methods 
+### API methods
 
 If you're using vanilla JavaScript to instantiate the plugin, you'll get
 access to the *open* and *close* methods.
