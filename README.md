@@ -105,7 +105,7 @@ plugin interprets it. For example
 In order for the plugin to understand the above markup, we can pass a 'query'
 option specifying where to find the header/summary elements of sections. 
 
-```html
+```js
 new jQueryCollapse($("#demo"), {
   query: 'div h2'
 });
@@ -168,8 +168,8 @@ the plugin with JavaScript.
 * **persist** (bool) : Enable persistence between page loads by setting this option to 'true'
 
 Example usage of options:
-```js
 
+```js
 // Initializing collapse plugin
 // with custom show/hide methods,
 // persistence plugin and accordion behaviour
