@@ -78,14 +78,6 @@ new jQueryCollapse($("#demo"), {
 ### Using custom markup
 
 By default the plugin will look for groups of two elements.
-
-```html
-<div data-collapse>
-  <h2>Summary</h2>
-  <div>Details...</div>
-</div>
-```
-
 In real life™ your markup may vary and you'll need to customize how the
 plugin interprets it. For example
 
@@ -103,17 +95,13 @@ plugin interprets it. For example
 ```
 
 In order for the plugin to understand the above markup, we can pass a 'query'
-option specifying where to find the header/summary elements of sections. 
+option specifying where to find the header/summary element of a section:
 
 ```js
 new jQueryCollapse($("#demo"), {
   query: 'div h2'
 });
 ```
-
-
-Each section is nested in a DIV element, so we'll need to tell the
-plugin to take this into acount
 
 
 ## Accordion
