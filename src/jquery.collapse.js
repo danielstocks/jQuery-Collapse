@@ -108,37 +108,39 @@
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
-      if($.isFunction(this.options.hide) && !bypass) {
-        this.options.hide.apply(this.$details);
+      var _this = this;
+      if($.isFunction(_this.options.hide) && !bypass) {
+        _this.options.hide.apply(_this.$details);
       } else {
-        this.$details.hide();
+        _this.$details.hide();
       }
-      this.$details.attr("aria-hidden", true);
-      this.$summary.addClass("closed").removeClass("open");
-      this.isOpen = false;
-      this.parent.$el.trigger("close", this);
-      if(this.parent.db) {
-        this.parent.db.write(this._index(),0);
+      _this.$details.attr("aria-hidden", true);
+      _this.$summary.addClass("closed").removeClass("open");
+      _this.isOpen = false;
+      _this.parent.$el.trigger("close", _this);
+      if(_this.parent.db) {
+        _this.parent.db.write(_this._index(),0);
       }
     },
     open: function(bypass) {
 
-      if(this.options.accordion && !bypass) {
-        $.each(this.parent.sections, function() {
+      var _this = this;
+      if(_this.options.accordion && !bypass) {
+        $.each(_this.parent.sections, function() {
           this.close();
         });
       }
-      if($.isFunction(this.options.show) && !bypass) {
-        this.options.show.apply(this.$details)
+      if($.isFunction(_this.options.show) && !bypass) {
+        _this.options.show.apply(_this.$details)
       } else {
-        this.$details.show();
+        _this.$details.show();
       }
-      this.$details.attr("aria-hidden", false);
-      this.$summary.addClass("open").removeClass("closed");
-      this.isOpen = true
-      this.parent.$el.trigger("open", this);
-      if(this.parent.db) {
-        this.parent.db.write(this._index(),1);
+      _this.$details.attr("aria-hidden", false);
+      _this.$summary.addClass("open").removeClass("closed");
+      _this.isOpen = true
+      _this.parent.$el.trigger("open", _this);
+      if(_this.parent.db) {
+        _this.parent.db.write(_this._index(),1);
       }
     },
     _index: function() {
