@@ -16,6 +16,7 @@
 
     var _this = this,
       options = options || {},
+      query = options.query || "> :even",
       err;
 
     err = !(el instanceof $) ? 
@@ -33,11 +34,11 @@
 
     // For every pair of elements in given
     // element, create a section
-    _this.$el.children(":odd").each(function() {
+    _this.$el.find(query).each(function() {
 
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      _this.states[section._index()] || $(this).prev().hasClass("open") ? 
+      _this.states[section._index()] || $(this).hasClass("open") ? 
         section.open(true) : section.close(true);
     });
 
@@ -94,10 +95,9 @@
     $.extend(this, {
       isOpen : false,
       $summary : $el
-        .prev()
         .attr("data-collapse-summary", "")
         .wrapInner('<a href="#"/>'),
-      $details : $el,
+      $details : $el.next(),
       options: parent.options,
       parent: parent
     });

@@ -115,6 +115,47 @@
       </script>
       <!-- END Showing and hiding with CSS -->
 
+
+      <!-- BEGIN custom markup example -->
+      <h2>Custom markup example</h2>
+      <div id="custom-markup-example">
+        <div>
+          <h3>Hello</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+              <p>I'm sliding</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Friend</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Foe</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $("#custom-markup-example").collapse({
+          query: "div h3"
+        });
+      </script>
+      <!-- END custom markup example -->
     </div>
 
     <div class="col c3">

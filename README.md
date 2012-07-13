@@ -56,7 +56,6 @@ achieve this by adding an 'open' class to the section heading
 </div>
 ```
 
-
 ## JavaScript usage
 
 If you'd rather omit the 'data-collapse' attribute in the HTML and load the plugin via jQuery, you can:
@@ -75,6 +74,46 @@ new jQueryCollapse($("#demo"), {
   // options...
 });
 ```
+
+### Using custom markup
+
+By default the plugin will look for groups of two elements.
+
+```html
+<div data-collapse>
+  <h2>Summary</h2>
+  <div>Details...</div>
+</div>
+```
+
+In real life™ your markup may vary and you'll need to customize how the
+plugin interprets it. For example
+
+```html
+<div id="demo">
+  <div>
+    <h2>Summary</h2>
+    <div>details...</div>
+  </div>
+  <div>
+    <h2>Summary</h2>
+    <div>details...</div>
+  </div>
+</div>
+```
+
+In order for the plugin to understand the above markup, we can pass a 'query'
+option specifying where to find the header/summary elements of sections. 
+
+```html
+new jQueryCollapse($("#demo"), {
+  query: 'div h2'
+});
+```
+
+
+Each section is nested in a DIV element, so we'll need to tell the
+plugin to take this into acount
 
 
 ## Accordion

@@ -212,6 +212,21 @@ describe "jQuery Collapse", ->
       @jq.close()
       expect(@hide).toHaveBeenCalledOnce()
 
+  describe 'Custom query', ->
+
+    before ->
+      ###:DOC+=<div class="test" id="test-custom-query">
+        <div><h1>Section 1</h1> <div>hello 1</div></div>
+        <div><h2>Section 2</h2> <span>hello 2</span></div>
+        <div><h3>Section 3</h3> <div>hello 3</div></div>
+      </div>###
+      @jq = new jQueryCollapse $("#test-custom-query"),
+        query: 'div > :header'
+
+    it "should use custom query to interpret markup", ->
+      expect(@jq.sections[0].$summary.text()).toBe "Section 1"
+      expect(@jq.sections[0].$details.text()).toBe "hello 1"
+
   describe 'Events', ->
 
     before ->
