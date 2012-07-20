@@ -5,6 +5,13 @@ body {
   font: normal 14px/1.2 'Helvetica Neue', 'Arial'
 }
 
+.fork {
+  border:0;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
 .col {
   width: 320px;
   float: left;
