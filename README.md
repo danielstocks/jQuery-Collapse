@@ -3,6 +3,9 @@
 A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also
 known as 'progressive disclosure'.
 
+*Notice: as of August 2012 this plugin has been rewritten from
+scratch. The old version is no longer maintained or supported*
+
 Enjoy!
 
 
@@ -126,7 +129,8 @@ If you want previously collapsed sections to stay open you can add 'persist' to 
 </div>
 ```
 
-jQuery Collapse uses HTML5 localStorage if available, otherwise it
+Please note: the target element will need an ID in order for the
+persistence to work. jQuery Collapse uses HTML5 localStorage if available, otherwise it
 will attempt to use cookies. If that also fails, it will degrade
 to work but without any persistence.
 
