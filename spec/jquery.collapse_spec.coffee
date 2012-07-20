@@ -97,9 +97,6 @@ describe "jQuery Collapse", ->
       </div>###
       @jq = new jQueryCollapse $("#test")
 
-    it "should have a sections array", ->
-      expect(@jq.sections).toBeObject []
-
     it "should create a section for every group of two child elements", ->
       expect(@jq.sections.length).toEqual 3
 
@@ -351,16 +348,13 @@ describe "jQuery Collapse", ->
       @jq.close(2)
       expect(@jq.db.write).toHaveBeenCalledWith(2,0)
 
-  describe 'storage', ->
+  describe 'Storage', ->
 
     before ->
       @storage = new jQueryCollapseStorage("xyz")
       @storage.db =
         setItem : @stub()
         getItem : ->
-
-    it "should define a storage object", ->
-      expect(jQueryCollapseStorage).toBeFunction()
 
     it "should set an id", ->
       expect(@storage.id).toBe "xyz"
@@ -393,3 +387,24 @@ describe "jQuery Collapse", ->
     it 'should return stored data', ->
       @stub(@storage.db, 'getItem').returns('{ "xyz" : [1,0,1] }')
       expect(@storage.read()).toEqual [1,0,1]
+
+  describe 'Cookie Storage', ->
+
+    before ->
+      @cookieStorage = jQueryCollapseCookieStorage
+
+    it 'should have setItem method', ->
+      expect(@cookieStorage.setItem).toBeFunction()
+
+    it 'should have a getItem method', ->
+      expect(@cookieStorage.getItem).toBeFunction()
+
+    it 'should set a cookie', ->
+      @cookieStorage.cookies = ""
+      @cookieStorage.setItem("test", "holla")
+      expect(@cookieStorage.cookies).toEqual "test=holla; expires=" + @cookieStorage.expires + "; path=/"
+
+    it 'should get a cookie value', ->
+      @cookieStorage.cookies = "blah=bleh; test=holla;"
+      expect(@cookieStorage.getItem('test')).toEqual 'holla'
+

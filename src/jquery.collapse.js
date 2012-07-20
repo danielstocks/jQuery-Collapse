@@ -20,16 +20,16 @@
       err;
 
     err = !(el instanceof $) ? 
-      "'el' argument must be a jQuery object" : null
+      "'el' argument must be a jQuery object" : null;
     err = (el.length < 1) ?
-      "'el' must contain a DOM element" : null
+      "'el' must contain a DOM element" : null;
     if(err) throw new TypeError(err);
 
     _this.$el = el;
     _this.options = options;
     _this.sections = [];
     _this.isAccordion = options.accordion || false;
-    _this.db = options.persist ? new _Storage(el[0].id) : false;
+    _this.db = options.persist ? new Storage(el[0].id) : false;
     _this.states = _this.db ? _this.db.read() : [];
 
     // For every pair of elements in given
@@ -38,7 +38,7 @@
 
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      _this.states[section._index()] || $(this).hasClass("open") ? 
+      _this.states[section._index()] || $(this).hasClass("open") ?
         section.open(true) : section.close(true);
     });
 
@@ -150,12 +150,12 @@
 
   var STORAGE_KEY = "jQuery-Collapse";
 
-  function _Storage(id) {
+  function Storage(id) {
     this.id = id;
-    this.db = window.localStorage;
+    this.db = window.localStorage || cookieStorage;
     this.data = [];
   }
-  _Storage.prototype = {
+  Storage.prototype = {
     write: function(position, state) {
       var _this = this;
       _this.data[position] = state;
@@ -179,10 +179,33 @@
     }
   }
 
+  var cookieStorage = {
+    expires: function() {
+      var now = new Date();
+      return now.setDate(now.getDate() + 1);
+    }(),
+    cookies : document.cookie,
+    setItem: function(key, value) {
+      this.cookies = key + '=' + value + '; expires=' + this.expires +'; path=/'
+    },
+    getItem: function(key) {
+      key+= "=";
+      var item = "";
+      $.each(this.cookies.split(';'), function(i, cookie) {
+        while (cookie.charAt(0)==' ') cookie = cookie.substring(1,cookie.length);
+        if(cookie.indexOf(key) == 0) {
+          item = cookie.substring(key.length,cookie.length);
+        }
+      });
+      return item;
+    }
+  }
+
   // Expose constructor to
   // global namespace
   jQueryCollapse = Collapse;
-  jQueryCollapseStorage = _Storage;
+  jQueryCollapseStorage = Storage;
+  jQueryCollapseCookieStorage = cookieStorage;
 
   // Add shortcut method
   // to jQuery API
