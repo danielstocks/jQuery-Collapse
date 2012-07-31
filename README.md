@@ -20,8 +20,8 @@ Enjoy!
 
 ### Demo
 
-A demo showcasing all the features of the plugin can be found in 'demo/demo.html' in
-this repository. It's a good starting point for usage examples.
+A demo showcasing all the features of the plugin can be found at 'demo/demo.html' in
+this repository.
 
 ## Usage
 
