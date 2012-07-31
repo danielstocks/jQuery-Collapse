@@ -120,6 +120,7 @@ To activate the accordion behaviour set 'accordion' as the value of the 'data-co
 
 ## Persistence
 
+
 By default, if the user reloads the page all the sections will be closed. 
 If you want previously collapsed sections to stay open you can add 'persist' to the data-collapse attribute:
 
@@ -128,11 +129,15 @@ If you want previously collapsed sections to stay open you can add 'persist' to 
   ...
 </div>
 ```
+And include the storage module in your document *after* the other
+scripts.
+
+```html
+<script src="jquery.collapse_storage.js"></script>
+```
 
 Please note: the target element will need an ID in order for the
-persistence to work. jQuery Collapse uses HTML5 localStorage if available, otherwise it
-will attempt to use cookies. If that also fails, it will degrade
-to work but without any persistence.
+persistence to work.
 
 You can combine the accordion and persistence options by adding
 both values to the data-collapse attribute:
@@ -143,6 +148,23 @@ both values to the data-collapse attribute:
 </div>
 ```
 
+jQuery Collapse uses HTML5 localStorage if available, otherwise it
+will attempt to use cookies (read about IE support below). If that also fails, it will degrade
+to work but without any persistence. Add cookie fallback support only if
+you need it:
+
+```html
+<script src="jquery.collapse_cookie_storage.js"></script>
+```
+
+### IE 6-7 Support
+
+For IE6 and IE7 you'll also need to add the JSON2.js module for
+the cookie storage to work properly:
+
+```html
+<script src="jquery.collapse_storage.js"></script>
+```
 
 ## API Documentation
 
