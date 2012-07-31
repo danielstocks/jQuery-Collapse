@@ -3,8 +3,8 @@
 A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also
 known as 'progressive disclosure'.
 
-*Notice: as of August 2012 this plugin has been rewritten from
-scratch. The old version is no longer maintained or supported*
+*NOTICE: As of August 2012 this plugin has been rewritten from scratch.  
+The old version is no longer maintained or supported.*
 
 Enjoy!
 
