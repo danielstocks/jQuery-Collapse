@@ -29,7 +29,7 @@
     _this.options = options;
     _this.sections = [];
     _this.isAccordion = options.accordion || false;
-    _this.db = options.persist ? new Storage(el[0].id) : false;
+    _this.db = options.persist ? new jQueryCollapseStorage(el[0].id) : false;
     _this.states = _this.db ? _this.db.read() : [];
 
     // For every pair of elements in given
@@ -148,65 +148,6 @@
     }
   }
 
-  var STORAGE_KEY = "jQuery-Collapse";
-
-  function Storage(id) {
-    this.id = id;
-    this.db = window.localStorage || cookieStorage;
-    this.data = [];
-  }
-  Storage.prototype = {
-    write: function(position, state) {
-      var _this = this;
-      _this.data[position] = state;
-      // Pad out data array with zero values
-      $.each(_this.data, function(i) {
-        if(typeof _this.data[i] == 'undefined') {
-          _this.data[i] = 0;
-        }
-      });
-      var obj = this.getDataObject();
-      obj[this.id] = this.data;
-      this.db.setItem(STORAGE_KEY, JSON.stringify(obj));
-    },
-    read: function() {
-      var obj = this.getDataObject();
-      return obj[this.id] || [];
-    },
-    getDataObject: function() {
-      var string = this.db.getItem(STORAGE_KEY);
-      return string ? JSON.parse(string) : {}
-    }
-  }
-
-  var cookieStorage = {
-    expires: function() {
-      var now = new Date();
-      return now.setDate(now.getDate() + 1);
-    }(),
-    cookies : document.cookie,
-    setItem: function(key, value) {
-      this.cookies = key + '=' + value + '; expires=' + this.expires +'; path=/'
-    },
-    getItem: function(key) {
-      key+= "=";
-      var item = "";
-      $.each(this.cookies.split(';'), function(i, cookie) {
-        while (cookie.charAt(0)==' ') cookie = cookie.substring(1,cookie.length);
-        if(cookie.indexOf(key) == 0) {
-          item = cookie.substring(key.length,cookie.length);
-        }
-      });
-      return item;
-    }
-  }
-
-  // Expose constructor to
-  // global namespace
-  jQueryCollapse = Collapse;
-  jQueryCollapseStorage = Storage;
-  jQueryCollapseCookieStorage = cookieStorage;
-
   // Add shortcut method
   // to jQuery API
   $.fn.extend({
@@ -227,5 +168,9 @@
   $(function() {
     $.fn.collapse(false, true)
   });
+
+  // Expose constructor to
+  // global namespace
+  jQueryCollapse = Collapse;
 
 }(window.jQuery);
