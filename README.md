@@ -18,6 +18,11 @@ Enjoy!
 - **Persistence** to remember open sections on page reload!
 
 
+### Demo
+
+A demo showcasing all the features of the plugin can be found in 'demo/demo.html' in
+this repository. It's a good starting point for usage examples.
+
 ## Usage
 
 Load jQuery and the jQuery Collapse plugin into your document:
@@ -159,9 +164,8 @@ you need it:
 
 ### IE 6-7 Support
 
-For IE6 and IE7 you'll also need to add the JSON2.js module (found in
-the vendor directory) for
-the cookie storage to work properly:
+For IE 6-7 you'll also need to add the JSON2.js library (found in
+the vendor directory) for the cookie storage to work properly:
 
 ```html
 <script src="json2.js"></script>
