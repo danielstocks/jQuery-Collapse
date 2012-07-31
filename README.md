@@ -12,7 +12,7 @@ Enjoy!
 ## Features
 
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
-- Lightweight (~x bytes minified and gzipped)
+- Lightweight (~ 1.2kb minified and gzipped)
 - Cross Browser compliant (Tested in >= IE6, Firefox, Safari, Chrome, Opera)
 - **Accordion** behaviour can be enabled. 
 - **Persistence** to remember open sections on page reload!
@@ -159,11 +159,12 @@ you need it:
 
 ### IE 6-7 Support
 
-For IE6 and IE7 you'll also need to add the JSON2.js module for
+For IE6 and IE7 you'll also need to add the JSON2.js module (found in
+the vendor directory) for
 the cookie storage to work properly:
 
 ```html
-<script src="jquery.collapse_storage.js"></script>
+<script src="json2.js"></script>
 ```
 
 ## API Documentation
