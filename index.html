@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-collapse by danielstocks</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery-collapse</h1>
+        <p>A plugin for enabling collapsible lists with cookie support</p>
+
+        <p class="view"><a href="https://github.com/danielstocks/jQuery-Collapse">View the Project on GitHub <small>danielstocks/jQuery-Collapse</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/danielstocks/jQuery-Collapse/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/danielstocks/jQuery-Collapse/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/danielstocks/jQuery-Collapse">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1></h1>
+
+<h1>jQuery Collapse</h1>
+
+<p>A lightweight plugin for enabling expandable/collapsible content.</p>
+
+<ul>
+<li>Packaged with cookie support (yum yum!)</li>
+<li>Lightweight (655 bytes minified and gzipped)</li>
+<li>ARIA compliant</li>
+</ul><p>Enjoy!</p>
+
+<h2>Usage</h2>
+
+<p>HTML::</p>
+
+<pre><code>&lt;div id="demo"&gt;
+    &lt;h3&gt;Fruits&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Apple&lt;/li&gt;
+        &lt;li&gt;Pear&lt;/li&gt;
+        &lt;li&gt;Orange&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h3&gt;Info&lt;/h3&gt;
+    &lt;div&gt;
+        &lt;p&gt;You can use any container you like (in this case a div)&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>JavaScript::</p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.collapse.js"&gt;&lt;/script&gt;
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt; &lt;!-- If you want cookie support --&gt;
+&lt;script&gt;
+$(function() {
+    $("#demo").collapse();
+});
+&lt;/script&gt;
+</code></pre>
+
+<p><em>Note</em>: If you're using the plugin on different pages on the same domain, you'll have to have a unique cookie name for each instance to avoid conflict. Use the "cookie" option to set a unique cookie name.</p>
+
+<h2>Options</h2>
+
+<ul>
+<li>
+<strong>show</strong> (function) : Custom function for showing content (default: function(){ this.show() })</li>
+<li>
+<strong>hide</strong> (function) : Custom function for hiding content (default: function(){ this.hide() })</li>
+<li>
+<strong>head</strong> (string) : Elements for clickable headings (default: "h3")</li>
+<li>
+<strong>group</strong> (string): Elements containing the collapsable content (default: "ul, div")</li>
+<li>
+<strong>cookieName</strong> (string) : Name of cookie used in the plugin. (default: "collapse")</li>
+</ul><h2>Browser Support</h2>
+
+<p>Probably works in most modern browsers, but only tested in: Safari, Chrome, IE6+, Firefox3+, Opera10+</p>
+
+<p><em>Google Chrome</em> does not work with cookies if run locally (i.e file://) 
+For more details: <a href="http://code.google.com/p/chromium/issues/detail?id=535">http://code.google.com/p/chromium/issues/detail?id=535</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/danielstocks">danielstocks</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
