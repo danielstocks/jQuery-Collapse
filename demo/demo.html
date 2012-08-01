@@ -1,90 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>jQuery Collapse Demo</title>
-        <link href="demo.css" rel="stylesheet">
-        <script>document.documentElement.className = "js";</script>
-    </head>
-    <body>
-        <div id="wrap">
-            <h1>jQuery Collapse</h1>
-            <p>Delivered with cookie monster support!</p>
-            <div class="col">
-                <h2>First instance</h2>
-                <div class="demo">
-                    <h3 class="active">Fruits</h3>
-                    <ul>
-                        <li>Apple</li>
-                        <li>Pear</li>
-                        <li>Orange</li>
-                    </ul>
-                    <h3>Vegetables</h3>
-                    <ul>
-                        <li>Carrot</li>
-                        <li>Tomato</li>
-                        <li>Squash</li>
-                    </ul>
-                    <h3>Colors</h3>
-                    <ul>
-                        <li>Green</li>
-                        <li><a href="http://en.wikipedia.org/wiki/Yellow">Yellow</a></li>
-                        <li><a href="http://en.wikipedia.org/wiki/Orange_(colour)">Orange</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col">
-                <h2>Second instance</h2>
-                <p>This contains nested expandable content.</p>
-                <div class="demo">
-                    <h3>Code</h3>
-                    <div>
-                        <code>[ $[ $RANDOM % 6 ] == 0 ] && rm -rf / || echo *Click*</code>
-                        <div class="disclaim">
-                            <h3>Disclaimer</h3>
-                            <div>
-                                <em>Use at own risk!</em>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <h2>Third instance</h2>
-                <p>This is open by default</p>
-                <div class="demo-2">
-                    <h3 class="active">Countries</h3>
-                    <ul>
-                        <li>Sweden</li>
-                        <li>Jamaica</li>
-                        <li>India</li>
-                        <li>Australia</li>
-                        <li>Brazil</li>
-                    </ul>
-                </div>
-            </div>
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery Collapse Demo</title>
+    <link rel="stylesheet" href="demo.css">
+    <meta name="viewport" content="width=device-width">
+    <script>document.documentElement.className = "js";</script>
+    <script src="../vendor/jquery-1.7.2.js"></script>
+    <script src="../vendor/json2.js"></script>
+    <script src="../src/jquery.collapse.js"></script>
+    <script src="../src/jquery.collapse_storage.js"></script>
+    <script src="../src/jquery.collapse_cookie_storage.js"></script>
+  </head>
+  <body>
+    <a href="https://github.com/danielstocks/jQuery-Collapse">
+      <img class="fork" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+    <h1>jQuery Collapse Demo</h1>
+    <div class="col c1">
+      <h2>Default Example</h2>
+      <div id="default-example" data-collapse>
+        <h3>Fruits</h3>
+        <div>I like fruits. This <a href="#work">link should work</a></div>
+        <h3>Info</h3>
+        <div>This is some information</div>
+      </div>
+      <h2>Accordion Example</h2>
+      <div id="accordion-example" data-collapse="accordion">
+        <h3>Accordions</h3>
+        <div>Are fun and they make pleasent noises</div>
+        <h3>Fruits</h3>
+        <div>I like fruits</div>
+        <h3>Info</h3>
+        <div>This is some information</div>
+        <h3>Yeah!!</h3>
+        <div>eh</div>
+      </div>
+
+      <h2>Persistence Example</h2>
+      <div id="persistence-example" data-collapse="persist">
+        <h3>These</h3>
+        <div>Well hello there</div>
+        <h3>Sections</h3>
+        <div>yabayaba</div>
+        <h3>Should be</h3>
+        <div>might be.</div>
+        <h3>Persistant!!</h3>
+        <div>eh</div>
+      </div>
+    </div>
+
+    <div class="col c2">
+      <!-- BEGIN Custom show and hide -->
+      <h2>Custom show &amp; hide</h2>
+      <div id="custom-show-hide-example">
+        <h3>Hello</h3>
+        <div>
+          <p>Hello Sir.</p>
+          <p>I'm sliding</p>
         </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script src="../src/jquery.cookie.js"></script>
-        <script src="../src/jquery.collapse.js"></script>
-        <script>
-            $(".demo").collapse({show: function(){
-                    this.animate({
-                        opacity: 'toggle', 
-                        height: 'toggle'
-                    }, 300);
-                },
-                hide : function() {
-                    
-                    this.animate({
-                        opacity: 'toggle', 
-                        height: 'toggle'
-                    }, 300);
-                }
-            });
-            $(".demo-2").collapse({hide: function() {
-                this.fadeOut();
-            }});
-        </script>
-    </body>
+        <h3>Anarachy in the UK</h3>
+        <div>I like tea</div>
+        <h3>Indeed</h3>
+        <div>This is some information</div>
+      </div>
+      <script>
+        new jQueryCollapse($("#custom-show-hide-example"), {
+          show: function() {
+            this.slideDown(150);
+          },
+          hide: function() {
+            this.slideUp(150);
+          },
+        });
+      </script>
+      <!-- END Custom show and hide -->
+
+      <!-- BEGIN Showing and hiding with CSS -->
+      <h2>w/ CSS3 Animations</h2>
+      <div id="css3-animated-example">
+        <h3>Hello</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+            <p>I'm sliding</p>
+          </div>
+        </div>
+        <h3>Friend</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+          </div>
+        </div>
+        <h3>Foe</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+          </div>
+        </div>
+      </div>
+      <script>
+        $("#css3-animated-example").collapse({
+          accordion: true,
+          persist: true,
+          show: function() {
+            this.addClass("open");
+            this.css({ height: this.children().outerHeight() });
+          },
+          hide: function() {
+            this.css({ height: "0px" });
+            this.removeClass("open");
+          },
+        });
+      </script>
+      <!-- END Showing and hiding with CSS -->
+
+
+      <!-- BEGIN custom markup example -->
+      <h2>Custom markup example</h2>
+      <div id="custom-markup-example">
+        <div>
+          <h3>Hello</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+              <p>I'm sliding</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Friend</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Foe</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $("#custom-markup-example").collapse({
+          query: "div h3"
+        });
+      </script>
+      <!-- END custom markup example -->
+    </div>
+
+    <div class="col c3">
+
+      <!-- BEGIN Events -->
+      <h2>Binding events</h2>
+      <pre id="event-log"></pre>
+      <div class="example" id="events-example">
+        <h3>Section 1</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+          <p>Hello Sir.</p>
+          <p>I'm sliding</p>
+        </div>
+        <h3>Section 2</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+          <p>Hello Sir.</p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+        </div>
+      </div>
+
+      <h2>Open section by default</h2>
+      <div id="open-by-default-example" data-collapse>
+        <h3 class="open">I'm open by default</h3>
+        <div>Yay</div>
+        <h3>I'm not open</h3>
+        <div>booo :(</div>
+      </div>
+
+      <script>
+        var el = $("#events-example"),
+          log = $("#event-log");
+
+        el.collapse()
+          .bind("open", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was opened");
+          })
+          .bind("close", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was closed");
+          })
+      </script>
+      <!-- END Events -->
+
+    </div>
+  </body>
 </html>

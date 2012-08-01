@@ -1,149 +1,176 @@
 /*
  * Collapse plugin for jQuery
- * http://github.com/danielstocks/jQuery-Collapse/
+ * --
+ * source: http://github.com/danielstocks/jQuery-Collapse/
+ * site: http://webcloud.se/code/jQuery-Collapse
  *
  * @author Daniel Stocks (http://webcloud.se)
- * Copyright 2010, Daniel Stocks
+ * Copyright 2012, Daniel Stocks
  * Released under the MIT, BSD, and GPL Licenses.
  */
- 
-(function($) {
-    
-    // Use a cookie counter to allow multiple instances of the plugin
-    var cookieCounter = 0;
-    
-    $.fn.extend({
-        collapse: function(options) {
-            
-            var defaults = {
-                head : "h3",
-                group : "div, ul",
-                cookieName : "collapse",
-                // Default function for showing content
-                show: function() { 
-                    this.show();
-                },
-                // Default function for hiding content
-                hide: function() { 
-                    this.hide();
-                }
-            };
-            var op = $.extend(defaults, options);
-            
-            // Default CSS classes
-            var active = "active",
-                inactive = "inactive";
-            
-            return this.each(function() {
-                
-                // Increment coookie counter to ensure cookie name integrity
-                cookieCounter++;
-                var obj = $(this),
-                    // Find all headers and wrap them in <a> for accessibility.
-                    sections = obj.find(op.head).wrapInner('<a href="#"></a>'),
-                    l = sections.length,
-                    cookie = op.cookieName + "_" + cookieCounter;
-                    // Locate all panels directly following a header
-                    var panel = obj.find(op.head).map(function() {
-                        var head = $(this)
-                        if(!head.hasClass(active)) {
-                            return head.next(op.group).hide()[0];
-                        }
-                        return head.next(op.group)[0];
-                    });
-    
-                // Bind event for showing content
-                obj.bind("show", function(e, bypass) {
-                    var obj = $(e.target);
-                    // ARIA attribute
-                    obj.attr('aria-hidden', false)
-                        .prev()
-                        .removeClass(inactive)
-                        .addClass(active);
-                    // Bypass method for instant display
-                    if(bypass) {
-                        obj.show();
-                    } else {
-                        op.show.call(obj);
-                    }
-                });
 
-                // Bind event for hiding content
-                obj.bind("hide", function(e, bypass) {
-                    var obj = $(e.target);
-                    obj.attr('aria-hidden', true)
-                        .prev()
-                        .removeClass(active)
-                        .addClass(inactive);
-                    if(bypass) {
-                        obj.hide();
-                    } else {
-                        op.hide.call(obj);
-                    }
-                });
-                
-                // Look for existing cookies
-                if(cookieSupport) {
-                    for (var c=0;c<=l;c++) {
-                        var val = $.cookie(cookie + c);
-                        // Show content if associating cookie is found
-                        if ( val == c + "open" ) {
-                            panel.eq(c).trigger('show', [true]);
-                        // Hide content
-                        } else if ( val == c + "closed") {
-                            panel.eq(c).trigger('hide', [true]);
-                        }
-                    }
-                }
-                
-                // Delegate click event to show/hide content.
-                obj.bind("click", function(e) {
-                    var t = $(e.target);
-                    // Check if header was clicked
-                    if(!t.is(op.head)) {
-                        // What about link inside header.
-                        if ( t.parent().is(op.head) ) {
-                            t = t.parent();
-                        } else {
-                            return;
-                        }
-                        e.preventDefault();
-                    }
-                    // Figure out what position the clicked header has.
-                    var num = sections.index(t),
-                        cookieName = cookie + num,
-                        cookieVal = num,
-                        content = t.next(op.group);
-                    // If content is already active, hide it.
-                    if(t.hasClass(active)) {
-                        content.trigger('hide');
-                        cookieVal += 'closed';
-                        if(cookieSupport) {
-                            $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
-                        }
-                        return;
-                    }
-                    // Otherwise show it.
-                    content.trigger('show');
-                    cookieVal += 'open';
-                    if(cookieSupport) {
-                        $.cookie(cookieName, cookieVal, { path: '/', expires: 10 });
-                    }
-                });
-            });
-        }
+!function($) {
+
+  // Constructor
+  function Collapse (el, options) {
+
+    var _this = this,
+      options = options || {},
+      query = options.query || "> :even",
+      err;
+
+    err = !(el instanceof $) ? 
+      "'el' argument must be a jQuery object" : null;
+    err = (el.length < 1) ?
+      "'el' must contain a DOM element" : null;
+    if(err) throw new TypeError(err);
+
+    _this.$el = el;
+    _this.options = options;
+    _this.sections = [];
+    _this.isAccordion = options.accordion || false;
+    _this.db = options.persist ? new jQueryCollapseStorage(el[0].id) : false;
+    _this.states = _this.db ? _this.db.read() : [];
+
+    // For every pair of elements in given
+    // element, create a section
+    _this.$el.find(query).each(function() {
+
+      var section = new Section($(this), _this);
+      _this.sections.push(section);
+      _this.states[section._index()] || $(this).hasClass("open") ?
+        section.open(true) : section.close(true);
     });
 
-    // Make sure can we eat cookies without getting into trouble.
-    var cookie = true;
-    $(function() {
-        try {
-            $.cookie('x', 'x', { path: '/', expires: 10 });
+    // Wrap in private scope to
+    // to preserve 'sections' property
+    (function(scope) {
+
+      var scope = scope;
+      _this.$el.on("click", "[data-collapse-summary]", 
+        $.proxy(_this.handleClick, scope));
+
+    }(_this));
+  }
+
+  Collapse.prototype = {
+
+    handleClick: function(e) {
+
+      e.preventDefault();
+
+      var sections = this.sections,
+        parent = $(e.target).parent(),
+        l = sections.length;
+      while(l--) {
+        if(sections[l].$summary.find("a").is(e.target)) {
+          sections[l].toggle();
+          break;
         }
-        catch(e) {
-            cookie = false;
-            $.cookie('x', null);
-        }
+      }
+    },
+    open : function(eq) {
+
+      if(typeof eq == "number") {
+        return this.sections[eq].open();
+      }
+      $.each(this.sections, function() {
+        this.open();
+      });
+    },
+    close: function(eq) {
+
+      if(typeof eq == "number") {
+        return this.sections[eq].close();
+      }
+      $.each(this.sections, function() {
+        this.close();
+      });
+    }
+  };
+
+  // Section constructor
+  function Section($el, parent) {
+
+    $.extend(this, {
+      isOpen : false,
+      $summary : $el
+        .attr("data-collapse-summary", "")
+        .wrapInner('<a href="#"/>'),
+      $details : $el.next(),
+      options: parent.options,
+      parent: parent
     });
-    var cookieSupport = $.fn.collapse.cookieSupport = cookie;
-})(jQuery);
+  }
+
+  Section.prototype = {
+    toggle : function() {
+      this.isOpen ? this.close() : this.open();
+    },
+    close: function(bypass) {
+      var _this = this;
+      if($.isFunction(_this.options.hide) && !bypass) {
+        _this.options.hide.apply(_this.$details);
+      } else {
+        _this.$details.hide();
+      }
+      _this.$details.attr("aria-hidden", true);
+      _this.$summary.addClass("closed").removeClass("open");
+      _this.isOpen = false;
+      _this.parent.$el.trigger("close", _this);
+      if(_this.parent.db) {
+        _this.parent.db.write(_this._index(),0);
+      }
+    },
+    open: function(bypass) {
+
+      var _this = this;
+      if(_this.options.accordion && !bypass) {
+        $.each(_this.parent.sections, function() {
+          this.close();
+        });
+      }
+      if($.isFunction(_this.options.show) && !bypass) {
+        _this.options.show.apply(_this.$details)
+      } else {
+        _this.$details.show();
+      }
+      _this.$details.attr("aria-hidden", false);
+      _this.$summary.addClass("open").removeClass("closed");
+      _this.isOpen = true
+      _this.parent.$el.trigger("open", _this);
+      if(_this.parent.db) {
+        _this.parent.db.write(_this._index(),1);
+      }
+    },
+    _index: function() {
+      return this.parent.sections.indexOf(this);
+    }
+  }
+
+  // Add shortcut method
+  // to jQuery API
+  $.fn.extend({
+    collapse: function(options, scan) {
+      var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
+      return nodes.each(function() {
+        var settings = (scan) ? {} : options,
+          values = $(this).attr("data-collapse") || "";
+        $.each(values.split(" "), function(i,v) {
+          if(v) settings[v] = true;
+        });
+        new jQueryCollapse($(this), settings).$el;
+      });
+    }
+  });
+
+  //jQuery DOM Ready
+  $(function() {
+    $.fn.collapse(false, true)
+  });
+
+  // Expose constructor to
+  // global namespace
+  jQueryCollapse = Collapse;
+
+}(window.jQuery);
