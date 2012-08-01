@@ -12,7 +12,7 @@ Enjoy!
 ## Features
 
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
-- Lightweight (~ 1.2kb minified and gzipped)
+- Lightweight (~1.2kb minified and gzipped)
 - Cross Browser compliant (Tested in >= IE6, Firefox, Safari, Chrome, Opera)
 - **Accordion** behaviour can be enabled. 
 - **Persistence** to remember open sections on page reload!
