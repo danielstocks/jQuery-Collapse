@@ -1,103 +1,108 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Jquery-collapse by danielstocks</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="description" content="A lightweight jQuery plugin that enables expanding and collapsing content">
+    <title>jQuery Collapse | webcloud</title>
+    <link href="style.css" rel="stylesheet">
+    <script>document.documentElement.className = "js";</script>
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Jquery-collapse</h1>
-        <p>A plugin for enabling collapsible lists with cookie support</p>
+    <div id="wrap">
+      <div id="crumb">
+          <a href="http://webcloud.se/">webcloud</a> / jQuery Collapse
+      </div>
+      <div id="social">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://webcloud.se/jQuery-Collapse/" data-text="A lightweight jQuery plugin that enables expanding and collapsing content" data-via="roflwtfbbq" data-hashtags="jQuery">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=danielstocks&repo=jQuery-Collapse&type=watch&count=true" width="94px" allowtransparency="true" frameborder="0" scrolling="0" height="20px"></iframe>
+      </div>
+      <div id="header">
+        <h1>jQuery Collapse</h1>
+        <h2>A lightweight (~1kb) jQuery plugin that enables expanding and collapsing content</h2>
+      </div>
+      <div id="content">
+        <section id="info">
+          <h2>Collapsible Content with JavaScript</h2>
+          <p>This Plugin delivers an accessible and lightweight solution to a widely adopted interface pattern known as <em>progressive disclosure.</em></p>
+          <p>Read the <a href="docs">full documentation</a> for more info.</p>
 
-        <p class="view"><a href="https://github.com/danielstocks/jQuery-Collapse">View the Project on GitHub <small>danielstocks/jQuery-Collapse</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/danielstocks/jQuery-Collapse/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/danielstocks/jQuery-Collapse/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/danielstocks/jQuery-Collapse">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1></h1>
-
-<h1>jQuery Collapse</h1>
-
-<p>A lightweight plugin for enabling expandable/collapsible content.</p>
-
-<ul>
-<li>Packaged with cookie support (yum yum!)</li>
-<li>Lightweight (655 bytes minified and gzipped)</li>
-<li>ARIA compliant</li>
-</ul><p>Enjoy!</p>
-
-<h2>Usage</h2>
-
-<p>HTML::</p>
-
-<pre><code>&lt;div id="demo"&gt;
-    &lt;h3&gt;Fruits&lt;/h3&gt;
-    &lt;ul&gt;
-        &lt;li&gt;Apple&lt;/li&gt;
-        &lt;li&gt;Pear&lt;/li&gt;
-        &lt;li&gt;Orange&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;h3&gt;Info&lt;/h3&gt;
-    &lt;div&gt;
-        &lt;p&gt;You can use any container you like (in this case a div)&lt;/p&gt;
-    &lt;/div&gt;
+<h3>Example</h3>
+<pre><code>&lt;div id=&quot;demo&quot; data-collapse="accordion persist"&gt;
+  &lt;h2&gt;Fruits&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Apple&lt;/li&gt;
+    &lt;li&gt;Pear&lt;/li&gt;
+    &lt;li&gt;Orange&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h2&gt;Hint&lt;/h2&gt;
+  &lt;div&gt;
+    &lt;p&gt;One fruit a day keeps the doctor away&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;h2>Third&lt;/h2>
+  &lt;p>Just a paragraph here&lt;/p>
 &lt;/div&gt;
 </code></pre>
+<div id="demo" data-collapse="accordion persist">
+  <h2>Fruits</h2>
+  <ul>
+    <li>Apple</li>
+    <li>Pear</li>
+    <li>Orange</li>
+  </ul>
+  <h2>Saying</h2>
+  <div>
+    <p>One fruit a day keeps the doctor away</p>
+  </div>
+  <h2>Third</h2>
+  <p>Just a paragraph here</p>
+</div>
 
-<p>JavaScript::</p>
-
-<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="jquery.collapse.js"&gt;&lt;/script&gt;
-&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt; &lt;!-- If you want cookie support --&gt;
-&lt;script&gt;
-$(function() {
-    $("#demo").collapse();
-});
-&lt;/script&gt;
-</code></pre>
-
-<p><em>Note</em>: If you're using the plugin on different pages on the same domain, you'll have to have a unique cookie name for each instance to avoid conflict. Use the "cookie" option to set a unique cookie name.</p>
-
-<h2>Options</h2>
-
-<ul>
-<li>
-<strong>show</strong> (function) : Custom function for showing content (default: function(){ this.show() })</li>
-<li>
-<strong>hide</strong> (function) : Custom function for hiding content (default: function(){ this.hide() })</li>
-<li>
-<strong>head</strong> (string) : Elements for clickable headings (default: "h3")</li>
-<li>
-<strong>group</strong> (string): Elements containing the collapsable content (default: "ul, div")</li>
-<li>
-<strong>cookieName</strong> (string) : Name of cookie used in the plugin. (default: "collapse")</li>
-</ul><h2>Browser Support</h2>
-
-<p>Probably works in most modern browsers, but only tested in: Safari, Chrome, IE6+, Firefox3+, Opera10+</p>
-
-<p><em>Google Chrome</em> does not work with cookies if run locally (i.e file://) 
-For more details: <a href="http://code.google.com/p/chromium/issues/detail?id=535">http://code.google.com/p/chromium/issues/detail?id=535</a></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/danielstocks">danielstocks</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+          <p>Check out the <a href="#">demo page</a> for wider variety of examples.</p>
+        </section>
+        <section id="links">
+          <div class="download">
+            <a class="btn btn-large" href="#">Download jQuery Collapse</a>
+            <small>Latest Release: 1.0.alpha</small>
+          </div>
+          <div class="view-on-github">
+            or
+            <a href="http://github.com/danielstocks/jQuery-Collapse/">View project on Github</a>
+          </div>
+        </section>
+        <section id="features">
+        <h2>Features</h2>
+          <div class="box">
+            <h3 class="open">Persistence</h3>
+            <div>
+              <p>Remembers open sections on page reload!</p>
+            </div>
+            <h3 class="open">Accordion</h3>
+            <div>
+              <p>The classic 'accordion' behavior of only allowing one open section at a time.</p>
+            </div>
+            <h3>WAI-ARIA Compliance</h3>
+            <div>
+              <p>The plugin has been designed with <a href="http://www.w3.org/WAI/intro/aria">WAI-ARIA</a> in mind which defines a way to make Web content and Web applications more accessible to people with disabilities.</p>
+            </div>
+            <h3>Lightweight</h3>
+            <div>
+              <p>jQuery-Collapse is designed to be a lightweight plugin that performs well both on small and big scales. It's only ~1kb when compiled and gzipped! </p>
+            </div>
+            <h3>Cross Browser</h3>
+            <div>
+              <p>Fully tested in IE6+, Firefox3+, Chrome5+, Safari4+, Opera 10+. Degrades gracefully in unsupported browsers</p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://raw.github.com/danielstocks/jQuery-Collapse/523c08f9747b42251e8a1fd84154ed0a2e1b979a/src/jquery.collapse.js"></script>
+    <script src="https://raw.github.com/danielstocks/jQuery-Collapse/523c08f9747b42251e8a1fd84154ed0a2e1b979a/src/jquery.collapse_storage.js"></script>
+    <script src="https://raw.github.com/danielstocks/jQuery-Collapse/523c08f9747b42251e8a1fd84154ed0a2e1b979a/src/jquery.collapse_cookie_storage.js"></script>
+    <script>
+      $("#features .box").collapse();
+    </script>
   </body>
 </html>
