@@ -12,7 +12,7 @@ ul {list-style-type:circle; display:block; margin: 20px 0;}
 li {margin: 10px 20px; list-style-type:circle;}
 p {margin: 20px 0}
 a {color: #39B2E5;}
-h1 {
+#header h1 {
   font:bold 72px/1 'Asap', sans-serif; 
   float: right;
   letter-spacing:-3px;
@@ -33,6 +33,10 @@ pre {
   display: block; 
   border:1px solid #ccc;
   border-width: 0 1px 1px 0;
+}
+code {
+  white-space: pre;
+  background: #ddd
 }
 
 /* Header
@@ -116,9 +120,20 @@ section:first-child {margin-left: 0}
   border-width: 0 1px 1px 0;
   margin-top:10px
 }
+#features p {
+  margin-top: 10px;
+}
+#features h3 {
+  margin: 0 0 5px;
+  background: url("sprite.png") 2px 5px no-repeat;
+  padding-left: 20px;
+}
 #features h3 a {
   color: #BFB470;
   text-decoration: none;
+}
+#features h3.open {
+  background-position: 0px -34px;
 }
 
 /* Download area
