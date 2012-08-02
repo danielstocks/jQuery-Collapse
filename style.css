@@ -154,6 +154,10 @@ section:first-child {margin-left: 0}
   line-height:50px;
 }
 
+.github-watch {
+  margin-left: 8px;
+}
+
 /* Button style (from twitter's Bootstrap)
  * ------------- */
 .btn {
@@ -229,3 +233,111 @@ section:first-child {margin-left: 0}
           box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+.col {
+  width: 292px;
+  float: left;
+  margin-right:32px;
+  margin-bottom: 16px;
+}
+.c3 {
+  margin-right:0;
+}
+
+
+#examples-header {
+  clear:both;
+  font:normal 48px/1.2 'Asap', sans-serif; 
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 5px;
+  margin: 0 0 10px;
+  text-align: center;
+}
+#examples {
+  margin:0;
+  width: 100%;
+}
+#examples h2 {
+  margin: 10px 0;
+  color: #000;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+#examples h3 {
+  margin: 0;
+  background-image: linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -o-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -moz-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -webkit-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -ms-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+}
+
+#examples h3 a {
+  background: url("sprite.png") 15px 13px no-repeat;
+  display: block;
+  padding: 10px;
+  padding-left: 32px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(128, 10, 85, 0.5);
+  text-shadow: 1px 1px 1px rgb(128,10,85);
+}
+#examples h3:hover { background: rgb(228,10,85); }
+#examples h3.open  { background: rgb(255,70,120); }
+#examples h3.open a { background-position: 13px -25px; }
+#examples h3 + div { padding: 10px; }
+
+#examples h2 + div,
+#examples .example {
+  background: #fff;
+  overflow: hidden;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+/* Pre hide sections with JavaScript on
+--- */
+#examples h3+div {
+  display: none;
+}
+
+/* CSS3 Animation example
+--- */
+#css3-animated-example h3 + div {
+  height: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background: #000;
+  display: block!important;
+  -webkit-transform: translateZ(0);
+  -webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	transition: all 0.3s ease;
+}
+#css3-animated-example .content {
+  padding: 10px;
+}
+
+#css3-animated-example h3.open + div {
+  height: auto;
+  background: #aaffff;
+}
+
+#examples p {
+margin: 5px 0;
+}
+
+/* Event example
+--- */
+pre#event-log {
+  background: #fafacc;
+  margin-top:0;
+  padding: 10px;
+  display: block;
+}
