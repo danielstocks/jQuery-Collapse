@@ -123,7 +123,7 @@
       var _this = this;
       _this.$summary.removeClass("open close").addClass(state);
       _this.isOpen = state == "open"
-      _this.$details.attr("aria-hidden", state == "open" ? false : true);
+      _this.$details.attr("aria-hidden", state == "close");
       _this.parent.$el.trigger(state, _this);
       if(_this.parent.db) {
         _this.parent.db.write(_this._index(), state == "open" ? 1 : 0);
