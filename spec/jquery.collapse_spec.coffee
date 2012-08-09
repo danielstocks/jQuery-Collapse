@@ -329,9 +329,9 @@ describe "jQuery Collapse", ->
 
     it "should write to storage that the third item was opened", ->
       @jq.open(2)
-      expect(@jq.db.write).toHaveBeenCalledWith(2,1)
+      expect(@jq.db.write).toHaveBeenCalledWith(2,true)
 
     it "should write to storage that the third item was closed", ->
       @jq.close(2)
-      expect(@jq.db.write).toHaveBeenCalledWith(2,0)
+      expect(@jq.db.write).toHaveBeenCalledWith(2,false)
 

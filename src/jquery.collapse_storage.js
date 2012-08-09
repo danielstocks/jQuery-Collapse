@@ -21,7 +21,7 @@
   Storage.prototype = {
     write: function(position, state) {
       var _this = this;
-      _this.data[position] = state;
+      _this.data[position] = state ? 1 : 0;
       // Pad out data array with zero values
       $.each(_this.data, function(i) {
         if(typeof _this.data[i] == 'undefined') {
