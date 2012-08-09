@@ -59,17 +59,13 @@
       }
     },
     open : function(eq) {
-      if(typeof eq == "number") {
-        return this.sections[eq].open();
-      }
+      if(isFinite(eq)) return this.sections[eq].open();
       $.each(this.sections, function() {
         this.open();
       });
     },
     close: function(eq) {
-      if(typeof eq == "number") {
-        return this.sections[eq].close();
-      }
+      if(isFinite(eq)) return this.sections[eq].close();
       $.each(this.sections, function() {
         this.close();
       });
