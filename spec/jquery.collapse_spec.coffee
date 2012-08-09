@@ -180,21 +180,21 @@ describe "jQuery Collapse", ->
       ###:DOC+=<div id="test-options">
         <h1>Section 1</h1> <div>hello 1</div>
       </div>###
-      @hide = @spy()
-      @show = @spy()
+      @close = @spy()
+      @open = @spy()
       @jq = new jQueryCollapse($("#test-options"), {
-        hide: @hide
-        show: @show
+        close: @close
+        open: @open
       })
 
-    it 'should fire the custom show function once', ->
+    it 'should fire the custom open function once', ->
       @jq.open()
-      expect(@show).toHaveBeenCalledOnce()
+      expect(@open).toHaveBeenCalledOnce()
 
-    it 'should fire the custom hide function once', ->
+    it 'should fire the custom close function once', ->
       @jq.open()
       @jq.close()
-      expect(@hide).toHaveBeenCalledOnce()
+      expect(@close).toHaveBeenCalledOnce()
 
   describe 'Custom query', ->
 

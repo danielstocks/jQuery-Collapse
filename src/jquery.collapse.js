@@ -94,13 +94,7 @@
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
-      var _this = this;
-      if($.isFunction(_this.options.hide) && !bypass) {
-        _this.options.hide.apply(_this.$details);
-      } else {
-        _this.$details.hide();
-      }
-      _this._changeState("close")
+      this._changeState("close", bypass)
     },
     open: function(bypass) {
       var _this = this;
@@ -109,20 +103,21 @@
           this.close();
         });
       }
-      if($.isFunction(_this.options.show) && !bypass) {
-        _this.options.show.apply(_this.$details)
-      } else {
-        _this.$details.show();
-      }
-      _this._changeState("open")
+      _this._changeState("open", bypass)
     },
     _index: function() {
       return this.parent.sections.indexOf(this);
     },
-    _changeState: function(state) {
+    _changeState: function(state, bypass) {
+
       var _this = this;
-      _this.$summary.removeClass("open close").addClass(state);
       _this.isOpen = state == "open"
+      if($.isFunction(_this.options[state]) && !bypass) {
+        _this.options[state].apply(_this.$details)
+      } else {
+        _this.isOpen ? _this.$details.show() : _this.$details.hide();
+      }
+      _this.$summary.removeClass("open close").addClass(state);
       _this.$details.attr("aria-hidden", state == "close");
       _this.parent.$el.trigger(state, _this);
       if(_this.parent.db) {

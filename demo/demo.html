@@ -51,7 +51,7 @@
     </div>
 
     <div class="col c2">
-      <!-- BEGIN Custom show and hide -->
+      <!-- BEGIN Custom open and close -->
       <h2>Custom show &amp; hide</h2>
       <div id="custom-show-hide-example">
         <h3>Hello</h3>
@@ -66,15 +66,15 @@
       </div>
       <script>
         new jQueryCollapse($("#custom-show-hide-example"), {
-          show: function() {
+          open: function() {
             this.slideDown(150);
           },
-          hide: function() {
+          close: function() {
             this.slideUp(150);
           },
         });
       </script>
-      <!-- END Custom show and hide -->
+      <!-- END Custom open and close -->
 
       <!-- BEGIN Showing and hiding with CSS -->
       <h2>w/ CSS3 Animations</h2>
@@ -108,11 +108,11 @@
         $("#css3-animated-example").collapse({
           accordion: true,
           persist: true,
-          show: function() {
+          open: function() {
             this.addClass("open");
             this.css({ height: this.children().outerHeight() });
           },
-          hide: function() {
+          close: function() {
             this.css({ height: "0px" });
             this.removeClass("open");
           },

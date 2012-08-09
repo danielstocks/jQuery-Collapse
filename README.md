@@ -53,8 +53,8 @@ That's it! The *data-collapse* attribute will automatically trigger the script.
 
 ### Open/Collapse section by default 
 
-The standard behaviour is to hide all the collapsible sections on page
-load. If you want to show a section to the user on page load you can
+The standard behaviour is to collapse all the sections on page load. 
+If you want to show a section to the user on page load you can
 achieve this by adding an 'open' class to the section heading
 
 ```html
@@ -181,8 +181,8 @@ using JavaScript. Enjoy.
 You can pass the following options when initializing
 the plugin with JavaScript.
 
-* **show** (function) : Custom function for showing content (default: function(){ this.show() })
-* **hide** (function) : Custom function for hiding content (default: function(){ this.hide() })
+* **open** (function) : Custom function for opening section (default: function(){ this.show() })
+* **close** (function) : Custom function for collapsing section (default: function(){ this.hide() })
 * **accordion** (bool) : Enable accordion behaviour by setting this option to 'true'
 * **persist** (bool) : Enable persistence between page loads by setting this option to 'true'
 
@@ -190,15 +190,15 @@ Example usage of options:
 
 ```js
 // Initializing collapse plugin
-// with custom show/hide methods,
+// with custom open/close methods,
 // persistence plugin and accordion behaviour
 $("#demo").collapse({
-  show: function() {
+  open: function() {
     // The context of 'this' is applied to
     // the collapsed details in a jQuery wrapper 
     this.slideDown(100);
   },
-  hide: function() {
+  close: function() {
     this.slideUp(100);
   },
   accordion: true,
