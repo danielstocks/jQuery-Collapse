@@ -12,37 +12,24 @@ describe "jQuery Collapse", ->
 
   describe "setup", ->
 
-    it "should require a jQuery object", ->
-      expect ->
-        jQueryCollapse()
-      .toThrow("TypeError")
+    before ->
+      @el = $(document.createElement('div'))
+      @jq = new jQueryCollapse(@el)
 
-    it "should require jQuery object to containt a DOM element", ->
-      el = $()
-      expect ->
-        jQueryCollapse(el)
-      .toThrow("TypeError")
+    it "should assign an element", ->
+      expect(@jq.$el).toBe(@el)
 
-    describe 'default assignment', ->
+    it "should not have an accordion", ->
+      expect(@jq.isAccordion).toBe false
 
-      before ->
-        @el = $(document.createElement('div'))
-        @jq = new jQueryCollapse(@el)
+    it "should not have a db", ->
+      expect(@jq.db).toBe false
 
-      it "should assign an element", ->
-        expect(@jq.$el).toBe(@el)
+    it "should have a 'sections' property",->
+      expect(@jq.sections).toEqual []
 
-      it "should not have an accordion", ->
-        expect(@jq.isAccordion).toBe false
-
-      it "should not have a db", ->
-        expect(@jq.db).toBe false
-
-      it "should have a 'sections' property",->
-        expect(@jq.sections).toEqual []
-
-      it "should have a 'states' property",->
-        expect(@jq.states).toEqual []
+    it "should have a 'states' property",->
+      expect(@jq.states).toEqual []
 
 
   describe 'initializing elements with data-collapse attribute', ->
@@ -54,11 +41,11 @@ describe "jQuery Collapse", ->
       @jq = @stub(window, "jQueryCollapse")
 
     it "should call the jQueryCollapse constructor twice", ->
-      $.fn.collapse(false, true);
+      $.fn.collapse(false, true)
       expect(@jq).toHaveBeenCalledTwice()
 
     it "should call the jQuery Collapse constructor once", ->
-      $("#test2").collapse();
+      $("#test2").collapse()
       expect(@jq).toHaveBeenCalledOnce()
 
   describe 'initializing plugin with data-collapse accordion', ->
@@ -69,7 +56,7 @@ describe "jQuery Collapse", ->
 
     it "should call the constructor with accordion option set to true",->
       obj = $("div").get(0)
-      $.fn.collapse(false, true);
+      $.fn.collapse(false, true)
       expect(@jq).toHaveBeenCalledWith($(obj),
         accordion: true
       )
@@ -82,7 +69,7 @@ describe "jQuery Collapse", ->
 
     it "should call the constructor with persist option set to true",->
       obj = $("div").get(0)
-      $.fn.collapse(false, true);
+      $.fn.collapse(false, true)
       expect(@jq).toHaveBeenCalledWith($(obj),
         persist: true
       )
@@ -129,8 +116,8 @@ describe "jQuery Collapse", ->
         it "should set aria-hidden to true on details", ->
           expect(@details.attr("aria-hidden")).toEqual "true"
 
-        it "should have a 'closed' CSS class on summary", ->
-          expect(@summary.hasClass('closed')).toBe true
+        it "should have a 'close' CSS class on summary", ->
+          expect(@summary.hasClass('close')).toBe true
 
         it "should not have a 'open' CSS class on summary", ->
           expect(@summary.hasClass('open')).toBe false
@@ -138,7 +125,7 @@ describe "jQuery Collapse", ->
       describe 'open section', ->
 
         before ->
-          @jq.sections[0].open();
+          @jq.sections[0].open()
 
         it "details should be visible", ->
           expect(@details.get(0).style.display).toEqual "block"
@@ -149,8 +136,8 @@ describe "jQuery Collapse", ->
         it "should have a 'open' CSS class on summary", ->
           expect(@summary.hasClass('open')).toBe true
 
-        it "should not have a 'closed' CSS class on summary", ->
-          expect(@summary.hasClass('closed')).toBe false
+        it "should not have a 'close' CSS class on summary", ->
+          expect(@summary.hasClass('close')).toBe false
 
       describe 'user interaction', ->
 
@@ -159,17 +146,17 @@ describe "jQuery Collapse", ->
           it "should prevent default behaviour", ->
             event =
               preventDefault : @spy()
-            @jq.handleClick(event);
+            @jq.handleClick(event)
             expect(event.preventDefault).toHaveBeenCalledOnce()
 
           it "should open the corresponding section if it's closed", ->
-            @jq.sections[0].close();
+            @jq.sections[0].close()
             stub = @stub(@jq.sections[0], "open")
             @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
 
           it "should close the corresponding section if it's open", ->
-            @jq.sections[0].open();
+            @jq.sections[0].open()
             stub = @stub(@jq.sections[0], "close")
             @summary.find("a").trigger("click")
             expect(stub).toHaveBeenCalledOnce()
@@ -266,7 +253,7 @@ describe "jQuery Collapse", ->
       describe 'targeted section', ->
 
         before ->
-          @jq.open(1);
+          @jq.open(1)
 
         it "should be open", ->
           expect(@jq.$el.find(".open").length).toBe 1
@@ -278,7 +265,7 @@ describe "jQuery Collapse", ->
 
       it "should close all sections", ->
         @jq.close()
-        expect(@jq.$el.find(".closed").length).toBe 3
+        expect(@jq.$el.find(".close").length).toBe 3
 
       describe 'targeted section', ->
 
@@ -287,10 +274,10 @@ describe "jQuery Collapse", ->
           @jq.close(1)
 
         it "should be closed", ->
-          expect(@jq.$el.find(".closed").length).toBe 1
+          expect(@jq.$el.find(".close").length).toBe 1
 
         it "should be a H2 element", ->
-          expect(@jq.$el.find(".closed").get(0).tagName).toBe "H2"
+          expect(@jq.$el.find(".close").get(0).tagName).toBe "H2"
 
 
   describe 'accordion', ->
