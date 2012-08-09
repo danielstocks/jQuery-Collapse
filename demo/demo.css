@@ -39,6 +39,7 @@ h2 {
 
 h3 {
   margin: 0;
+  background-color: rgb(228,10,85);
   background-image: linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -o-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
   background-image: -moz-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);

@@ -102,7 +102,7 @@
       _this._changeState("open", bypass)
     },
     _index: function() {
-      return this.parent.sections.indexOf(this);
+      return $.inArray(this, this.parent.sections);
     },
     _changeState: function(state, bypass) {
 
