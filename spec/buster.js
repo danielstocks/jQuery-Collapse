@@ -4,7 +4,7 @@ config["jQuery Collapse specs"] = {
   rootPath: "../",
   environment: "browser",
   sources: [
-    "vendor/jquery-1.7.2.js",
+    "vendor/jquery-1.8.0.js",
     "vendor/json2.js",
     "src/jquery.collapse.js",
     "src/jquery.collapse_storage.js",

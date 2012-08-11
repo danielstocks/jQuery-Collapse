@@ -15,8 +15,7 @@
   function Collapse (el, options) {
     var _this = this,
       options = options || {},
-      query = options.query || "> :even",
-      err;
+      query = options.query || "> :even";
 
     $.extend(_this, {
       $el: el,
