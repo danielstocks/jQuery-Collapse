@@ -13,52 +13,40 @@
 
   // Constructor
   function Collapse (el, options) {
-
     var _this = this,
       options = options || {},
-      query = options.query || "> :even",
-      err;
+      query = options.query || "> :even";
 
-    err = !(el instanceof $) ? 
-      "'el' argument must be a jQuery object" : null;
-    err = (el.length < 1) ?
-      "'el' must contain a DOM element" : null;
-    if(err) throw new TypeError(err);
+    $.extend(_this, {
+      $el: el,
+      options : options,
+      sections: [],
+      isAccordion : options.accordion || false,
+      db : options.persist ? new jQueryCollapseStorage(el[0].id) : false
+    });
 
-    _this.$el = el;
-    _this.options = options;
-    _this.sections = [];
-    _this.isAccordion = options.accordion || false;
-    _this.db = options.persist ? new jQueryCollapseStorage(el[0].id) : false;
+    // Figure out what sections are open if storage is used
     _this.states = _this.db ? _this.db.read() : [];
 
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      _this.states[section._index()] || $(this).hasClass("open") ?
+      _this.states[section._index()] || section.$summary.hasClass("open") ?
         section.open(true) : section.close(true);
     });
 
-    // Wrap in private scope to
-    // to preserve 'sections' property
+    // Capute ALL the clicks!
     (function(scope) {
-
-      var scope = scope;
-      _this.$el.on("click", "[data-collapse-summary]", 
+      _this.$el.on("click", "[data-collapse-summary]",
         $.proxy(_this.handleClick, scope));
-
     }(_this));
   }
 
   Collapse.prototype = {
-
     handleClick: function(e) {
-
       e.preventDefault();
-
       var sections = this.sections,
         parent = $(e.target).parent(),
         l = sections.length;
@@ -70,19 +58,13 @@
       }
     },
     open : function(eq) {
-
-      if(typeof eq == "number") {
-        return this.sections[eq].open();
-      }
+      if(isFinite(eq)) return this.sections[eq].open();
       $.each(this.sections, function() {
         this.open();
       });
     },
     close: function(eq) {
-
-      if(typeof eq == "number") {
-        return this.sections[eq].close();
-      }
+      if(isFinite(eq)) return this.sections[eq].close();
       $.each(this.sections, function() {
         this.close();
       });
@@ -91,7 +73,6 @@
 
   // Section constructor
   function Section($el, parent) {
-
     $.extend(this, {
       isOpen : false,
       $summary : $el
@@ -108,48 +89,39 @@
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
-      var _this = this;
-      if($.isFunction(_this.options.hide) && !bypass) {
-        _this.options.hide.apply(_this.$details);
-      } else {
-        _this.$details.hide();
-      }
-      _this.$details.attr("aria-hidden", true);
-      _this.$summary.addClass("closed").removeClass("open");
-      _this.isOpen = false;
-      _this.parent.$el.trigger("close", _this);
-      if(_this.parent.db) {
-        _this.parent.db.write(_this._index(),0);
-      }
+      this._changeState("close", bypass)
     },
     open: function(bypass) {
-
       var _this = this;
       if(_this.options.accordion && !bypass) {
         $.each(_this.parent.sections, function() {
           this.close();
         });
       }
-      if($.isFunction(_this.options.show) && !bypass) {
-        _this.options.show.apply(_this.$details)
-      } else {
-        _this.$details.show();
-      }
-      _this.$details.attr("aria-hidden", false);
-      _this.$summary.addClass("open").removeClass("closed");
-      _this.isOpen = true
-      _this.parent.$el.trigger("open", _this);
-      if(_this.parent.db) {
-        _this.parent.db.write(_this._index(),1);
-      }
+      _this._changeState("open", bypass)
     },
     _index: function() {
-      return this.parent.sections.indexOf(this);
+      return $.inArray(this, this.parent.sections);
+    },
+    _changeState: function(state, bypass) {
+
+      var _this = this;
+      _this.isOpen = state == "open"
+      if($.isFunction(_this.options[state]) && !bypass) {
+        _this.options[state].apply(_this.$details)
+      } else {
+        _this.isOpen ? _this.$details.show() : _this.$details.hide();
+      }
+      _this.$summary.removeClass("open close").addClass(state);
+      _this.$details.attr("aria-hidden", state == "close");
+      _this.parent.$el.trigger(state, _this);
+      if(_this.parent.db) {
+        _this.parent.db.write(_this._index(), _this.isOpen);
+      }
     }
   }
 
-  // Add shortcut method
-  // to jQuery API
+  // Expose in jQuery API
   $.fn.extend({
     collapse: function(options, scan) {
       var nodes = (scan) ? $("body").find("[data-collapse]") : $(this);
