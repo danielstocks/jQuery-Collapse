@@ -9,11 +9,16 @@
     <link href="prism.css" rel="stylesheet">
     <script>document.documentElement.className = "js";</script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <!--[if lt IE 8]>
+        <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <![endif]-->
     <script src="prism.js"></script>
     <script src="src/jquery.collapse.js"></script>
     <script src="src/jquery.collapse_storage.js"></script>
     <script src="src/jquery.collapse_cookie_storage.js"></script>
+    <script>
+    /*@cc_on(function(e,i){i=e.length;while(i--)document.createElement(e[i])})("abbr,article,aside,audio,canvas,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','))@*/
+    </script>
   </head>
   <body>
     <a href="https://github.com/danielstocks/jQuery-Collapse">
