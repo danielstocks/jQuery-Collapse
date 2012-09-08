@@ -2,10 +2,13 @@
 
 /* Base
  * ------------- */
-
 html, body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
-html,body  {background:#EEE;}
-body {padding: 20px;font: 14px/1.4 Georgia, serif; color:#333;}
+body {
+  padding: 20px;
+  font: 14px/1.4 Georgia, serif; 
+  color:#444;
+  background: url('back_pattern.png');
+}
 strong {font-weight:bold;}
 em {font-style:italic;}
 ul {list-style-type:circle; display:block; margin: 20px 0;}
@@ -13,7 +16,7 @@ li {margin: 10px 20px; list-style-type:circle;}
 p {margin: 20px 0}
 a {color: #39B2E5;}
 #header h1 {
-  font:bold 72px/1 'Asap', sans-serif; 
+  font: bold 72px/1 'Asap', sans-serif;
   float: right;
   letter-spacing:-3px;
 }
@@ -25,18 +28,13 @@ h3 {
   font: 18px/24px 'Asap', sans-serif;
   margin: 0 0 -12px;
 }
-pre {
-  background: #ddd;
+#content pre {
   font-size: 12px;
   padding: 10px;
-  margin: 20px 0;
-  display: block; 
+  margin: 30px 0;
+  display: block;
   border:1px solid #ccc;
   border-width: 0 1px 1px 0;
-}
-code {
-  white-space: pre;
-  background: #ddd
 }
 
 /* Header
@@ -248,6 +246,13 @@ section:first-child {margin-left: 0}
   margin: 0 0 10px;
   text-align: center;
 }
+#examples-header span {
+  color: #ccc;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+#examples-info { text-align: center; }
 #examples {
   margin:0;
   width: 100%;
