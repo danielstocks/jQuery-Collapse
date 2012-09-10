@@ -47,8 +47,7 @@ width="84px" height="20px"></iframe>
           <h2>Collapsible Content with JavaScript</h2>
           <p>This plugin provides you an accessible and lightweight solution to a widely adopted interface pattern known as <em>progressive disclosure.</em></p>
           <p>Read the <a href="http://github.com/danielstocks/jQuery-Collapse/blob/523c08f9747b42251e8a1fd84154ed0a2e1b979a/README.md">full documentation</a> for more info.</p>
-
-      <h3>Basic Usage</h3>
+          <h3>Basic Usage</h3>
 <pre><code class="language-markup">&lt;div id=&quot;demo&quot; data-collapse="accordion persist"&gt;
   &lt;h2&gt;Fruits&lt;/h2&gt;
   &lt;ul&gt;
@@ -64,20 +63,20 @@ width="84px" height="20px"></iframe>
   &lt;p>Just a paragraph here&lt;/p>
 &lt;/div&gt;
 </code></pre>
-<div id="demo" data-collapse="accordion persist">
-  <h2>Fruits</h2>
-  <ul>
-    <li>Apple</li>
-    <li>Pear</li>
-    <li>Orange</li>
-  </ul>
-  <h2>Saying</h2>
-  <div>
-    <p>One fruit a day keeps the doctor away</p>
-  </div>
-  <h2>Third</h2>
-  <p>Just a paragraph here</p>
-</div>
+          <div id="demo" data-collapse="accordion persist">
+            <h2>Fruits</h2>
+            <ul>
+              <li>Apple</li>
+              <li>Pear</li>
+              <li>Orange</li>
+            </ul>
+            <h2>Saying</h2>
+            <div>
+              <p>One fruit a day keeps the doctor away</p>
+            </div>
+            <h2>Third</h2>
+            <p>Just a paragraph here</p>
+          </div>
         </section>
         <section id="links">
           <div class="download">
@@ -170,10 +169,10 @@ width="84px" height="20px"></iframe>
       </div>
       <script>
         new jQueryCollapse($("#custom-show-hide-example"), {
-          show: function() {
+          open: function() {
             this.slideDown(150);
           },
-          hide: function() {
+          close: function() {
             this.slideUp(150);
           }
         });
@@ -212,11 +211,11 @@ width="84px" height="20px"></iframe>
         $("#css3-animated-example").collapse({
           accordion: true,
           persist: true,
-          show: function() {
+          open: function() {
             this.addClass("open");
             this.css({ height: this.children().outerHeight() });
           },
-          hide: function() {
+          close: function() {
             this.css({ height: "0px" });
             this.removeClass("open");
           }
