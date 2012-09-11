@@ -155,20 +155,18 @@ both values to the data-collapse attribute:
 
 jQuery Collapse uses HTML5 localStorage if available, otherwise it
 will attempt to use cookies (read about IE support below). If that also fails, it will degrade
-to work but without any persistence. Add cookie fallback support only if
-you need it:
+to work but without any persistence.
+
+### Internet Explorer =< 7 Support
+
+For IE 6-7 you'll need to include the cookie storage and JSON2 libraries 
+for the cookie storage support to work properly:
 
 ```html
-<script src="jquery.collapse_cookie_storage.js"></script>
-```
-
-### IE 6-7 Support
-
-For IE 6-7 you'll also need to add the JSON2.js library (found in
-the vendor directory) for the cookie storage to work properly:
-
-```html
-<script src="json2.js"></script>
+<!--[if lt IE 8]>
+  <script src="jquery.collapse_cookie_storage.js"></script>
+  <script src="json2.js"></script>
+ <![endif]-->
 ```
 
 ## API Documentation
