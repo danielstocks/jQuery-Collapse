@@ -1,0 +1,8 @@
+{
+  "name": "jQuery-Collapse",
+  "version": "1.0.beta",
+  "main": ["./src/jquery.collapse.js","./src/jquery.collapse_storage.js","./src/jquery.collapse_cookie_storage.js"],
+  "dependencies": {
+    "jquery": "~1.8.1"
+  }
+}
