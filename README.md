@@ -166,7 +166,7 @@ for the cookie storage support to work properly:
 <!--[if lt IE 8]>
   <script src="jquery.collapse_cookie_storage.js"></script>
   <script src="json2.js"></script>
- <![endif]-->
+<![endif]-->
 ```
 
 ## API Documentation
