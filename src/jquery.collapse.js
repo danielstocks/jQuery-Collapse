@@ -33,8 +33,11 @@
     _this.$el.find(query).each(function() {
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      _this.states[section._index()] || section.$summary.hasClass("open") ?
-        section.open(true) : section.close(true);
+      if (typeof _this.states[section._index()] !== "undefined") {
+        _this.states[section._index()] ? section.open(true) : section.close(true);
+      } else {
+        section.$summary.hasClass("open") ? section.open(true) : section.close(true);
+      }
     });
 
     // Capute ALL the clicks!
