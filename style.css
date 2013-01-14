@@ -7,7 +7,7 @@ body {
   padding: 20px;
   font: 14px/1.4 Georgia, serif; 
   color:#444;
-  background: url('back_pattern.png');
+  background: url('back_pattern.png') fixed;
 }
 strong {font-weight:bold;}
 em {font-style:italic;}
