@@ -52,10 +52,9 @@
     handleClick: function(e) {
       e.preventDefault();
       var sections = this.sections,
-        parent = $(e.target).parent(),
         l = sections.length;
       while(l--) {
-        if(sections[l].$summary.find("a").is(e.target)) {
+        if($.contains(sections[l].$summary[0], e.target)) {
           sections[l].toggle();
           break;
         }
