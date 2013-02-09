@@ -7,3 +7,4 @@ Guardfile
 Gemfile
 spec/*_spec.js
 TODO
+node_modules
