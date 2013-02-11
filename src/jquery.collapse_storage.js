@@ -9,7 +9,7 @@
  * Released under the MIT, BSD, and GPL Licenses.
  */
 
-!function($) {
+(function($) {
 
   var STORAGE_KEY = "jQuery-Collapse";
 
@@ -38,10 +38,10 @@
     },
     getDataObject: function() {
       var string = this.db.getItem(STORAGE_KEY);
-      return string ? JSON.parse(string) : {}
+      return string ? JSON.parse(string) : {};
     }
-  }
+  };
 
   jQueryCollapseStorage = Storage;
 
-}(jQuery);
+})(jQuery);
