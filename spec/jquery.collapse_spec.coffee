@@ -311,7 +311,7 @@ describe "jQuery Collapse", ->
     before ->
       ###:DOC+=<div class="test" id="test4">
         <h1>Section 1</h1> <div>hello 1</div>
-        <h2>Section 2</h2> <span>hello 2</span>
+        <h2 class="open">Section 2</h2> <span>hello 2</span>
         <h3>Section 3</h3> <div>hello 3</div>
       </div>###
 
@@ -334,4 +334,10 @@ describe "jQuery Collapse", ->
     it "should write to storage that the third item was closed", ->
       @jq.close(2)
       expect(@jq.db.write).toHaveBeenCalledWith(2,false)
+
+    it "should open the third section", ->
+      expect(@jq.sections[2].$summary.hasClass("open")).toBe true
+
+    it "should not open the second section", ->
+      expect(@jq.sections[1].$summary.hasClass("open")).toBe false
 

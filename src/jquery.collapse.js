@@ -33,7 +33,18 @@
     _this.$el.find(query).each(function() {
       var section = new Section($(this), _this);
       _this.sections.push(section);
-      if(_this.states[section._index()] || section.$summary.hasClass("open")) {
+
+      // Check current state of section
+      var state = _this.states[section._index()];
+      if(state === 0) {
+        section.$summary.removeClass("open");
+      }
+      if(state === 1) {
+        section.$summary.addClass("open");
+      }
+
+      // Show or hide accordingly
+      if(section.$summary.hasClass("open")) {
         section.open(true);
       }
       else {
