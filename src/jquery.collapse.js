@@ -22,7 +22,7 @@
       options : options,
       sections: [],
       isAccordion : options.accordion || false,
-      db : options.persist ? new jQueryCollapseStorage(el[0].id) : false
+      db : options.persist ? jQueryCollapseStorage(el[0].id) : false
     });
 
     // Figure out what sections are open if storage is used

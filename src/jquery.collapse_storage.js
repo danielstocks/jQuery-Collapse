@@ -14,11 +14,20 @@
   var STORAGE_KEY = "jQuery-Collapse";
 
   function Storage(id) {
+    var DB;
+    try {
+      DB = window.localStorage || $.fn.collapse.cookieStorage;
+    } catch(e) {
+      DB = false;
+    }
+    return DB ? new _Storage(id, DB) : false;
+  }
+  function _Storage(id, DB) {
     this.id = id;
-    this.db = window.localStorage || $.fn.collapse.cookieStorage;
+    this.db = DB;
     this.data = [];
   }
-  Storage.prototype = {
+  _Storage.prototype = {
     write: function(position, state) {
       var _this = this;
       _this.data[position] = state ? 1 : 0;

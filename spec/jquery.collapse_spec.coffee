@@ -315,7 +315,6 @@ describe "jQuery Collapse", ->
         <h3>Section 3</h3> <div>hello 3</div>
       </div>###
 
-      @stub(jQueryCollapseStorage.prototype, 'read').returns [0,0,1]
       @jq = new jQueryCollapse($("#test4"), {
         persist: true
       })
@@ -323,9 +322,6 @@ describe "jQuery Collapse", ->
 
     it "should instantiate a storage object", ->
       expect(@jq.db.id).toBe @jq.$el[0].id
-
-    it "should read from db and set states accordingly", ->
-      expect(@jq.states).toEqual [0,0,1]
 
     it "should write to storage that the third item was opened", ->
       @jq.open(2)
