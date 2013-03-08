@@ -54,7 +54,9 @@
 
     // Capute ALL the clicks!
     (function(scope) {
-      _this.$el.on("click", "[data-collapse-summary]",
+      var clickQuery = scope.options['clickQuery'] || "";
+
+      _this.$el.on("click", "[data-collapse-summary] " + clickQuery,
         $.proxy(_this.handleClick, scope));
     }(_this));
   }
@@ -87,11 +89,12 @@
 
   // Section constructor
   function Section($el, parent) {
+    var summaryElement = $el.attr("data-collapse-summary", "");
+    if(!parent.options['clickQuery']) summaryElement = summaryElement.wrapInner('<a href="#"/>');
+
     $.extend(this, {
       isOpen : false,
-      $summary : $el
-        .attr("data-collapse-summary", "")
-        .wrapInner('<a href="#"/>'),
+      $summary : summaryElement,
       $details : $el.next(),
       options: parent.options,
       parent: parent
