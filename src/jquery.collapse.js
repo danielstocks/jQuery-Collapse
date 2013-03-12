@@ -30,7 +30,7 @@
 
     // For every pair of elements in given
     // element, create a section
-    _this.$el.find(query).each(function() {
+    _this.$el.find(query).filter(':not([data-collapse-summary])').each(function() {
       var section = new Section($(this), _this);
       _this.sections.push(section);
 
