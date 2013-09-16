@@ -1,8 +1,0 @@
-{
-  "name": "jQuery-Collapse",
-  "version": "1.0.0",
-  "main": ["./src/jquery.collapse.js"],
-  "dependencies": {
-    "jquery": "~1.7"
-  }
-}

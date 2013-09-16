@@ -1,0 +1,15 @@
+{
+  "name": "jQuery-Collapse",
+  "version": "1.0.1",
+  "main": "src/jquery.collapse.js",
+  "dependencies": {
+    "jquery": "~1.7"
+  },
+  "ignore": [
+    "demo",
+    "spec",
+    "vendor",
+    "bower.json",
+    "README.md"
+  ]
+}
