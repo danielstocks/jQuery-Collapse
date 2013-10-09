@@ -160,5 +160,6 @@
   // Expose constructor to
   // global namespace
   jQueryCollapse = Collapse;
+  jQueryCollapseSection = Section;
 
 })(window.jQuery);
