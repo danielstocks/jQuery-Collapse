@@ -28,3 +28,20 @@ describe 'Collapse', ->
       it 'has no states', ->
         expect(@collapse.states).to.eql []
 
+    describe 'with options', ->
+
+      before ->
+        el = $(document.createElement('div'))
+        @stub = sinon.stub(window, "jQueryCollapseStorage")
+        @options =
+          query: "div h2"
+          accordion: true
+          persist: true
+        @collapse = new jQueryCollapse el, @options
+
+      it 'is an accordion', ->
+        expect(@collapse.isAccordion).to.eq @options.accordion
+
+      it 'is persistant', ->
+        expect(@stub.calledOnce).to.be.ok
+

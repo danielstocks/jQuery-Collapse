@@ -110,7 +110,7 @@
       var _this = this;
       if(_this.options.accordion && !bypass) {
         $.each(_this.parent.sections, function() {
-          this.close();
+      his.close();
         });
       }
       _this._changeState("open", bypass);
