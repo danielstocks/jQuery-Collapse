@@ -63,7 +63,42 @@ describe 'Collapse', ->
         expect(@sectionStub.calledTwice).to.be.ok
 
       it 'captures ALL the clicks', ->
-        expect(@el.on.calledWith("click", "[data-collapse-summary]")).to.be.ok
+        expect(@el.on.calledWith('click', '[data-collapse-summary]')).to.be.ok
 
+  describe 'open method', ->
 
+    beforeEach ->
+      @el = $(document.createElement('div'))
+      @collapse = new jQueryCollapse @el
+      @collapse.sections = [
+        {open: sinon.spy()}
+        {open: sinon.spy()}
+      ]
 
+    it 'opens given section', ->
+      @collapse.open(1)
+      expect(@collapse.sections[1].open.calledOnce).to.be.ok
+
+    it 'opens all the sections', ->
+      @collapse.open()
+      expect(@collapse.sections[0].open.calledOnce).to.be.ok
+      expect(@collapse.sections[1].open.calledOnce).to.be.ok
+
+  describe 'close method', ->
+
+    beforeEach ->
+      @el = $(document.createElement('div'))
+      @collapse = new jQueryCollapse @el
+      @collapse.sections = [
+        {close: sinon.spy()}
+        {close: sinon.spy()}
+      ]
+
+    it 'closes given section', ->
+      @collapse.close(1)
+      expect(@collapse.sections[1].close.calledOnce).to.be.ok
+
+    it 'closes all the sections', ->
+      @collapse.close()
+      expect(@collapse.sections[0].close.calledOnce).to.be.ok
+      expect(@collapse.sections[1].close.calledOnce).to.be.ok

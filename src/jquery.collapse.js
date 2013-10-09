@@ -55,11 +55,15 @@
     },
     open : function(eq) {
       if(isFinite(eq)) return this.sections[eq].open();
-      $.each(this.sections, this.open)
+      $.each(this.sections, function(i, section) {
+        section.open();
+      })
     },
     close: function(eq) {
       if(isFinite(eq)) return this.sections[eq].close();
-      $.each(this.sections, this.close)
+      $.each(this.sections, function(i, section) {
+        section.close();
+      })
     }
   };
 
