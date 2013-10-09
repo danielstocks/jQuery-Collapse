@@ -22,7 +22,7 @@
       options : options,
       sections: [],
       isAccordion : options.accordion || false,
-      db : options.persist ? jQueryCollapseStorage(el[0].id) : false
+      db : options.persist ? jQueryCollapseStorage(el.get(0).id) : false
     });
 
     // Figure out what sections are open if storage is used
@@ -31,7 +31,7 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-      new Section($(this), _this);
+      new jQueryCollapseSection($(this), _this);
     });
 
     // Capute ALL the clicks!
