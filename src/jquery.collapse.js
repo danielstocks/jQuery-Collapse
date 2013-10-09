@@ -147,7 +147,7 @@
         $.each(values.split(" "), function(i,v) {
           if(v) settings[v] = true;
         });
-        new jQueryCollapse($(this), settings);
+        new Collapse($(this), settings);
       });
     }
   });
