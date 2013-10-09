@@ -22,3 +22,9 @@ describe 'Collapse', ->
       it 'is not an accordion', ->
         expect(@collapse.isAccordion).to.eq false
 
+      it 'is not persistant', ->
+        expect(@collapse.db).to.eq false
+
+      it 'has no states', ->
+        expect(@collapse.states).to.eql []
+
