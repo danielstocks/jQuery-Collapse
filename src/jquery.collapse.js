@@ -31,7 +31,25 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-      _this.sections.push(new Section($(this), _this));
+      var section = new Section($(this), _this);
+      _this.sections.push(section);
+
+      // Check current state of section
+      var state = _this.states[section._index()];
+      if(state === 0) {
+        section.$summary.removeClass("open");
+      }
+      if(state === 1) {
+        section.$summary.addClass("open");
+      }
+
+      // Show or hide accordingly
+      if(section.$summary.hasClass("open")) {
+        section.open(true);
+      }
+      else {
+        section.close(true);
+      }
     });
 
     // Capute ALL the clicks!
@@ -69,8 +87,7 @@
 
   // Section constructor
   function Section($el, parent) {
-    var _this = this;
-    $.extend(_this, {
+    $.extend(this, {
       isOpen : false,
       $summary : $el
         .attr("data-collapse-summary", "")
@@ -79,18 +96,6 @@
       options: parent.options,
       parent: parent
     });
-
-    // Check current state of section
-    var state = parent.states[_this._index()];
-
-    if(state === 0) {
-      _this.$summary.removeClass("open");
-    }
-    if(state === 1) {
-      _this.$summary.addClass("open");
-    }
-
-    _this.$summary.hasClass("open") ? _this.open(true) : _this.close(true);
   }
 
   Section.prototype = {
