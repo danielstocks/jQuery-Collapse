@@ -31,25 +31,7 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-      var section = new Section($(this), _this);
-      _this.sections.push(section);
-
-      // Check current state of section
-      var state = _this.states[section._index()];
-      if(state === 0) {
-        section.$summary.removeClass("open");
-      }
-      if(state === 1) {
-        section.$summary.addClass("open");
-      }
-
-      // Show or hide accordingly
-      if(section.$summary.hasClass("open")) {
-        section.open(true);
-      }
-      else {
-        section.close(true);
-      }
+      new Section($(this), _this);
     });
 
     // Capute ALL the clicks!
@@ -96,6 +78,24 @@
       options: parent.options,
       parent: parent
     });
+    parent.sections.push(this);
+
+    // Check current state of section
+    var state = parent.states[this._index()];
+    if(state === 0) {
+      this.$summary.removeClass("open");
+    }
+    if(state === 1) {
+      this.$summary.addClass("open");
+    }
+
+    // Show or hide accordingly
+    if(this.$summary.hasClass("open")) {
+      this.open(true);
+    }
+    else {
+      this.close(true);
+    }
   }
 
   Section.prototype = {
