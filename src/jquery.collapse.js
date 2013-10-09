@@ -55,15 +55,11 @@
     },
     open : function(eq) {
       if(isFinite(eq)) return this.sections[eq].open();
-      $.each(this.sections, function() {
-        this.open();
-      });
+      $.each(this.sections, this.open)
     },
     close: function(eq) {
       if(isFinite(eq)) return this.sections[eq].close();
-      $.each(this.sections, function() {
-        this.close();
-      });
+      $.each(this.sections, this.close)
     }
   };
 
@@ -109,9 +105,7 @@
     open: function(bypass) {
       var _this = this;
       if(_this.options.accordion && !bypass) {
-        $.each(_this.parent.sections, function() {
-      his.close();
-        });
+        $.each(_this.parent.sections, this.close);
       }
       _this._changeState("open", bypass);
     },
