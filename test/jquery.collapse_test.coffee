@@ -65,6 +65,27 @@ describe 'Collapse', ->
       it 'captures ALL the clicks', ->
         expect(@el.on.calledWith('click', '[data-collapse-summary]')).to.be.ok
 
+  describe 'handleClick method', ->
+
+    beforeEach ->
+
+      summary = $("<div>")
+      @collapse = new jQueryCollapse($(document.createElement('div')))
+      @collapse.sections = [
+        {toggle: sinon.spy(), $summary: $('<div>').append(summary)}
+      ]
+      @e =
+        target : summary.get(0)
+        preventDefault: sinon.spy()
+      @collapse.handleClick(@e)
+
+    it 'prevents default event behaviour', ->
+      expect(@e.preventDefault.calledOnce).to.be.ok
+
+    it 'toggles section if a summary was clicked', ->
+      expect(@collapse.sections[0].toggle.calledOnce).to.be.ok
+
+
   describe 'open method', ->
 
     beforeEach ->
