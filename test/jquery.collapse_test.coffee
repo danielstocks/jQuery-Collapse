@@ -65,6 +65,7 @@ describe 'Collapse', ->
       it 'captures ALL the clicks', ->
         expect(@el.on.calledWith('click', '[data-collapse-summary]')).to.be.ok
 
+
   describe 'handleClick method', ->
 
     beforeEach ->
@@ -123,3 +124,25 @@ describe 'Collapse', ->
       @collapse.close()
       expect(@collapse.sections[0].close.calledOnce).to.be.ok
       expect(@collapse.sections[1].close.calledOnce).to.be.ok
+
+describe 'Section', ->
+
+  describe 'constructor', ->
+
+    describe 'defaults', ->
+
+      it 'is not open'
+      it 'sets summary attribute on el'
+      it 'injects a link inside el'
+      it 'finds and sets details'
+      it 'applies a parent'
+      it 'applies parent options'
+      it 'pushes to parent sections'
+
+    describe 'open section',->
+      it 'applies an open CSS class'
+      it 'opens with a bypass'
+
+    describe 'closed section', ->
+      it 'applies a closed CSS class'
+      it 'closes with a bypass'
