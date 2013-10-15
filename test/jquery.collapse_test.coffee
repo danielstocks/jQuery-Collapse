@@ -50,6 +50,10 @@ describe 'Collapse', ->
           persist: true
         @collapse = new jQueryCollapse @el, @options
 
+      after ->
+        jQueryCollapseSection.restore()
+        jQueryCollapseStorage.restore()
+
       it 'is an accordion', ->
         expect(@collapse.isAccordion).to.eq @options.accordion
 
@@ -129,20 +133,76 @@ describe 'Section', ->
 
   describe 'constructor', ->
 
+    before ->
+      @summary = $("<div>").addClass("summary")
+      @details = $("<div>").addClass("details")
+      @rootEl = $("<div>").append(@summary, @details)
+
+      @parent =
+        sections : []
+        states: [0,1,0]
+        options: {}
+        $el: @rootEl
+
+      @section = new jQueryCollapseSection(@summary, @parent)
+
     describe 'defaults', ->
 
-      it 'is not open'
-      it 'sets summary attribute on el'
-      it 'injects a link inside el'
-      it 'finds and sets details'
-      it 'applies a parent'
-      it 'applies parent options'
-      it 'pushes to parent sections'
+      it 'is not open', ->
+        expect(@section.isOpen).to.eql false
 
-    describe 'open section',->
-      it 'applies an open CSS class'
-      it 'opens with a bypass'
+      it 'sets a summary', ->
+        expect(@section.$summary.is(@summary)).to.eql true
+
+      it 'sets a data-collapse summary attribute on summry', ->
+        expect(@section.$summary.data()).to.eql { collapseSummary: '' }
+
+      it 'injects a link inside el', ->
+        expect(@section.$summary.find("a").length).to.eql 1
+
+      it 'finds and sets details', ->
+        expect(@section.$details.get(0)).to.eql @details.get(0)
+
+      it 'applies a parent', ->
+        expect(@section.parent).to.eql @parent
+
+      it 'applies parent options', ->
+        expect(@section.options).to.eql @parent.options
+
+      it 'pushes to parent sections', ->
+        expect(@parent.sections[0]).to.eql @section
+
+    describe 'open section', ->
+
+      before ->
+        sinon.stub(jQueryCollapseSection.prototype, '_index').returns(1)
+        @open = sinon.stub(jQueryCollapseSection.prototype, 'open')
+        @section = new jQueryCollapseSection(@summary, @parent)
+
+      after ->
+        jQueryCollapseSection.prototype._index.restore()
+        jQueryCollapseSection.prototype.open.restore()
+
+      it 'applies an open CSS class to summary', ->
+        expect(@section.$summary.is(".open")).to.be.ok
+
+      it 'opens with a bypass', ->
+        expect(@open.calledWith(true)).to.be.ok
 
     describe 'closed section', ->
-      it 'applies a closed CSS class'
-      it 'closes with a bypass'
+
+      before ->
+        sinon.stub(jQueryCollapseSection.prototype, '_index').returns(0)
+        @close = sinon.stub(jQueryCollapseSection.prototype, 'close')
+        @section = new jQueryCollapseSection(@summary, @parent)
+
+      after ->
+        jQueryCollapseSection.prototype._index.restore()
+        jQueryCollapseSection.prototype.close.restore()
+
+      it 'applies a closed CSS class', ->
+        expect(@section.$summary.not(".open")).to.be.ok
+
+      it 'closes with a bypass', ->
+        expect(@close.calledWith(true)).to.be.ok
+
