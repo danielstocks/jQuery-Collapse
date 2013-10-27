@@ -83,14 +83,13 @@
     // Check current state of section
     var state = parent.states[this._index()];
     if(state === 0) {
-      this.$summary.removeClass("open");
+      this.$summary.removeClass("collapsed");
     }
     if(state === 1) {
-      this.$summary.addClass("open");
+      this.$summary.addClass("collapsed");
     }
 
-    // Show or hide accordingly
-    if(this.$summary.hasClass("open")) {
+    if(this.$summary.hasClass("collapsed")) {
       this.open(true);
     }
     else {
@@ -100,16 +99,18 @@
 
   Section.prototype = {
     toggle : function() {
-      if(this.isOpen) this.close();
-      else this.open();
+      this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
+      console.log(bypass);
       this._changeState("close", bypass);
     },
     open: function(bypass) {
       var _this = this;
       if(_this.options.accordion && !bypass) {
-        $.each(_this.parent.sections, this.close);
+        $.each(_this.parent.sections, function(i, section) {
+          section.close()
+        });
       }
       _this._changeState("open", bypass);
     },
@@ -123,10 +124,10 @@
       if($.isFunction(_this.options[state]) && !bypass) {
         _this.options[state].apply(_this.$details);
       } else {
-        if(_this.isOpen) _this.$details.show();
-        else _this.$details.hide();
+        _this.$details[_this.isOpen ? "show" : "hide"]();
       }
-      _this.$summary.removeClass("open close").addClass(state);
+
+      _this.$summary.toggleClass("collapsed", state != "close")
       _this.$details.attr("aria-hidden", state == "close");
       _this.parent.$el.trigger(state, _this);
       if(_this.parent.db) {

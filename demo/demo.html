@@ -109,12 +109,12 @@
         $("#css3-animated-example").collapse({
           accordion: true,
           open: function() {
-            this.addClass("open");
+            this.addClass("collapsed");
             this.css({ height: this.children().outerHeight() });
           },
           close: function() {
             this.css({ height: "0px" });
-            this.removeClass("open");
+            this.removeClass("collapsed");
           }
         });
       </script>
@@ -192,7 +192,7 @@
 
       <h2>Open section by default</h2>
       <div id="open-by-default-example" data-collapse>
-        <h3 class="open">I'm open by default</h3>
+        <h3 class="collapsed">I'm open by default</h3>
         <div>Yay</div>
         <h3>I'm not open</h3>
         <div>booo :(</div>
