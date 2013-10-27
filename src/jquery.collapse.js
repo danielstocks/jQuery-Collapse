@@ -22,7 +22,7 @@
       options : options,
       sections: [],
       isAccordion : options.accordion || false,
-      db : options.persist ? jQueryCollapseStorage(el[0].id) : false
+      db : options.persist ? jQueryCollapseStorage(el.get(0).id) : false
     });
 
     // Figure out what sections are open if storage is used
@@ -31,25 +31,7 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-      var section = new Section($(this), _this);
-      _this.sections.push(section);
-
-      // Check current state of section
-      var state = _this.states[section._index()];
-      if(state === 0) {
-        section.$summary.removeClass("open");
-      }
-      if(state === 1) {
-        section.$summary.addClass("open");
-      }
-
-      // Show or hide accordingly
-      if(section.$summary.hasClass("open")) {
-        section.open(true);
-      }
-      else {
-        section.close(true);
-      }
+      new jQueryCollapseSection($(this), _this);
     });
 
     // Capute ALL the clicks!
@@ -73,15 +55,15 @@
     },
     open : function(eq) {
       if(isFinite(eq)) return this.sections[eq].open();
-      $.each(this.sections, function() {
-        this.open();
-      });
+      $.each(this.sections, function(i, section) {
+        section.open();
+      })
     },
     close: function(eq) {
       if(isFinite(eq)) return this.sections[eq].close();
-      $.each(this.sections, function() {
-        this.close();
-      });
+      $.each(this.sections, function(i, section) {
+        section.close();
+      })
     }
   };
 
@@ -96,6 +78,24 @@
       options: parent.options,
       parent: parent
     });
+    parent.sections.push(this);
+
+    // Check current state of section
+    var state = parent.states[this._index()];
+    if(state === 0) {
+      this.$summary.removeClass("open");
+    }
+    if(state === 1) {
+      this.$summary.addClass("open");
+    }
+
+    // Show or hide accordingly
+    if(this.$summary.hasClass("open")) {
+      this.open(true);
+    }
+    else {
+      this.close(true);
+    }
   }
 
   Section.prototype = {
@@ -109,9 +109,7 @@
     open: function(bypass) {
       var _this = this;
       if(_this.options.accordion && !bypass) {
-        $.each(_this.parent.sections, function() {
-          this.close();
-        });
+        $.each(_this.parent.sections, this.close);
       }
       _this._changeState("open", bypass);
     },
@@ -160,5 +158,6 @@
   // Expose constructor to
   // global namespace
   jQueryCollapse = Collapse;
+  jQueryCollapseSection = Section;
 
 })(window.jQuery);

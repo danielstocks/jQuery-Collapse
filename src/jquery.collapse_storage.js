@@ -37,15 +37,15 @@
           _this.data[i] = 0;
         }
       });
-      var obj = this.getDataObject();
+      var obj = this._getDataObject();
       obj[this.id] = this.data;
       this.db.setItem(STORAGE_KEY, JSON.stringify(obj));
     },
     read: function() {
-      var obj = this.getDataObject();
+      var obj = this._getDataObject();
       return obj[this.id] || [];
     },
-    getDataObject: function() {
+    _getDataObject: function() {
       var string = this.db.getItem(STORAGE_KEY);
       return string ? JSON.parse(string) : {};
     }

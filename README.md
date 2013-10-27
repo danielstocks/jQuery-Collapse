@@ -246,16 +246,17 @@ demo.close(0); // Close first section
 Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
 
 * Find a bug, or invent a feature.
-* Write a test case (located in ./spec/*_spec.coffee)
+* Write a test case
 * Watch it fail (red light)
 * Fix bug / introduce feature
 * Watch it pass (green light)
 * Refactor / Perfectionize!
-* Do a pull request on Github
-* Wait patiently...
+* Do a pull request on Github and wait patiently...
 * Rejoice!
 
-Tests are written in CoffeeScript with a BDD flavour using the [Buster.js](http://busterjs.org/) test framework.
+Tests are written in CoffeeScript with a BDD flavour using mocha and the chai exception framework.
+
+Testa are run with the karma test runner. To run the tests simply type 'karma start' from the project root.
 
 Thanks in advance
 
