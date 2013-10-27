@@ -102,7 +102,6 @@
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
-      console.log(bypass);
       this._changeState("close", bypass);
     },
     open: function(bypass) {
