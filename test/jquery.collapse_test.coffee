@@ -183,9 +183,6 @@ describe 'Section', ->
         jQueryCollapseSection.prototype._index.restore()
         jQueryCollapseSection.prototype.open.restore()
 
-      it 'applies an open CSS class to summary', ->
-        expect(@section.$summary.is(".collapsed")).to.be.ok
-
       it 'opens with a bypass', ->
         expect(@open.calledWith(true)).to.be.ok
 
@@ -199,9 +196,6 @@ describe 'Section', ->
       after ->
         jQueryCollapseSection.prototype._index.restore()
         jQueryCollapseSection.prototype.close.restore()
-
-      it 'applies a closed CSS class', ->
-        expect(@section.$summary.not(".collapsed")).to.be.ok
 
       it 'closes with a bypass', ->
         expect(@close.calledWith(true)).to.be.ok

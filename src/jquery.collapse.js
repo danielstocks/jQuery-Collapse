@@ -82,18 +82,12 @@
 
     // Check current state of section
     var state = parent.states[this._index()];
-    if(state === 0) {
-      this.$summary.removeClass("collapsed");
-    }
-    if(state === 1) {
-      this.$summary.addClass("collapsed");
-    }
 
-    if(this.$summary.hasClass("collapsed")) {
-      this.open(true);
+    if(state === 0) {
+      this.close(true)
     }
-    else {
-      this.close(true);
+    else if(this.$summary.is(".collapsed") || state === 1) {
+      this.open(true);
     }
   }
 
