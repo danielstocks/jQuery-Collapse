@@ -63,6 +63,17 @@ achieve this by adding an 'collapsed' class to the section heading
 </div>
 ```
 
+### Open all sections
+
+If you want, you can open all section programtically, by initializing the plugin with JavaScript (see below) and calling the open method. Here's en example using a button
+
+```js
+var demo = new jQueryCollapse($("#demo")); // Initializing plugin
+demo.open(); // Open all sections
+```
+
+For more information, refer to the *events* chapter of this documentation.
+
 ## JavaScript usage
 
 If you'd rather omit the 'data-collapse' attribute in the HTML and load the plugin via jQuery, you can:
