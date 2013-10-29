@@ -13,7 +13,7 @@ Enjoy!
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
 - Lightweight (~1.2kb minified and gzipped)
 - Cross Browser compliant (Tested in >= IE6, Firefox, Safari, Chrome, Opera)
-- **Accordion** behaviour can be enabled. 
+- **Accordion** behaviour can be enabled.
 - **Persistence** to remember open sections on page reload!
 
 
@@ -48,11 +48,11 @@ Here's some sample HTML markup:
 </div>
 ```
 
-That's it! The *data-collapse* attribute will automatically trigger the script. 
+That's it! The *data-collapse* attribute will automatically trigger the script.
 
-### Open/Collapse section by default 
+### Open/Collapse section by default
 
-The standard behaviour is to collapse all the sections on page load. 
+The standard behaviour is to collapse all the sections on page load.
 If you want to show a section to the user on page load you can
 achieve this by adding an 'collapsed' class to the section heading
 
@@ -135,8 +135,7 @@ To activate the accordion behaviour set 'accordion' as the value of the 'data-co
 
 ## Persistence
 
-
-By default, if the user reloads the page all the sections will be closed. 
+By default, if the user reloads the page all the sections will be closed.
 If you want previously collapsed sections to stay open you can add 'persist' to the data-collapse attribute:
 
 ```html
@@ -169,7 +168,7 @@ to work but without any persistence.
 
 ### Internet Explorer =< 7 Support
 
-For IE 6-7 you'll need to include the cookie storage and JSON2 libraries 
+For IE 6-7 you'll need to include the cookie storage and JSON2 libraries
 for the cookie storage support to work properly:
 
 ```html
@@ -203,7 +202,7 @@ Example usage of options:
 $("#demo").collapse({
   open: function() {
     // The context of 'this' is applied to
-    // the collapsed details in a jQuery wrapper 
+    // the collapsed details in a jQuery wrapper
     this.slideDown(100);
   },
   close: function() {
