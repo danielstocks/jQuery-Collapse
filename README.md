@@ -65,7 +65,7 @@ achieve this by adding an 'collapsed' class to the section heading
 
 ### Open all sections
 
-If you want, you can open all section programtically, by initializing the plugin with JavaScript (see below) and calling the open method. Here's en example using a button
+If you want, you can open all sections programmatically, by initializing the plugin with JavaScript (see below) and calling the open method. Here's en example using a button
 
 ```js
 var demo = new jQueryCollapse($("#demo")); // Initializing plugin
