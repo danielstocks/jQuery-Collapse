@@ -34,7 +34,7 @@ Load jQuery and the jQuery Collapse plugin into your document:
 Here's some sample HTML markup:
 
 ```html
-<div id="demo" data-collapse>
+<div data-collapse>
   <h2>Fruits</h2>
   <ul>
     <li>Apple</li>
@@ -57,7 +57,7 @@ If you want to show a section to the user on page load you can
 achieve this by adding an 'collapsed' class to the section heading
 
 ```html
-<div id="demo" data-collapse>
+<div data-collapse>
   <h2 class="collapsed">I'm open by default</h2>
   <p>Yay</p>
 </div>
@@ -127,7 +127,7 @@ new jQueryCollapse($("#demo"), {
 To activate the accordion behaviour set 'accordion' as the value of the 'data-collapse' attribute:
 
 ```html
-<div id="demo" data-collapse="accordion">
+<div data-collapse="accordion">
   ...
 </div>
 ```
@@ -150,7 +150,7 @@ scripts.
 <script src="jquery.collapse_storage.js"></script>
 ```
 
-Please note: the target element will need an ID in order for the
+As in the example above, the target element (#demo) **will require an ID** in order for the
 persistence to work.
 
 You can combine the accordion and persistence options by adding
