@@ -167,7 +167,7 @@
 
 
       <!-- BEGIN Events -->
-      <h2>Binding events</h2>
+      <h2>Binding & Triggering events</h2>
       <pre id="event-log">event log</pre>
       <div class="example" id="events-example">
         <h3>Section 1</h3>
@@ -189,6 +189,33 @@
           external stylesheet toggle the collapsed state.</p>
         </div>
       </div>
+      <button id="btn-open-all">Open all</button>
+      <button id="btn-close-first">Close first</button>
+      <button id="btn-toggle-last">Toggle last</button>
+      <script>
+        var el = $("#events-example"),
+          log = $("#event-log");
+
+        el.collapse();
+        el.bind("opened", function(e, section) {
+          log.html("'" + section.$summary.text() + "' was opened");
+        })
+        .bind("closed", function(e, section) {
+          log.html("'" + section.$summary.text() + "' was closed");
+        });
+
+        $("#btn-open-all").click(function() {
+          $("#events-example").trigger("open")
+        })
+        $("#btn-close-first").click(function() {
+            console.log("hwat what");
+          $("#events-example h3 a").first().trigger("close")
+        })
+        $("#btn-toggle-last").click(function() {
+          $("#events-example h3 a").last().trigger("toggle")
+        })
+      </script>
+      <br><br>
 
       <h2>Open section by default</h2>
       <div id="open-by-default-example" data-collapse>
@@ -197,19 +224,6 @@
         <h3>I'm not open</h3>
         <div>booo :(</div>
       </div>
-
-      <script>
-        var el = $("#events-example"),
-          log = $("#event-log");
-
-        el.collapse()
-          .bind("open", function(e, section) {
-            log.html("'" + section.$summary.text() + "' was opened");
-          })
-          .bind("close", function(e, section) {
-            log.html("'" + section.$summary.text() + "' was closed");
-          });
-      </script>
       <!-- END Events -->
 
       <h2>Nested markup example</h2>
