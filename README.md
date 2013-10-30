@@ -80,7 +80,7 @@ You can now trigger events on the elements you want to affect. For instance:
 ```js
 $("#test").trigger("open") // Open all sections
 $("#test").trigger("close") // Close all sections
-$("#test h2").first().trigger("open") // Open first section
+$("#test h2 a").first().trigger("open") // Open first section
 ```
 
 For further information, please refer to the [events](#links) documentation.
