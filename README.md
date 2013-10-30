@@ -266,7 +266,7 @@ demo.close(); // Close all sections
 demo.open(0); // Open first section
 demo.open(1); // Open second section
 demo.close(0); // Close first section
-demo.toggle(1); / Toggle second section
+demo.toggle(1); // Toggle second section
 ```
 
 ## Contributing
@@ -282,9 +282,7 @@ Did you find a bug? Do you want to introduce a feature? Here's what to do (in th
 * Do a pull request on Github and wait patiently...
 * Rejoice!
 
-Tests are written in CoffeeScript with a BDD flavour using mocha and the chai exception framework.
-
-Testa are run with the karma test runner. To run the tests simply type 'karma start' from the project root.
+Tests are written in CoffeeScript with a BDD flavour using mocha and the chai exception framework. They are run with the karma test runner. To run the tests simply type 'karma start' from the project root (you may have to npm install first).
 
 Thanks in advance
 
