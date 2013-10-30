@@ -35,6 +35,7 @@ describe 'Collapse', ->
           find : sinon.stub().returns($("<div>").add("<div>"))
           get : sinon.stub().returns(true)
           on : sinon.stub().returns(true)
+          bind : sinon.stub().returns(true)
 
         @sectionStub = sinon.stub(window, 'jQueryCollapseSection')
 

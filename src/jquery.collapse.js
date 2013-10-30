@@ -38,22 +38,31 @@
     (function(scope) {
       _this.$el.on("click", "[data-collapse-summary]",
         $.proxy(_this.handleClick, scope));
+
+      _this.$el.bind("toggle close open",
+        $.proxy(_this.handleEvent, scope));
+
     }(_this));
   }
 
   Collapse.prototype = {
-    handleClick: function(e) {
+    handleClick: function(e, state) {
+      var state = state || "toggle"
       e.preventDefault();
       var sections = this.sections,
         l = sections.length;
       while(l--) {
         if($.contains(sections[l].$summary[0], e.target)) {
-          sections[l].toggle();
+          sections[l][state]();
           break;
         }
       }
     },
-    open : function(eq) {
+    handleEvent: function(e) {
+      if(e.target == this.$el.get(0)) return this[e.type]();
+      this.handleClick(e, e.type);
+    },
+    open: function(eq) {
       if(isFinite(eq)) return this.sections[eq].open();
       $.each(this.sections, function(i, section) {
         section.open();
@@ -63,6 +72,12 @@
       if(isFinite(eq)) return this.sections[eq].close();
       $.each(this.sections, function(i, section) {
         section.close();
+      })
+    },
+    toggle: function(eq) {
+      if(isFinite(eq)) return this.sections[eq].toggle();
+      $.each(this.sections, function(i, section) {
+        section.toggle();
       })
     }
   };
@@ -122,7 +137,7 @@
 
       _this.$summary.toggleClass("collapsed", state != "close")
       _this.$details.attr("aria-hidden", state == "close");
-      _this.parent.$el.trigger(state, _this);
+      _this.$summary.trigger(state == "open" ? "opened" : "closed", _this);
       if(_this.parent.db) {
         _this.parent.db.write(_this._index(), _this.isOpen);
       }
