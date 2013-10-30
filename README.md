@@ -257,7 +257,7 @@ $("#demo").last().trigger("toggle") // toggle last section
 ### API methods
 
 If you're using vanilla JavaScript to instantiate the plugin, you'll get
-access to the **open**, **close*, and **toggle** methods.
+access to the **open**, **close**, and **toggle** methods.
 
 ```js
 var demo = new jQueryCollapse($("#demo")); // Initializing plugin
