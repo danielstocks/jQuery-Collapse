@@ -228,36 +228,35 @@ $("#demo").collapse({
 
 #### Binding events
 
-You can listen for the **open**, **close** and **toggle** events on a collapsed collection.
+You can listen for the **opened** and **closed** events on a collapsed collection.
 
 ```js
 
-$("#demo").bind("open", function(e, section) {
-  console.log(section, " is open");
+$("#demo").bind("opened", function(e, section) {
+  console.log(section, " was opened");
 });
 
-$("#demo").bind("close", function(e, section) {
-  console.log(section, " is closed");
-});
-
-// Or just listen on a specific section
-$("#demo h2").first().bind("close", function(e) {
-  console.log("First section was opened");
+$("#demo").bind("closed", function(e, section) {
+  console.log(section, " was closed");
 });
 ```
 
-You can also trigger these events manually to open and close sections as you wish
+#### Triggering events
+
+You can manually trigger an **open**, **close** or **toggle** event to change the state of a section:
 
 ```js
 $("#demo").trigger("open") // open all sections
 $("#demo").trigger("close") // close all sections
-$("#demo").last().trigger("toggle") // toggle last section
+$("#demo h2 a").last().trigger("toggle") // toggle last section
 ```
+
+When a section changes state, it will trigger either an "opened" or "closed" event in return, depending on it's new state.
 
 ### API methods
 
 If you're using vanilla JavaScript to instantiate the plugin, you'll get
-access to the **open**, **close**, and **toggle** methods.
+direct access to the **open**, **close** and **toggle** methods.
 
 ```js
 var demo = new jQueryCollapse($("#demo")); // Initializing plugin
