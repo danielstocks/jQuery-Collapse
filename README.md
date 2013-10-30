@@ -65,14 +65,25 @@ achieve this by adding an 'collapsed' class to the section heading
 
 ### Open all sections
 
-If you want, you can open all sections programmatically, by initializing the plugin with JavaScript (see below) and calling the *open* method.
+You can open or close sections by utilizing events. Assume you have the following markup:
+
+```html
+<div id="test" data-collapse>
+  <h2>Section 1</h2>
+  <p>I'm first</p>
+  <h2>Section 2</h2>
+  <p>I'm second/p>
+</div>
+```
+You can now trigger events on the elements you want to affect. For instance:
 
 ```js
-var demo = new jQueryCollapse($("#demo")); // Initializing plugin
-demo.open(); // Open all sections
+$("#test").trigger("open") // Open all sections
+$("#test").trigger("close") // Close all sections
+$("#test h2").first().trigger("open") // Open first section
 ```
 
-For more information, refer to the *events* chapter of this documentation.
+For further information, please refer to the [events](#links) documentation.
 
 ## JavaScript usage
 
@@ -217,11 +228,9 @@ $("#demo").collapse({
 
 #### Binding events
 
-You can bind your own callbacks to the open and close events for a
-section.
+You can listen for the **open**, **close** and **toggle** events on a collapsed collection.
 
 ```js
-$("#demo").collapse(); // Initializing plugin
 
 $("#demo").bind("open", function(e, section) {
   console.log(section, " is open");
@@ -230,23 +239,35 @@ $("#demo").bind("open", function(e, section) {
 $("#demo").bind("close", function(e, section) {
   console.log(section, " is closed");
 });
+
+// Or just listen on a specific section
+$("#demo h2").first().bind("close", function(e) {
+  console.log("First section was opened");
+});
+```
+
+You can also trigger these events manually to open and close sections as you wish
+
+```js
+$("#demo").trigger("open") // open all sections
+$("#demo").trigger("close") // close all sections
+$("#demo").last().trigger("toggle") // toggle last section
 ```
 
 ### API methods
 
 If you're using vanilla JavaScript to instantiate the plugin, you'll get
-access to the *open* and *close* methods.
+access to the **open**, **close*, and **toggle** methods.
 
 ```js
-
 var demo = new jQueryCollapse($("#demo")); // Initializing plugin
 demo.open(); // Open all sections
 demo.close(); // Close all sections
 demo.open(0); // Open first section
 demo.open(1); // Open second section
 demo.close(0); // Close first section
+demo.toggle(1); / Toggle second section
 ```
-
 
 ## Contributing
 
