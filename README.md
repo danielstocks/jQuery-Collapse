@@ -83,7 +83,7 @@ $("#test").trigger("close") // Close all sections
 $("#test h2 a").first().trigger("open") // Open first section
 ```
 
-For further information, please refer to the [events](#links) documentation.
+For further information, please refer to the [events](#events) documentation.
 
 ## JavaScript usage
 
