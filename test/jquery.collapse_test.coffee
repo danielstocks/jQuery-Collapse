@@ -173,7 +173,7 @@ describe 'Section', ->
       it 'pushes to parent sections', ->
         expect(@parent.sections[0]).to.eql @section
 
-    describe 'open section', ->
+    describe 'state is 1', ->
 
       before ->
         sinon.stub(jQueryCollapseSection.prototype, '_index').returns(1)
@@ -187,7 +187,7 @@ describe 'Section', ->
       it 'opens with a bypass', ->
         expect(@open.calledWith(true)).to.be.ok
 
-    describe 'closed section', ->
+    describe 'state is 0', ->
 
       before ->
         sinon.stub(jQueryCollapseSection.prototype, '_index').returns(0)
@@ -201,3 +201,16 @@ describe 'Section', ->
       it 'closes with a bypass', ->
         expect(@close.calledWith(true)).to.be.ok
 
+    describe 'section summary has .open class', ->
+
+      before ->
+        sinon.stub($.fn, 'is').withArgs('.open').returns(true)
+        @open = sinon.stub(jQueryCollapseSection.prototype, 'open')
+        new jQueryCollapseSection(@summary, @parent)
+
+      after ->
+        $.fn.is.restore()
+        jQueryCollapseSection.prototype.open.restore()
+
+      it 'opens with a bypass', ->
+        expect(@open.calledWith(true)).to.be.ok

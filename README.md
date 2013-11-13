@@ -19,8 +19,7 @@ Enjoy!
 
 ### Demo
 
-A demo showcasing all the features of the plugin can be found at 'demo/demo.html' in
-this repository.
+A demo showcasing all the features of the plugin can be found at 'demo/demo.html' in this repository.
 
 ## Usage
 
@@ -54,11 +53,11 @@ That's it! The *data-collapse* attribute will automatically trigger the script.
 
 The standard behaviour is to collapse all the sections on page load.
 If you want to show a section to the user on page load you can
-achieve this by adding an 'collapsed' class to the section heading
+achieve this by adding an 'open' class to the section heading
 
 ```html
 <div data-collapse>
-  <h2 class="collapsed">I'm open by default</h2>
+  <h2 class="open">I'm open by default</h2>
   <p>Yay</p>
 </div>
 ```

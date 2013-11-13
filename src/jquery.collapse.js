@@ -101,7 +101,7 @@
     if(state === 0) {
       this.close(true)
     }
-    else if(this.$summary.is(".collapsed") || state === 1) {
+    else if(this.$summary.is(".open") || state === 1) {
       this.open(true);
     }
   }
@@ -135,7 +135,7 @@
         _this.$details[_this.isOpen ? "show" : "hide"]();
       }
 
-      _this.$summary.toggleClass("collapsed", state != "close")
+      _this.$summary.toggleClass("open", state != "close")
       _this.$details.attr("aria-hidden", state == "close");
       _this.$summary.trigger(state == "open" ? "opened" : "closed", _this);
       if(_this.parent.db) {

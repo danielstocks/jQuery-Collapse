@@ -60,10 +60,9 @@ h3 a {
   text-shadow: 1px 1px 1px rgb(128,10,85);
 }
 h3:hover { background: rgb(228,10,85); }
-h3.collapsed  { background: rgb(255,70,120); }
-h3.collapsed a { background-position: 13px -25px; }
+h3.open  { background: rgb(255,70,120); }
+h3.open a { background-position: 13px -25px; }
 h3 + div { padding: 10px; }
-
 h2 + div,
 .example {
   background: #fff;
@@ -99,7 +98,7 @@ h3+div {
   padding: 10px;
 }
 
-#css3-animated-example h3.collapsed + div {
+#css3-animated-example h3.open + div {
   height: auto;
   background: #aaffff;
 }
