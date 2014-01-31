@@ -141,6 +141,7 @@
 
       _this.$summary.toggleClass("open", state != "close")
       _this.$details.attr("aria-hidden", state == "close");
+      _this.$summary.attr("aria-expanded", state == "open");
       _this.$summary.trigger(state == "open" ? "opened" : "closed", _this);
       if(_this.parent.db) {
         _this.parent.db.write(_this._index(), _this.isOpen);
