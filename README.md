@@ -145,10 +145,13 @@ You can also just use an arbitrary link on a page to collapse\expand a section:
 </div>
 ```
 
+Then attach an event handler to your link and make use of jQuery Collapse events to toggle the setion:
+
 ```js
 $("#toggle").click(function() {
   $(this.hash).trigger("toggle");
 });
+```
 
 
 ## Accordion
