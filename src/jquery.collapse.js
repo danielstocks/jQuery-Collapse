@@ -104,6 +104,8 @@
     }
     else if(this.$summary.is(".open") || state === 1) {
       this.open(true);
+    } else {
+      this.close(true)
     }
   }
 
