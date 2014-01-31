@@ -123,6 +123,9 @@ pre#event-log {
   }
 }
 
+.test { background: #ccc; padding: 10px; border-bottom: 1px solid #aaa;}
+.test + div { background: #fff; padding: 10px; }
+
 @media
 only screen and (max-width: 704px),
 only screen and (-webkit-min-device-pixel-ratio : 1.5),

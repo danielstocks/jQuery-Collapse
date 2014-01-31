@@ -36,7 +36,7 @@
 
     // Capute ALL the clicks!
     (function(scope) {
-      _this.$el.on("click", "[data-collapse-summary]",
+      _this.$el.on("click", "[data-collapse-summary] " + (scope.options.clickQuery || ""),
         $.proxy(_this.handleClick, scope));
 
       _this.$el.bind("toggle close open",
@@ -47,8 +47,8 @@
 
   Collapse.prototype = {
     handleClick: function(e, state) {
-      var state = state || "toggle"
       e.preventDefault();
+      var state = state || "toggle"
       var sections = this.sections,
         l = sections.length;
       while(l--) {
@@ -84,11 +84,12 @@
 
   // Section constructor
   function Section($el, parent) {
+
+    if(!parent.options.clickQuery) $el.wrapInner('<a href="#"/>');
+
     $.extend(this, {
       isOpen : false,
-      $summary : $el
-        .attr("data-collapse-summary", "")
-        .wrapInner('<a href="#"/>'),
+      $summary : $el.attr("data-collapse-summary",""),
       $details : $el.next(),
       options: parent.options,
       parent: parent
@@ -108,6 +109,7 @@
 
   Section.prototype = {
     toggle : function() {
+
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {

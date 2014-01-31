@@ -153,6 +153,35 @@ $("#toggle").click(function() {
 });
 ```
 
+#### Custom click query
+
+Sometimes you want to customize what element inside the collapse summary that should trigger the open/close action. Consider the following markup:
+
+```html
+<div id="custom-click-query">
+  <div class="test">
+    <a href="http://www.google.com">Google.com</a> <span class="toggle">info</span>
+  </div>
+  <div>
+    <p>Find stuff on google</p>
+  </div>
+  <div class="test">
+    <a href="http://www.twitter.com">Twitter.com</a> <span class="toggle">info</span>
+  </div>
+  <div>
+    <p>Tweet stuff on twitter</p>
+  </div>
+</div>
+```
+
+Now use the clickQuery option to trigger the action only when the span is clicked
+
+```js
+$("#custom-click-query").collapse({
+  clickQuery: "span.toggle"
+});
+```
+
 
 ## Accordion
 
@@ -224,6 +253,8 @@ the plugin with JavaScript.
 * **close** (function) : Custom function for collapsing section (default: function(){ this.hide() })
 * **accordion** (bool) : Enable accordion behaviour by setting this option to 'true'
 * **persist** (bool) : Enable persistence between page loads by setting this option to 'true'
+* **query** (string) : Please refer to to [using custom markup](#using-custom-markup)
+* **clickQuery** (string): Please refer to [custom click query](#custom-click-query)
 
 Example usage of options:
 

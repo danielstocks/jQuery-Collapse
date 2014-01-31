@@ -161,10 +161,31 @@
         });
       </script>
       <!-- END custom markup example -->
+
+      <!-- Custom click query example -->
+      <div id="custom-click-query">
+        <div class="test">
+          <a href="http://www.google.com">Google.com</a> <span class="toggle">info</span>
+        </div>
+        <div>
+          <p>Find stuff on google</p>
+        </div>
+        <div class="test">
+          <a href="http://www.twitter.com">Twitter.com</a> <span class="toggle">info</span>
+        </div>
+        <div>
+          <p>Tweet stuff on twitter</p>
+        </div>
+      </div>
+      <script>
+        $("#custom-click-query").collapse({
+          clickQuery: "span.toggle"
+        });
+      </script>
+      <!-- END click query example -->
+
     </div>
-
     <div class="col c3">
-
 
       <!-- BEGIN Events -->
       <h2>Binding & Triggering events</h2>
