@@ -111,7 +111,6 @@
 
   Section.prototype = {
     toggle : function() {
-
       this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {

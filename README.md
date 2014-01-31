@@ -1,12 +1,8 @@
 # jQuery Collapse
 
-A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also
-known as 'progressive disclosure'.
+A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also known as 'progressive disclosure'.
 
-jQuery Collapse is tested agaisnt the latest version of jQuery but requires at least jQuery 1.7.0 or newer.
-
-Enjoy!
-
+jQuery Collapse is tested agaisnt the latest version of jQuery but requires at least jQuery 1.7.0.
 
 ## Features
 
