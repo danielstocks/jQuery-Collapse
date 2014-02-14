@@ -68,7 +68,7 @@ describe 'Collapse', ->
         expect(@sectionStub.calledTwice).to.be.ok
 
       it 'captures ALL the clicks', ->
-        expect(@el.on.calledWith('click', '[data-collapse-summary]')).to.be.ok
+        expect(@el.on.calledWith('click', '[data-collapse-summary] ')).to.be.ok
 
 
   describe 'handleClick method', ->
