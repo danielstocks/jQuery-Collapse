@@ -4,6 +4,8 @@ A lightweight and flexible jQuery plugin that allows you to collapse content. A 
 
 jQuery Collapse is tested agaisnt the latest version of jQuery but requires at least jQuery 1.7.0.
 
+[![Build Status](https://travis-ci.org/danielstocks/jQuery-Collapse.png?branch=master)](https://travis-ci.org/danielstocks/jQuery-Collapse)
+
 ## Features
 
 - [WAI ARIA](http://dev.opera.com/articles/view/introduction-to-wai-aria/) compliant
