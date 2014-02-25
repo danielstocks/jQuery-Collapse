@@ -9,7 +9,7 @@
  * Released under the MIT, BSD, and GPL Licenses.
  */
 
-(function($) {
+(function($, exports) {
 
   // Constructor
   function Collapse (el, options) {
@@ -48,7 +48,7 @@
   Collapse.prototype = {
     handleClick: function(e, state) {
       e.preventDefault();
-      var state = state || "toggle"
+      state = state || "toggle";
       var sections = this.sections,
         l = sections.length;
       while(l--) {
@@ -63,22 +63,18 @@
       this.handleClick(e, e.type);
     },
     open: function(eq) {
-      if(isFinite(eq)) return this.sections[eq].open();
-      $.each(this.sections, function(i, section) {
-        section.open();
-      })
+      this._change("open", eq);
     },
     close: function(eq) {
-      if(isFinite(eq)) return this.sections[eq].close();
-      $.each(this.sections, function(i, section) {
-        section.close();
-      })
+      this._change("close", eq);
     },
     toggle: function(eq) {
-      if(isFinite(eq)) return this.sections[eq].toggle();
+      this._change("toggle", eq);
+    },
+    _change: function(action, eq) {
       $.each(this.sections, function(i, section) {
-        section.toggle();
-      })
+        section[action]();
+      });
     }
   };
 
@@ -100,12 +96,12 @@
     var state = parent.states[this._index()];
 
     if(state === 0) {
-      this.close(true)
+      this.close(true);
     }
     else if(this.$summary.is(".open") || state === 1) {
       this.open(true);
     } else {
-      this.close(true)
+      this.close(true);
     }
   }
 
@@ -120,7 +116,7 @@
       var _this = this;
       if(_this.options.accordion && !bypass) {
         $.each(_this.parent.sections, function(i, section) {
-          section.close()
+          section.close();
         });
       }
       _this._changeState("open", bypass);
@@ -138,10 +134,10 @@
         _this.$details[_this.isOpen ? "show" : "hide"]();
       }
 
-      _this.$summary.toggleClass("open", state != "close")
-      _this.$details.attr("aria-hidden", state == "close");
-      _this.$summary.attr("aria-expanded", state == "open");
-      _this.$summary.trigger(state == "open" ? "opened" : "closed", _this);
+      _this.$summary.toggleClass("open", state !== "close");
+      _this.$details.attr("aria-hidden", state === "close");
+      _this.$summary.attr("aria-expanded", state === "open");
+      _this.$summary.trigger(state === "open" ? "opened" : "closed", _this);
       if(_this.parent.db) {
         _this.parent.db.write(_this._index(), _this.isOpen);
       }
@@ -170,7 +166,7 @@
 
   // Expose constructor to
   // global namespace
-  jQueryCollapse = Collapse;
-  jQueryCollapseSection = Section;
+  exports.jQueryCollapse = Collapse;
+  exports.jQueryCollapseSection = Section;
 
-})(window.jQuery);
+})(window.jQuery, window);
