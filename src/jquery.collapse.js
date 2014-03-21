@@ -73,7 +73,9 @@
     },
     _change: function(action, eq) {
       $.each(this.sections, function(i, section) {
-        section[action]();
+        if(!eq || (eq && eq === i)) {
+            section[action]();
+        }
       });
     }
   };
