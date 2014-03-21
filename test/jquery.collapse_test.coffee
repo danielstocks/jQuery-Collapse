@@ -123,6 +123,7 @@ describe 'Collapse', ->
 
     it 'closes given section', ->
       @collapse.close(1)
+      expect(@collapse.sections[0].close.called).not.to.be.ok
       expect(@collapse.sections[1].close.calledOnce).to.be.ok
 
     it 'closes all the sections', ->
