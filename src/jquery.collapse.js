@@ -72,6 +72,7 @@
       this._change("toggle", eq);
     },
     _change: function(action, eq) {
+      if(isFinite(eq)) return this.sections[eq][action]();
       $.each(this.sections, function(i, section) {
         section[action]();
       });

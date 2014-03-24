@@ -104,6 +104,7 @@ describe 'Collapse', ->
 
     it 'opens given section', ->
       @collapse.open(1)
+      expect(@collapse.sections[0].open.called).not.to.be.ok
       expect(@collapse.sections[1].open.calledOnce).to.be.ok
 
     it 'opens all the sections', ->
@@ -123,6 +124,7 @@ describe 'Collapse', ->
 
     it 'closes given section', ->
       @collapse.close(1)
+      expect(@collapse.sections[0].close.called).not.to.be.ok
       expect(@collapse.sections[1].close.calledOnce).to.be.ok
 
     it 'closes all the sections', ->
