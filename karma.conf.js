@@ -55,7 +55,10 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Firefox','Chrome'],
+
+    // NOTE: Only using Firefox, because Chrome will NOT run on
+    // Travis CI which will result in build error
+    browsers: ['Firefox'],
 
 
     // If browser does not capture in given timeout [ms], kill it
