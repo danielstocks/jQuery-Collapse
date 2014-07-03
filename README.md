@@ -321,9 +321,10 @@ demo.toggle(1); // Toggle second section
 
 ## Contributing
 
-Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
+1. Check out this repository
+2. In the project root run npm install to install the dev dependencies
+3. Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
 
-* Find a bug, or invent a feature.
 * Write a test case
 * Watch it fail (red light)
 * Fix bug / introduce feature
@@ -332,7 +333,11 @@ Did you find a bug? Do you want to introduce a feature? Here's what to do (in th
 * Do a pull request on Github and wait patiently...
 * Rejoice!
 
-Tests are written in CoffeeScript with a BDD flavour using mocha and the chai exception framework. They are run with the karma test runner. To run the tests simply type 'karma start' from the project root (you may have to npm install first).
 
-Thanks in advance
+### A note about testing
 
+To run the tests simply type "npm test". The [Karma](http://karma-runner.github.io/) test runner will open Chrome and Firefox and run the tests.
+
+The tests are written in a BDD fashion using CoffeScript and can be found in the test directory.
+
+The test suite uses the Mocha test framwork, the [Chai](http://chaijs.com/) exception framework and [Sinon](http://sinonjs.org/) for stubs and mocks.
