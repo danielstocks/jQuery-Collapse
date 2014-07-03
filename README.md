@@ -2,7 +2,7 @@
 
 A lightweight and flexible jQuery plugin that allows you to collapse content. A feature also known as 'progressive disclosure'.
 
-jQuery Collapse is tested agaisnt the latest version of jQuery but requires at least jQuery 1.7.0.
+jQuery Collapse is tested against the latest version of jQuery but requires at least jQuery 1.7.0.
 
 [![Build Status](https://travis-ci.org/danielstocks/jQuery-Collapse.png?branch=master)](https://travis-ci.org/danielstocks/jQuery-Collapse)
 [![Code Climate](https://codeclimate.com/github/danielstocks/jQuery-Collapse.png)](https://codeclimate.com/github/danielstocks/jQuery-Collapse)
@@ -144,7 +144,7 @@ You can also just use an arbitrary link on a page to collapse\expand a section:
 </div>
 ```
 
-Then attach an event handler to your link and make use of jQuery Collapse events to toggle the setion:
+Then attach an event handler to your link and make use of jQuery Collapse events to toggle the section:
 
 ```js
 $("#toggle").click(function() {
@@ -336,6 +336,6 @@ Did you find a bug? Do you want to introduce a feature? Here's what to do (in th
 
 To run the tests simply type "npm test". The [Karma](http://karma-runner.github.io/) test runner will open Chrome and Firefox and run the tests.
 
-The tests are written in a BDD fashion using CoffeScript and can be found in the test directory.
+The tests are written in a BDD fashion using CoffeeScript and can be found in the test directory.
 
-The test suite uses [Mocha](http://visionmedia.github.io/mocha/) (test framwork), [Chai](http://chaijs.com/) (exceptions) and [Sinon](http://sinonjs.org/) (stubs and mocks).
+The test suite uses [Mocha](http://visionmedia.github.io/mocha/) (test framework), [Chai](http://chaijs.com/) (exceptions) and [Sinon](http://sinonjs.org/) (stubs and mocks).
