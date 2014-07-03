@@ -321,16 +321,15 @@ demo.toggle(1); // Toggle second section
 
 ## Contributing
 
-1. Check out this repository
-2. In the project root run npm install to install the dev dependencies
-3. Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
+Did you find a bug? Do you want to introduce a feature? Here's what to do (in the following order)
 
+* Clone this repository, and run `npm install`
 * Write a test case
 * Watch it fail (red light)
 * Fix bug / introduce feature
 * Watch it pass (green light)
 * Refactor / Perfectionize!
-* Do a pull request on Github and wait patiently...
+* Submit a pull request on Github and wait patiently...
 * Rejoice!
 
 ### A note about testing
@@ -339,4 +338,4 @@ To run the tests simply type "npm test". The [Karma](http://karma-runner.github.
 
 The tests are written in a BDD fashion using CoffeScript and can be found in the test directory.
 
-The test suite uses the Mocha test framwork, the [Chai](http://chaijs.com/) exception framework and [Sinon](http://sinonjs.org/) for stubs and mocks.
+The test suite uses [Mocha](http://visionmedia.github.io/mocha/) (test framwork), [Chai](http://chaijs.com/) (exceptions) and [Sinon](http://sinonjs.org/) (stubs and mocks).
