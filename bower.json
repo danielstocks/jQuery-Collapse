@@ -7,7 +7,7 @@
   },
   "ignore": [
     "demo",
-    "spec",
+    "test",
     "vendor",
     "bower.json",
     "README.md"

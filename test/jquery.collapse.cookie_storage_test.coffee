@@ -1,5 +1,3 @@
-expect = chai.expect
-
 describe 'Cookie Storage', ->
 
   before ->

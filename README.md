@@ -333,7 +333,6 @@ demo.toggle(1); // Toggle second section
 * Do a pull request on Github and wait patiently...
 * Rejoice!
 
-
 ### A note about testing
 
 To run the tests simply type "npm test". The [Karma](http://karma-runner.github.io/) test runner will open Chrome and Firefox and run the tests.
