@@ -9,7 +9,7 @@
  * Released under the MIT, BSD, and GPL Licenses.
  */
 
-(function($) {
+(function($, exports) {
 
   // Constructor
   function Collapse (el, options) {
@@ -22,7 +22,7 @@
       options : options,
       sections: [],
       isAccordion : options.accordion || false,
-      db : options.persist ? jQueryCollapseStorage(el[0].id) : false
+      db : options.persist ? jQueryCollapseStorage(el.get(0).id) : false
     });
 
     // Figure out what sections are open if storage is used
@@ -31,77 +31,84 @@
     // For every pair of elements in given
     // element, create a section
     _this.$el.find(query).each(function() {
-      var section = new Section($(this), _this);
-      _this.sections.push(section);
-
-      // Check current state of section
-      var state = _this.states[section._index()];
-      if(state === 0) {
-        section.$summary.removeClass("open");
-      }
-      if(state === 1) {
-        section.$summary.addClass("open");
-      }
-
-      // Show or hide accordingly
-      if(section.$summary.hasClass("open")) {
-        section.open(true);
-      }
-      else {
-        section.close(true);
-      }
+      new jQueryCollapseSection($(this), _this);
     });
 
     // Capute ALL the clicks!
     (function(scope) {
-      _this.$el.on("click", "[data-collapse-summary]",
+      _this.$el.on("click", "[data-collapse-summary] " + (scope.options.clickQuery || ""),
         $.proxy(_this.handleClick, scope));
+
+      _this.$el.bind("toggle close open",
+        $.proxy(_this.handleEvent, scope));
+
     }(_this));
   }
 
   Collapse.prototype = {
-    handleClick: function(e) {
+    handleClick: function(e, state) {
       e.preventDefault();
+      state = state || "toggle";
       var sections = this.sections,
         l = sections.length;
       while(l--) {
         if($.contains(sections[l].$summary[0], e.target)) {
-          sections[l].toggle();
+          sections[l][state]();
           break;
         }
       }
     },
-    open : function(eq) {
-      if(isFinite(eq)) return this.sections[eq].open();
-      $.each(this.sections, function() {
-        this.open();
-      });
+    handleEvent: function(e) {
+      if(e.target == this.$el.get(0)) return this[e.type]();
+      this.handleClick(e, e.type);
+    },
+    open: function(eq) {
+      this._change("open", eq);
     },
     close: function(eq) {
-      if(isFinite(eq)) return this.sections[eq].close();
-      $.each(this.sections, function() {
-        this.close();
+      this._change("close", eq);
+    },
+    toggle: function(eq) {
+      this._change("toggle", eq);
+    },
+    _change: function(action, eq) {
+      if(isFinite(eq)) return this.sections[eq][action]();
+      $.each(this.sections, function(i, section) {
+        section[action]();
       });
     }
   };
 
   // Section constructor
   function Section($el, parent) {
+
+    if(!parent.options.clickQuery) $el.wrapInner('<a href="#"/>');
+
     $.extend(this, {
       isOpen : false,
-      $summary : $el
-        .attr("data-collapse-summary", "")
-        .wrapInner('<a href="#"/>'),
+      $summary : $el.attr("data-collapse-summary",""),
       $details : $el.next(),
       options: parent.options,
       parent: parent
     });
+    parent.sections.push(this);
+
+    // Check current state of section
+    var state = parent.states[this._index()];
+
+    if(state === 0) {
+      this.close(true);
+    }
+    else if(this.$summary.is(".open") || state === 1) {
+      this.open(true);
+    } else {
+      this.close(true);
+    }
   }
 
   Section.prototype = {
     toggle : function() {
-      if(this.isOpen) this.close();
-      else this.open();
+      this.isOpen ? this.close() : this.open();
     },
     close: function(bypass) {
       this._changeState("close", bypass);
@@ -109,8 +116,8 @@
     open: function(bypass) {
       var _this = this;
       if(_this.options.accordion && !bypass) {
-        $.each(_this.parent.sections, function() {
-          this.close();
+        $.each(_this.parent.sections, function(i, section) {
+          section.close();
         });
       }
       _this._changeState("open", bypass);
@@ -125,12 +132,13 @@
       if($.isFunction(_this.options[state]) && !bypass) {
         _this.options[state].apply(_this.$details);
       } else {
-        if(_this.isOpen) _this.$details.show();
-        else _this.$details.hide();
+        _this.$details[_this.isOpen ? "show" : "hide"]();
       }
-      _this.$summary.removeClass("open close").addClass(state);
-      _this.$details.attr("aria-hidden", state == "close");
-      _this.parent.$el.trigger(state, _this);
+
+      _this.$summary.toggleClass("open", state !== "close");
+      _this.$details.attr("aria-hidden", state === "close");
+      _this.$summary.attr("aria-expanded", state === "open");
+      _this.$summary.trigger(state === "open" ? "opened" : "closed", _this);
       if(_this.parent.db) {
         _this.parent.db.write(_this._index(), _this.isOpen);
       }
@@ -147,7 +155,7 @@
         $.each(values.split(" "), function(i,v) {
           if(v) settings[v] = true;
         });
-        new jQueryCollapse($(this), settings);
+        new Collapse($(this), settings);
       });
     }
   });
@@ -159,6 +167,7 @@
 
   // Expose constructor to
   // global namespace
-  jQueryCollapse = Collapse;
+  exports.jQueryCollapse = Collapse;
+  exports.jQueryCollapseSection = Section;
 
-})(window.jQuery);
+})(window.jQuery, window);
