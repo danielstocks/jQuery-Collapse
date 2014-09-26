@@ -15,7 +15,7 @@
   function Collapse (el, options) {
     options = options || {};
     var _this = this,
-      query = options.query || "> :even";
+      query = options.query || (options.titleBottom ? "> :odd" : "> :even");
 
     $.extend(_this, {
       $el: el,
@@ -87,7 +87,7 @@
     $.extend(this, {
       isOpen : false,
       $summary : $el.attr("data-collapse-summary",""),
-      $details : $el.next(),
+      $details : parent.options.titleBottom ? $el.prev() : $el.next(),
       options: parent.options,
       parent: parent
     });
