@@ -22,11 +22,15 @@
     }
     return DB ? new _Storage(id, DB) : false;
   }
+
   function _Storage(id, DB) {
     this.id = id;
     this.db = DB;
     this.data = [];
   }
+
+  jQueryCollapseStorage = Storage;
+
   _Storage.prototype = {
     write: function(position, state) {
       var _this = this;
@@ -50,7 +54,5 @@
       return string ? JSON.parse(string) : {};
     }
   };
-
-  jQueryCollapseStorage = Storage;
 
 })(jQuery);
