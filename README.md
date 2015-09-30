@@ -6,7 +6,7 @@ jQuery Collapse is tested against the latest version of jQuery but requires at l
 
 [![Build Status](https://travis-ci.org/danielstocks/jQuery-Collapse.png?branch=master)](https://travis-ci.org/danielstocks/jQuery-Collapse)
 [![Code Climate](https://codeclimate.com/github/danielstocks/jQuery-Collapse.png)](https://codeclimate.com/github/danielstocks/jQuery-Collapse)
-[![Coveralls]](https://img.shields.io/coveralls/danielstocks/jQuery-Collapse/master.svg)(https://coveralls.io/github/danielstocks/jQuery-Collapse?branch=master)
+[![Coveralls](https://img.shields.io/coveralls/danielstocks/jQuery-Collapse/master.svg)](https://coveralls.io/github/danielstocks/jQuery-Collapse?branch=master)
 
 ## Features
 
