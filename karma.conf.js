@@ -8,7 +8,8 @@ module.exports = function(config) {
     basePath: '',
 
     preprocessors: {
-      '**/*.coffee': ['coffee']
+      '**/*.coffee': ['coffee'],
+      '**/src/*.js': ['coverage']
     },
 
     // frameworks to use
@@ -30,7 +31,15 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage', 'coveralls'],
+
+    coverageReporter: {
+      reporters: [
+        // reporters not supporting the `file` property
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' }
+      ]
+    },
 
 
     // web server port

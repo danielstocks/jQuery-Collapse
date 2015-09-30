@@ -3,8 +3,7 @@
 *.patch
 .DS_Store
 .settings
-Guardfile
-Gemfile
 spec/*_spec.js
 TODO
 node_modules
+coverage
