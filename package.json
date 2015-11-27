@@ -1,6 +1,6 @@
 {
-  "name": "jQuery-Collapse",
-  "version": "1.0.0",
+  "name": "jquery-collapse",
+  "version": "1.1.2",
   "description": "A lightweight (~1kb) jQuery plugin that enables expanding and collapsing content",
   "devDependencies": {
     "coveralls": "^2.11.4",
