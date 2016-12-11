@@ -339,4 +339,4 @@ To run the tests simply type "npm test". The [Karma](http://karma-runner.github.
 
 The tests are written in a BDD fashion using CoffeeScript and can be found in the test directory.
 
-The test suite uses [Mocha](http://visionmedia.github.io/mocha/) (test framework), [Chai](http://chaijs.com/) (exceptions) and [Sinon](http://sinonjs.org/) (stubs and mocks).
+The test suite uses [Mocha](http://mochajs.org/) (test framework), [Chai](http://chaijs.com/) (exceptions) and [Sinon](http://sinonjs.org/) (stubs and mocks).
