@@ -138,10 +138,8 @@ You can also just use an arbitrary link on a page to collapse\expand a section:
 ```html
 <a id="toggle" href="#demo">Toggle section</a>
 <div id="demo" data-collapse>
-  <div>
     <h2>Summary</h2>
     <div>details...</div>
-  </div>
 </div>
 ```
 
