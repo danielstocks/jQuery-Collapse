@@ -36,7 +36,7 @@
 
     // Capute ALL the clicks!
     (function(scope) {
-      _this.$el.on("click", "[data-collapse-summary] " + (scope.options.clickQuery || ""),
+      _this.$el.click("[data-collapse-summary] " + (scope.options.clickQuery || ""),
         $.proxy(_this.handleClick, scope));
 
       _this.$el.bind("toggle close open",
