@@ -254,6 +254,28 @@
         <h3>Info</h3>
         <div>This is some information</div>
       </div>
+      
+      <h2>Title Bottom</h2>
+        <div id="title-bottom-example">
+            <div>
+                <p>botton title...</p>
+                <p>botton title...</p>
+                <p>botton title...</p>
+                <p>botton title...</p>
+            </div>
+            <h3>Indeed</h3>
+        </div>
+        <script>
+            new jQueryCollapse($("#title-bottom-example"), {
+                titleBottom :true,
+                open: function() {
+                    this.slideDown(150);
+                },
+                close: function() {
+                    this.slideUp(150);
+                }
+            });
+        </script>
 
     </div>
   </body>
