@@ -115,7 +115,7 @@
     },
     open: function(bypass) {
       var _this = this;
-      if(_this.options.accordion && !bypass) {
+      if(!_this.options.accordion && !bypass) {
         $.each(_this.parent.sections, function(i, section) {
           section.close();
         });
