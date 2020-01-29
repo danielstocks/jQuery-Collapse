@@ -1,0 +1,407 @@
+@import url(http://fonts.googleapis.com/css?family=Asap:400,700);
+
+/* Base
+ * ------------- */
+html, body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+body {
+  padding: 20px;
+  font: 14px/1.4 Georgia, serif;
+  color:#444;
+  background: url('back_pattern.png') fixed;
+}
+strong {font-weight:bold;}
+em {font-style:italic;}
+ul {list-style-type:circle; display:block; margin: 20px 0;}
+li {margin: 10px 20px; list-style-type:circle;}
+p {margin: 20px 0}
+a {color: #39B2E5;}
+#header h1 {
+  font: bold 72px/1 'Asap', sans-serif;
+  float: right;
+  letter-spacing:-3px;
+}
+h2 {
+  font: 24px/28px 'Asap', sans-serif;
+  line-height: 1.2;
+}
+h3 {
+  font: 18px/24px 'Asap', sans-serif;
+  margin: 0 0 -12px;
+}
+#content pre {
+  font-size: 12px;
+  padding: 10px;
+  background: #fff;
+  margin: 30px 0;
+  display: block;
+  border:1px solid #ccc;
+  border-width: 0 1px 1px 0;
+}
+
+/* Header
+ * ------------- */
+#wrap {
+  width: 940px;
+  margin:80px auto 0;
+  position:relative;
+}
+#wrap #header {
+  border-top:2px solid #333;
+  position:relative;
+  border-bottom: 1px solid #aaa;
+  padding:20px 0; display:block;
+  overflow:hidden;
+  margin-bottom: 20px;
+}
+#header h2 {
+  font-size: 20px;
+  font-family: Georgia, serif;
+  margin:0;
+  width:380px;
+  position:absolute;
+  bottom:20px;
+}
+#crumb,
+#social {
+  position: absolute;
+  right:0;
+  top:-32px
+}
+#crumb {right:auto;}
+
+/* Sections
+ * ------------- */
+section {
+  width: 450px;
+  float: left;
+  margin: 20px 0;
+  overflow: hidden;
+  margin-left: 40px;
+}
+section:first-child {margin-left: 0}
+
+/* Demo collapse
+ * ------------- */
+#demo {
+  background: #B0E5B8;
+  border: 1px solid #628066;
+  border-width: 0 1px 0px 0;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+#demo h2 a {
+  font-size: 18px;
+  background: url("sprite.png") 15px 13px no-repeat;
+  display: block;
+  padding: 9px;
+  padding-left: 32px;
+  margin: 0;
+  color: #628066;
+  text-decoration: none;
+  font-weight: normal;
+  border-bottom: 1px solid #628066;
+}
+#demo h2.open a {background-position: 14px -24px;}
+#demo h2 + div,
+#demo h2 + ul,
+#demo h2 + p {
+  padding: 10px;
+  background: #fff;
+  margin:0;
+}
+
+/* Feature box
+ * ------------- */
+#features .box {
+  background: #FFF095;
+  padding:20px;
+  border:1px solid #BFB470;
+  border-width: 0 1px 1px 0;
+  margin-top:10px
+}
+#features p {
+  margin-top: 10px;
+}
+#features h3 {
+  margin: 0 0 5px;
+  background: url("sprite.png") 2px 5px no-repeat;
+  padding-left: 20px;
+}
+#features h3 a {
+  color: #BFB470;
+  text-decoration: none;
+}
+#features h3.open {
+  background-position: 0px -34px;
+}
+
+/* Download area
+ * ------------- */
+.download {
+  float:left;
+  overflow:hidden;
+}
+.download small {
+  margin: 5px 2px 0;
+  text-align:right;
+  display: block;
+  color: #888;
+}
+.view-on-github {
+  float:left;
+  margin-left: 10px;
+  line-height:50px;
+}
+
+/* Button style (from twitter's Bootstrap)
+ * ------------- */
+.btn {
+  font: normal 13px/18px 'Asap', sans-serif;
+  text-decoration:none;
+  display: inline-block;
+  *display: inline;
+  padding: 4px 10px 4px;
+  margin-bottom: 0;
+  *margin-left: .3em;
+  font-size: 13px;
+  line-height: 18px;
+  *line-height: 20px;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  *background-color: #e6e6e6;
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-bottom-color: #b3b3b3;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          text-shadow: 1px 1px 1px #fff;
+}
+.btn-large {
+  padding: 14px 19px;
+  font-size: 18px;
+  line-height: normal;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+}
+
+.btn:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: #e6e6e6;
+  *background-color: #d9d9d9;
+  /* Buttons in IE7 don't get borders, so darken on hover */
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+     -moz-transition: background-position 0.1s linear;
+      -ms-transition: background-position 0.1s linear;
+       -o-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
+}
+.btn:active {
+  background-color: #e6e6e6;
+  background-color: #d9d9d9 \9;
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.col {
+  width: 292px;
+  float: left;
+  margin-right:32px;
+  margin-bottom: 16px;
+}
+.c3 {
+  margin-right:0;
+}
+
+
+#examples-header {
+  clear:both;
+  font:normal 48px/1.2 'Asap', sans-serif;
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 5px;
+  margin: 0 0 10px;
+  text-align: center;
+}
+#examples-header span {
+  color: #ccc;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+#examples-info { text-align: center; }
+#examples {
+  margin:0;
+  width: 100%;
+}
+#examples h2 {
+  margin: 10px 0;
+  color: #000;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+#examples h3 {
+  margin: 0;
+  background-color: rgb(228,10,85);
+  background-image: linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -o-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -moz-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -webkit-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+  background-image: -ms-linear-gradient(bottom, rgb(228,10,85) 14%, rgb(255,36,111) 57%);
+}
+
+#examples h3 a {
+  background: url("sprite.png") 15px 13px no-repeat;
+  display: block;
+  padding: 10px;
+  padding-left: 32px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(128, 10, 85, 0.5);
+  text-shadow: 1px 1px 1px rgb(128,10,85);
+}
+#examples h3:hover { background: rgb(228,10,85); }
+#examples h3.open  { background: rgb(255,70,120); }
+#examples h3.open a { background-position: 13px -25px; }
+#examples h3 + div { padding: 10px; }
+
+#examples h2 + div,
+#examples .example {
+  background: #fff;
+  overflow: hidden;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.fork {
+  border:0;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+#github-star {
+  margin-left: 8px;
+}
+
+/* Pre hide sections with JavaScript on
+--- */
+#examples h3+div {
+  display: none;
+}
+
+/* CSS3 Animation example
+--- */
+#css3-animated-example h3 + div {
+  height: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background: #000;
+  display: block!important;
+  -webkit-transform: translateZ(0);
+  -webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	transition: all 0.3s ease;
+}
+#css3-animated-example .content {
+  padding: 10px;
+}
+
+#css3-animated-example h3.open + div {
+  height: auto;
+  background: #aaffff;
+}
+
+#examples p {
+margin: 5px 0;
+}
+
+/* Event example
+--- */
+pre#event-log {
+  background: #fafacc;
+  margin-top:0;
+  padding: 10px;
+  display: block;
+}
+
+/* Responsive design
+--- */
+@media screen and (max-width: 1056px) {
+
+  .fork {
+    display: none;
+  }
+
+  #header h1 {
+    font-size: 70px;
+    float:auto;
+    margin-bottom: 20px;
+  }
+  #header h2 {
+    position: static;
+    width: auto;
+  }
+  #info {
+    margin:0;
+  }
+  #wrap {
+    width: 450px;
+  }
+  #links, #features {
+    margin: 10px 0;
+  }
+  #examples-header {
+    padding-top: 20px;
+    font-size: 36px;
+  }
+  .col {
+    width: 450px;
+    margin-right:0;
+  }
+  #github-star { display: none; }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+  body {
+    width: 450px;
+    padding: 24px;
+    padding-top: 0;
+  }
+  .wrap {
+    margin: 0;
+  }
+}

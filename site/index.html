@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A lightweight jQuery plugin that enables expanding and collapsing content">
+    <meta name="viewport" content="width=device-width">
+    <title>jQuery Collapse | webcloud</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="prism.css" rel="stylesheet">
+    <script>document.documentElement.className = "js";</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--[if lt IE 8]>
+        <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <![endif]-->
+    <script src="prism.js"></script>
+    <script src="src/jquery.collapse.js"></script>
+    <script src="src/jquery.collapse_storage.js"></script>
+    <script src="src/jquery.collapse_cookie_storage.js"></script>
+    <script>
+    /*@cc_on(function(e,i){i=e.length;while(i--)document.createElement(e[i])})("abbr,article,aside,audio,canvas,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','))@*/
+    </script>
+    <script>
+      if(/webcloud\.se$/.test(window.location.hostname)) {
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-4323373-5']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+      }
+    </script>
+  </head>
+  <body>
+    <a href="https://github.com/danielstocks/jQuery-Collapse">
+      <img class="fork" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+    <div id="wrap">
+      <div id="crumb">
+          <a href="http://webcloud.se/">webcloud</a> / jQuery Collapse
+      </div>
+      <div id="social">
+
+        <a href="https://twitter.com/share" class="twitter-share-button" data-align="right" data-url="http://webcloud.se/jQuery-Collapse/" data-text="A lightweight jQuery plugin that enables expanding and collapsing content" data-via="roflwtfbbq" data-hashtags="jQuery">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+        <iframe id="github-star"
+src="http://ghbtns.com/github-btn.html?user=danielstocks&repo=jQuery-Collapse&type=watch&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0"
+width="84px" height="20px"></iframe>
+      </div>
+      <div id="header">
+        <h1>jQuery Collapse</h1>
+        <h2>A lightweight (~1kb) jQuery plugin that enables expanding and collapsing content</h2>
+      </div>
+      <div id="content">
+        <section id="info">
+          <h2>Collapsible Content with JavaScript</h2>
+          <p>This plugin provides you an accessible and lightweight solution to a widely adopted interface pattern known as <em>progressive disclosure.</em></p>
+          <p>Read the <a href="https://github.com/danielstocks/jQuery-Collapse">full documentation</a> for more info.</p>
+          <h3>Basic Usage</h3>
+<pre><code class="language-markup">&lt;div id=&quot;demo&quot; data-collapse="accordion persist"&gt;
+  &lt;h2&gt;Fruits&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Apple&lt;/li&gt;
+    &lt;li&gt;Pear&lt;/li&gt;
+    &lt;li&gt;Orange&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h2&gt;Hint&lt;/h2&gt;
+  &lt;div&gt;
+    &lt;p&gt;One fruit a day keeps the doctor away&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;h2>Third&lt;/h2>
+  &lt;p>Just a paragraph here&lt;/p>
+&lt;/div&gt;
+</code></pre>
+          <div id="demo" data-collapse="accordion persist">
+            <h2>Fruits</h2>
+            <ul>
+              <li>Apple</li>
+              <li>Pear</li>
+              <li>Orange</li>
+            </ul>
+            <h2>Saying</h2>
+            <div>
+              <p>One fruit a day keeps the doctor away</p>
+            </div>
+            <h2>Third</h2>
+            <p>Just a paragraph here</p>
+          </div>
+        </section>
+        <section id="links">
+          <div class="download">
+            <a class="btn btn-large" href="https://github.com/danielstocks/jQuery-Collapse/zipball/1.1.2">Download jQuery Collapse</a>
+            <small>Latest Release: 1.1.2</small>
+          </div>
+          <div class="view-on-github">
+            or
+            <a href="http://github.com/danielstocks/jQuery-Collapse/">view project on GitHub</a>
+          </div>
+        </section>
+        <section id="features">
+        <h2>Features</h2>
+          <div class="box">
+            <h3 class="open">Persistence</h3>
+            <div>
+              <p>Remembers open sections on page reload using either HTML5 localStorage or cookies!</p>
+            </div>
+            <h3 class="open">Accordion</h3>
+            <div>
+              <p>jQuery Collapse is packed with the classic 'accordion' behaviour that can be easily toggled on and off.</p>
+            </div>
+            <h3 class="open">WAI-ARIA Compliance</h3>
+            <div>
+              <p>The plugin has been designed with <a href="http://www.w3.org/WAI/intro/aria">WAI-ARIA</a> in mind which defines a way to make Web content and Web applications more accessible to people with disabilities.</p>
+            </div>
+            <h3>Lightweight</h3>
+            <div>
+              <p>jQuery-Collapse is designed to be lightweight with minimal bloat. It's only ~1kb when compiled and gzipped! </p>
+            </div>
+            <h3>Cross Browser</h3>
+            <div>
+              <p>Fully tested in IE6+, Firefox3+, Chrome5+, Safari4+, Opera 10+. Degrades gracefully in unsupported browsers</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    <h1 id="examples-header"><span>—</span> A few examples <span>—</span></h1>
+    <p id="examples-info">To better understand how these examples work I recommend you to <a href="view-source:http://webcloud.se/jQuery-Collapse/">view the source</a>.
+
+    <!-- DEMO -->
+    <section id="examples">
+    <div class="col c1">
+      <h2>Default Example</h2>
+      <div id="default-example" data-collapse>
+        <h3>Fruits</h3>
+        <div>I like fruits. This <a href="#work">link should work</a></div>
+        <h3>Info</h3>
+        <div>This is some information</div>
+      </div>
+      <h2>Accordion Example</h2>
+      <div id="accordion-example" data-collapse="accordion">
+        <h3>Accordions</h3>
+        <div>Are fun and they make pleasent noises</div>
+        <h3>Fruits</h3>
+        <div>I like fruits</div>
+        <h3>Info</h3>
+        <div>This is some information</div>
+        <h3>Yeah!!</h3>
+        <div>eh</div>
+      </div>
+
+      <h2>Persistence Example</h2>
+      <div id="persistence-example" data-collapse="persist">
+        <h3>These</h3>
+        <div>Well hello there</div>
+        <h3>Sections</h3>
+        <div>yabayaba</div>
+        <h3>Should be</h3>
+        <div>might be.</div>
+        <h3>Persistant!!</h3>
+        <div>eh</div>
+      </div>
+    </div>
+
+    <div class="col c2">
+      <!-- BEGIN Custom show and hide -->
+      <h2>Custom show &amp; hide</h2>
+      <div id="custom-show-hide-example">
+        <h3>Hello</h3>
+        <div>
+          <p>Hello Sir.</p>
+          <p>I'm sliding</p>
+        </div>
+        <h3>Anarachy in the UK</h3>
+        <div>I like tea</div>
+        <h3>Indeed</h3>
+        <div>This is some information</div>
+      </div>
+      <script>
+        new jQueryCollapse($("#custom-show-hide-example"), {
+          open: function() {
+            this.slideDown(150);
+          },
+          close: function() {
+            this.slideUp(150);
+          }
+        });
+      </script>
+      <!-- END Custom show and hide -->
+
+      <!-- BEGIN Showing and hiding with CSS -->
+      <h2>w/ CSS3 Animations</h2>
+      <div id="css3-animated-example">
+        <h3>Hello</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+            <p>I'm sliding</p>
+          </div>
+        </div>
+        <h3>Friend</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+            <p>Hello Sir.</p>
+          </div>
+        </div>
+        <h3>Foe</h3>
+        <div>
+          <div class="content">
+            <p>This example simply sets a class attribute to the details and let's an
+            external stylesheet toggle the collapsed state.</p>
+          </div>
+        </div>
+      </div>
+      <script>
+        $("#css3-animated-example").collapse({
+          accordion: true,
+          persist: true,
+          open: function() {
+            this.addClass("open");
+            this.css({ height: this.children().outerHeight() });
+          },
+          close: function() {
+            this.css({ height: "0px" });
+            this.removeClass("open");
+          }
+        });
+      </script>
+      <!-- END Showing and hiding with CSS -->
+
+
+      <!-- BEGIN custom markup example -->
+      <h2>Custom markup example</h2>
+      <div id="custom-markup-example">
+        <div>
+          <h3>Hello</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+              <p>I'm sliding</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Friend</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+              <p>Hello Sir.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Foe</h3>
+          <div>
+            <div class="content">
+              <p>This example simply sets a class attribute to the details and let's an
+              external stylesheet toggle the collapsed state.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $("#custom-markup-example").collapse({
+          query: "div h3"
+        });
+      </script>
+      <!-- END custom markup example -->
+    </div>
+
+    <div class="col c3">
+
+      <!-- BEGIN Events -->
+      <h2>Binding events</h2>
+      <pre id="event-log">Event log</pre>
+      <div class="example" id="events-example">
+        <h3>Section 1</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+          <p>Hello Sir.</p>
+          <p>I'm sliding</p>
+        </div>
+        <h3>Section 2</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+          <p>Hello Sir.</p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+          <p>This example simply sets a class attribute to the details and let's an
+          external stylesheet toggle the collapsed state.</p>
+        </div>
+      </div>
+
+      <h2>Open section by default</h2>
+      <div id="open-by-default-example" data-collapse>
+        <h3 class="open">I'm open by default</h3>
+        <div>Yay</div>
+        <h3>I'm not open</h3>
+        <div>booo :(</div>
+      </div>
+
+      <script>
+        var el = $("#events-example"),
+          log = $("#event-log");
+
+        el.collapse()
+          .bind("open", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was opened");
+          })
+          .bind("close", function(e, section) {
+            log.html("'" + section.$summary.text() + "' was closed");
+          })
+      </script>
+      <!-- END Events -->
+
+      </section>
+    </div>
+
+    <script>
+      $("#features .box").collapse();
+    </script>
+  </body>
+</html>
