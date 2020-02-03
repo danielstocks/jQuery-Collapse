@@ -7,5 +7,5 @@ services:
  - xvfb
 script:
  - npm install
- - npm run unit
+ - npm run test
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
