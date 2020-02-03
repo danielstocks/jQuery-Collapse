@@ -1,8 +1,11 @@
 language: node_js
-sudo: false
 node_js:
-  - 0.10
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+ - "stable"
+before_install:
+ - export CHROME_BIN=chromium-browser
+services:
+ - xvfb
+script:
+ - npm install
+ - npm run unit
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

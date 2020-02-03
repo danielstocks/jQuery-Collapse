@@ -70,7 +70,7 @@ module.exports = function(config) {
 
     // NOTE: Only using Firefox, because Chrome will NOT run on
     // Travis CI which will result in build error
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
 
 
     // If browser does not capture in given timeout [ms], kill it
