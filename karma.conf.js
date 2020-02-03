@@ -3,31 +3,22 @@
 
 module.exports = function(config) {
   config.set({
-
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
     preprocessors: {
       '**/*.coffee': ['coffee'],
-      '**/src/*.js': ['coverage']
+      '**/src/*.js': ['coverage'],
     },
 
     // frameworks to use
     frameworks: ['mocha', 'sinon-chai'],
 
-
     // list of files / patterns to load in the browser
-    files: [
-      'vendor/*.js',
-      'src/*.js',
-      'test/*.coffee'
-    ],
-
+    files: ['vendor/*.js', 'src/*.js', 'test/*.coffee'],
 
     // list of files to exclude
-    exclude: [
-    ],
-
+    exclude: [],
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
@@ -36,28 +27,23 @@ module.exports = function(config) {
     coverageReporter: {
       reporters: [
         // reporters not supporting the `file` property
-        { type: 'html', subdir: 'report-html' },
-        { type: 'lcov', subdir: 'report-lcov' }
-      ]
+        {type: 'html', subdir: 'report-html'},
+        {type: 'lcov', subdir: 'report-lcov'},
+      ],
     },
-
 
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
 
     // Start these browsers, currently available:
     // - Chrome
@@ -68,17 +54,22 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
 
-    // NOTE: Only using Firefox, because Chrome will NOT run on
-    // Travis CI which will result in build error
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'ChromeHeadlessNoSandbox'],
+
+    // you can define custom flags
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
 
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
 
-
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
   });
 };
