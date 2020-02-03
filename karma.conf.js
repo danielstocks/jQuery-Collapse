@@ -54,9 +54,8 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
 
-    browsers: ['Chrome', 'ChromeHeadlessNoSandbox'],
+    browsers: ['ChromeHeadlessNoSandbox'],
 
-    // you can define custom flags
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
