@@ -326,7 +326,7 @@ section:first-child {
 }
 
 #examples h3 a {
-  background: url('sprite.png') 15px 13px no-repeat;
+  background: url('../sprite.png') 15px 13px no-repeat;
   display: block;
   padding: 10px;
   padding-left: 32px;
