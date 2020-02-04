@@ -142,7 +142,7 @@ section:first-child {
 }
 #features h3 {
   margin: 0 0 5px;
-  background: url('sprite.png') 2px 5px no-repeat;
+  background: url('../sprite.png') 2px 5px no-repeat;
   padding-left: 20px;
 }
 #features h3 a {
