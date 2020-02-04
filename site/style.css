@@ -7,7 +7,7 @@ body {
   padding: 20px;
   font: 14px/1.4 Georgia, serif;
   color: #444;
-  background: url('back_pattern.png') fixed;
+  background: url('../back_pattern.png') fixed;
 }
 ul {
   list-style-type: circle;
@@ -107,7 +107,7 @@ section:first-child {
 }
 #demo h2 a {
   font-size: 18px;
-  background: url('sprite.png') 15px 13px no-repeat;
+  background: url('../sprite.png') 15px 13px no-repeat;
   display: block;
   padding: 9px;
   padding-left: 32px;
