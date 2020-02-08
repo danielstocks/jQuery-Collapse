@@ -3,11 +3,11 @@
 /* Base
  * ------------- */
 body {
-	margin: 0;
+  margin: 0;
   padding: 20px;
   font: 14px/1.4 Georgia, serif;
   color: #444;
-  background: url('../back_pattern.png') fixed;
+  background: url('back_pattern.png') fixed;
 }
 ul {
   list-style-type: circle;
@@ -107,7 +107,7 @@ section:first-child {
 }
 #demo h2 a {
   font-size: 18px;
-  background: url('../sprite.png') 15px 13px no-repeat;
+  background: url('sprite.png') 15px 13px no-repeat;
   display: block;
   padding: 9px;
   padding-left: 32px;
@@ -142,7 +142,7 @@ section:first-child {
 }
 #features h3 {
   margin: 0 0 5px;
-  background: url('../sprite.png') 2px 5px no-repeat;
+  background: url('sprite.png') 2px 5px no-repeat;
   padding-left: 20px;
 }
 #features h3 a {
@@ -326,7 +326,7 @@ section:first-child {
 }
 
 #examples h3 a {
-  background: url('../sprite.png') 15px 13px no-repeat;
+  background: url('sprite.png') 15px 13px no-repeat;
   display: block;
   padding: 10px;
   padding-left: 32px;
