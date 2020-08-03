@@ -29,7 +29,7 @@
     this.data = [];
   }
 
-  jQueryCollapseStorage = Storage;
+  window.jQueryCollapseStorage = Storage;
 
   _Storage.prototype = {
     write: function(position, state) {
